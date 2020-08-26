@@ -17,10 +17,15 @@ class LoginContainer extends React.Component {
     console.log(event);
   };
 
+  public onClick: React.ChangeEventHandler<HTMLButtonElement> = (event) => {
+    console.log(event);
+  };
+
   public render() {
     return (
       <LoginPresenter
         onChange={this.onInputChange}
+        onClick={this.onClick}
       ></LoginPresenter>
     );
   }
