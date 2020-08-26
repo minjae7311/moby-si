@@ -41,8 +41,18 @@ const LoginForm: React.SFC<IProps> = ({
   pwValue = "",
 }) => (
   <Form onSubmit={onSubmit}>
-    <Input name="inputId" value={idValue} onChange={onChange} placeholder={"ID"}></Input>
-    <Input name="inputPw" value={pwValue} onChange={onChange} placeholder={"PASSWORD"}></Input>
+    <Input
+      name="inputId"
+      value={idValue}
+      onChange={onChange}
+      placeholder={"ID"}
+    ></Input>
+    <Input
+      name="inputPw"
+      value={pwValue}
+      onChange={onChange}
+      placeholder={"PASSWORD"}
+    ></Input>
     <Button type="submit"></Button>
   </Form>
 );

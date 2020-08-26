@@ -2,10 +2,12 @@
 
 import * as React from "react";
 import LoginForm from "../../Components/LoginForm/LoginForm";
+import { MutationFunction } from "react-apollo";
+import { TestMutation_TestMutation, TestMutation } from "../../types/api";
 
 interface IProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
+  onSubmit: MutationFunction<TestMutation_TestMutation, TestMutation>;
   idValue: string;
   pwValue: string;
 }

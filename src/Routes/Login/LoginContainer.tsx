@@ -3,14 +3,17 @@
 import React from "react";
 import LoginPresenter from "./LoginPresenter";
 import { RouteComponentProps } from "react-router-dom";
+import { Mutation } from "react-apollo";
+import { TEST_MUTATION } from "./LoginMutations";
+import { TestMutation_TestMutation, TestMutation } from "../../types/api";
 
 interface IState {
   inputId: string;
   inputPw: string;
 }
 
+// 이게 있어야 readonly 에러 안난다.
 interface IProps extends RouteComponentProps<any> {
-  // 이게 있어야 readonly 에러 안난다.
   location: any;
   history: any;
 }
@@ -21,7 +24,6 @@ class LoginContainer extends React.Component<IProps, IState> {
     this.state = { inputId: "", inputPw: "" };
 
     this.onChange = this.onChange.bind(this);
-    this.onSubmit = this.onSubmit.bind(this);
   }
 
   public onChange: React.ChangeEventHandler<HTMLInputElement> = (event) => {
@@ -31,19 +33,43 @@ class LoginContainer extends React.Component<IProps, IState> {
     this.setState({ [name]: value } as any);
   };
 
-  public onSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
-    event.preventDefault();
-    console.log(this.state);
-  };
+  // public onSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
+  //   event.preventDefault();
+  // };
 
   public render() {
+    // const { inputId, inputPw } = this.state;
+
     return (
-      <LoginPresenter
-        idValue={this.state.inputId}
-        pwValue={this.state.inputPw}
-        onChange={this.onChange}
-        onSubmit={this.onSubmit}
-      ></LoginPresenter>
+      <Mutation mutation={TEST_MUTATION}>
+        {() => (
+          <Mutation<TestMutation_TestMutation, TestMutation>
+            mutation={TEST_MUTATION}
+            onCompleted={(data) => {
+              console.log(data);
+            }}
+          >
+            {(mutation, { loading }) => {
+              // eslint-disable-next-line
+              const onSumbit: React.FormEventHandler<HTMLFormElement> = (
+                event
+              ) => {
+                event.preventDefault();
+                mutation();
+              };
+
+              return (
+                <LoginPresenter
+                  idValue={this.state.inputId}
+                  pwValue={this.state.inputPw}
+                  onChange={this.onChange}
+                  onSubmit={mutation}
+                ></LoginPresenter>
+              );
+            }}
+          </Mutation>
+        )}
+      </Mutation>
     );
   }
 }
