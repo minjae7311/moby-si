@@ -15,7 +15,7 @@ interface IProps {
   //   required?: boolean;
   //   value: string;
   //   name?: string;
-  //   onChange: any;
+  onChange: any;
 }
 
 const LoginInput: React.SFC<IProps> = ({
@@ -24,10 +24,10 @@ const LoginInput: React.SFC<IProps> = ({
   //   required = true,
   //   value,
   //   name = "",
-  //   onChange,
+  onChange,
 }) => (
   <Container
-    // onChange={onChange}
+    onChange={onChange}
     // name={name}
     // type={type}
     // required={required}
