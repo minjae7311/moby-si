@@ -8,6 +8,7 @@ import { TestMutation_TestMutation, TestMutation } from "../../types/api";
 interface IProps {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: MutationFunction<TestMutation_TestMutation, TestMutation>;
+  // onSubmit: (event: React.ChangeEvent<HTMLFormElement>) => void;
   idValue: string;
   pwValue: string;
 }

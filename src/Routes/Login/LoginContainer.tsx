@@ -23,6 +23,10 @@ class LoginContainer extends React.Component<IProps, IState> {
     super(props);
     this.state = { inputId: "", inputPw: "" };
 
+    if (!props.location.state) {
+      props.history.push("/");
+    }
+
     this.onChange = this.onChange.bind(this);
   }
 
@@ -33,9 +37,12 @@ class LoginContainer extends React.Component<IProps, IState> {
     this.setState({ [name]: value } as any);
   };
 
-  // public onSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
-  //   event.preventDefault();
-  // };
+  public onSubmit: React.ChangeEventHandler<HTMLFormElement> = async (
+    event
+  ) => {
+    event.preventDefault();
+    this.props.history.push("/");
+  };
 
   public render() {
     // const { inputId, inputPw } = this.state;
@@ -46,18 +53,11 @@ class LoginContainer extends React.Component<IProps, IState> {
           <Mutation<TestMutation_TestMutation, TestMutation>
             mutation={TEST_MUTATION}
             onCompleted={(data) => {
-              console.log(data);
+              console.log("on Completed ::: ", data);
             }}
           >
             {(mutation, { loading }) => {
-              // eslint-disable-next-line
-              const onSumbit: React.FormEventHandler<HTMLFormElement> = (
-                event
-              ) => {
-                event.preventDefault();
-                mutation();
-              };
-
+              console.log(mutation);
               return (
                 <LoginPresenter
                   idValue={this.state.inputId}

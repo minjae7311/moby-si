@@ -1,6 +1,6 @@
 /** @format */
 
-import ApolloClient, { Operation } from "apollo-boost";
+import ApolloClient from "apollo-boost";
 
 const client = new ApolloClient({
   //   clientState: {
