@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import Login from "./Login/login";
+import Login from "./Login/Login";
 
 const Root: React.FC = () => (
   <BrowserRouter>
