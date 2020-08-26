@@ -1,9 +1,18 @@
 /** @format */
 
 import * as React from "react";
+import LoginInput from "../../Components/LoginInput/LoginInput";
+import styled from "../../typed-components";
+
+const Container = styled.div``;
 
 const Login: React.FC = () => {
-  return <h2>This is Login Page</h2>;
+  return (
+    <Container>
+      <LoginInput placeholder={"ID"}></LoginInput>
+      <LoginInput placeholder={"PW"}></LoginInput>
+    </Container>
+  );
 };
 
 export default Login;
