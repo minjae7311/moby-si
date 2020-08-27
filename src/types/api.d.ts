@@ -4,17 +4,22 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: TestMutation
+// GraphQL mutation operation: adminLogin
 // ====================================================
 
-export interface TestMutation_TestMutation {
-  __typename: "TestMutationResponse";
-  ok: boolean | null;
+export interface adminLogin_AdminLogin {
+  __typename: "AdminLoginResponse";
+  ok: boolean;
   error: string | null;
 }
 
-export interface TestMutation {
-  TestMutation: TestMutation_TestMutation;
+export interface adminLogin {
+  AdminLogin: adminLogin_AdminLogin;
+}
+
+export interface adminLoginVariables {
+  loginId: string;
+  loginPw: string;
 }
 
 /* tslint:disable */

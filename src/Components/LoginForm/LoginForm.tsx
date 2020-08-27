@@ -28,19 +28,22 @@ const Button = styled.button`
 `;
 
 interface IProps {
-  onSubmit: any;
+  // onSubmit: any;
+  onClick: any;
   onChange: any;
   idValue: string;
   pwValue: string;
 }
 
 const LoginForm: React.SFC<IProps> = ({
-  onSubmit,
+  // onSubmit,
+  onClick,
   onChange,
   idValue = "",
   pwValue = "",
 }) => (
-  <Form onSubmit={onSubmit}>
+  // <Form onSubmit={onSubmit}>
+  <Form>
     <Input
       name="inputId"
       value={idValue}
@@ -53,7 +56,10 @@ const LoginForm: React.SFC<IProps> = ({
       onChange={onChange}
       placeholder={"PASSWORD"}
     ></Input>
-    <Button type="submit"></Button>
+    {/* <Button type="submit">LOGIN</Button> */}
+    <Button type="button" onClick={onClick}>
+      LOGIN
+    </Button>
   </Form>
 );
 

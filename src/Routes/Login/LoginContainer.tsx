@@ -4,8 +4,8 @@ import React from "react";
 import LoginPresenter from "./LoginPresenter";
 import { RouteComponentProps } from "react-router-dom";
 import { Mutation } from "react-apollo";
-import { TEST_MUTATION } from "./LoginMutations";
-import { TestMutation_TestMutation, TestMutation } from "../../types/api";
+import { LOGIN_MUTATION } from "./LoginMutations";
+import { adminLoginVariables, adminLogin } from "../../types/api";
 
 interface IState {
   inputId: string;
@@ -24,7 +24,7 @@ class LoginContainer extends React.Component<IProps, IState> {
     this.state = { inputId: "", inputPw: "" };
 
     if (!props.location.state) {
-      props.history.push("/");
+      // props.history.push("/");
     }
 
     this.onChange = this.onChange.bind(this);
@@ -37,33 +37,41 @@ class LoginContainer extends React.Component<IProps, IState> {
     this.setState({ [name]: value } as any);
   };
 
-  public onSubmit: React.ChangeEventHandler<HTMLFormElement> = async (
-    event
-  ) => {
-    event.preventDefault();
-    this.props.history.push("/");
-  };
-
   public render() {
     // const { inputId, inputPw } = this.state;
 
     return (
-      <Mutation mutation={TEST_MUTATION}>
+      <Mutation mutation={LOGIN_MUTATION}>
         {() => (
-          <Mutation<TestMutation_TestMutation, TestMutation>
-            mutation={TEST_MUTATION}
+          <Mutation<adminLogin, adminLoginVariables>
+            mutation={LOGIN_MUTATION}
+            variables={{
+              loginId: this.state.inputId,
+              loginPw: this.state.inputPw,
+            }}
             onCompleted={(data) => {
-              console.log("on Completed ::: ", data);
+              const { AdminLogin } = data;
+
+              if (AdminLogin.ok) {
+                /**
+                 * @todo login succeed
+                 */
+              } else {
+                console.log(AdminLogin.error);
+              }
+            }}
+            onError={(error) => {
+              console.error(error);
             }}
           >
             {(mutation, { loading }) => {
-              console.log(mutation);
               return (
                 <LoginPresenter
                   idValue={this.state.inputId}
                   pwValue={this.state.inputPw}
                   onChange={this.onChange}
-                  onSubmit={mutation}
+                  // onSubmit={mutation}
+                  onClick={mutation}
                 ></LoginPresenter>
               );
             }}
