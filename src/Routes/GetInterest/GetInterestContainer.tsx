@@ -9,12 +9,17 @@ import { Query } from "react-apollo";
 import GetInterestPresenter from "./GetInterestPresenter";
 
 class GetInterestContainer extends React.Component{
-  state:{}
+  state:{page: number;}
    constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
+      page: 1, 
     };
   }
+
+  public PageChange: React.ChangeEventHandler = (event) => {
+    this.setState({page : event})
+  };
 
   public render() {
     return (
@@ -24,6 +29,8 @@ class GetInterestContainer extends React.Component{
           return (
             <GetInterestPresenter
               getInterest = {GetInterest}
+              page = {this.state.page}
+              PageChange = {this.PageChange}
             >
             </GetInterestPresenter>
           )

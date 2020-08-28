@@ -1,4 +1,4 @@
 /** @format */
 
 import GetInterestContainer from "./GetInterestContainer";
-export default GetInterestContainer;
+export default  GetInterestContainer;

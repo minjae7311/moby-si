@@ -33,9 +33,9 @@ import React from "react";
 //     this.setState({ [name]: value } as any);
 //   };
 
-//   // public onSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
-//   //   event.preventDefault();
-//   // };
+//    public onSubmit: React.ChangeEventHandler<HTMLFormElement> = (event) => {
+//      event.preventDefault();
+//    };
 
 //   public render() {
 //     // const { inputId, inputPw } = this.state;
@@ -66,10 +66,10 @@ import React from "react";
 //                   onSubmit={mutation}
 //                 ></LoginPresenter>
 //               );
-//       //       }}
-//       //     </Mutation>
-//       //   )}
-//       // </Mutation>
+//              }}
+//            </Mutation>
+//          )}
+//        </Mutation>
 //     );
 //   }
 // }

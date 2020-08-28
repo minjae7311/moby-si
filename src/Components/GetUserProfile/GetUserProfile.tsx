@@ -2,10 +2,10 @@
 
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import Layout from '../Layout';
-import Sidebar, { SidebarTitle } from '../Sidebar';
-import Main from '../Main';
-import { List, ListItem } from '../List';
+import Layout from '../Style/Layout';
+import Sidebar, { SidebarTitle } from '../Style/Sidebar';
+import Main from '../Style/Main';
+import { List, ListItem } from '../Style/List';
 
 
 interface IProps {

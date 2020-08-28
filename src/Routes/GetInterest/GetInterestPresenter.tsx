@@ -5,13 +5,19 @@ import GetInterest from "../../Components/GetInterest/GetInterest";
 
 interface IProps {
   getInterest: any;
+  page: number;
+  PageChange: any;
 }
 
 const GetInterestPresenter: React.SFC<IProps> = ({
-  getInterest
+  getInterest,
+  page,
+  PageChange
 }) => (
   <GetInterest
     getInterest={getInterest}
+    page={page}
+    PageChange={PageChange}
   >
   </GetInterest>
 );
