@@ -8,7 +8,14 @@ import Main from '../Main';
 import { List, ListItem } from '../List';
 
 
-const SIForm: React.FC = () => {
+interface IProps {
+  fullName: any;
+}
+
+const GetUserProfile: React.FC<IProps> = ({
+  fullName
+}) => {
+  console.log(fullName)
   return (
     <Layout>
       <Sidebar>
@@ -18,7 +25,7 @@ const SIForm: React.FC = () => {
             <Link to="/GetUserProfile">GetUserProfile</Link>
           </ListItem>
           <ListItem>
-            <Link to="/GetMyride">GetMyride</Link>
+            <Link to="/GetMyrides">GetMyrides</Link>
           </ListItem>
           <ListItem>
             <Link to="/GetInterest">GetInterest</Link>
@@ -26,12 +33,16 @@ const SIForm: React.FC = () => {
         </List>
       </Sidebar>
       <Main>
-        <div style={{
-          margin: '100px'
-        }}></div>
+        <div 
+          style={{
+            margin: '100px'
+          }}
+        >
+          <text style={{fontSize:15}}>가나다라마바</text>
+        </div>
       </Main>
     </Layout>
   );
 }
 
-export default SIForm;
+export default GetUserProfile;

@@ -7,32 +7,39 @@ import Sidebar, { SidebarTitle } from '../Sidebar';
 import Main from '../Main';
 import { List, ListItem } from '../List';
 
-const style: React.CSSProperties = {
-  textDecoration: 'none',
-  color: '#000',
+interface IProps {
+  getInterest
 }
 
-const GetInterests: React.FC = () => {
+const GetInterest: React.FC<IProps> = ({
+}) => {
   return (
     <Layout>
       <Sidebar>
         <SidebarTitle>SIForm</SidebarTitle>
         <List>
           <ListItem first>
-            <Link to="/GetInterests">GetInterests</Link>
+            <Link to="/GetUserProfile">GetUserProfile</Link>
           </ListItem>
           <ListItem>
             <Link to="/GetMyrides">GetMyrides</Link>
           </ListItem>
+          <ListItem>
+            <Link to="/GetInterest">GetInterest</Link>
+          </ListItem>
         </List>
       </Sidebar>
       <Main>
-        <div style={{
-          margin: '100px'
-        }}></div>
+        <div 
+          style={{
+            margin: '100px'
+          }}
+        >
+          <text style={{fontSize:15}}></text>
+        </div>
       </Main>
     </Layout>
   );
 }
 
-export default GetInterests;
+export default GetInterest;
