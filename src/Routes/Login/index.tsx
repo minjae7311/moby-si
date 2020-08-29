@@ -1,4 +1,4 @@
 /** @format */
 
-import LoginContainer from "./LoginContainer";
+import LoginContainer from "./Login.container";
 export default LoginContainer;
