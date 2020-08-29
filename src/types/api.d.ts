@@ -11,6 +11,7 @@ export interface adminLogin_AdminLogin {
   __typename: "AdminLoginResponse";
   ok: boolean;
   error: string | null;
+  token: string | null;
 }
 
 export interface adminLogin {
