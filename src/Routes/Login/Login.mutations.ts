@@ -13,3 +13,9 @@ export const LOGIN_MUTATION = gql`
     }
   }
 `;
+
+// export const LOG_USER_OUT = gql`
+//   mutation logUserOut {
+//     logUserOut @client
+//   }
+// `;

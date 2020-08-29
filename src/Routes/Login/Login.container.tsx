@@ -6,6 +6,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { Mutation } from "react-apollo";
 import { LOGIN_MUTATION } from "./Login.mutations";
 import { adminLoginVariables, adminLogin } from "../../types/api";
+import { LOG_USER_IN } from "../../loginMutation.local";
 
 interface IState {
   inputId: string;
@@ -39,49 +40,55 @@ class LoginContainer extends React.Component<IProps, IState> {
 
   public render() {
     return (
-      <Mutation mutation={LOGIN_MUTATION}>
-        {(logUserIn) => (
-          <Mutation<adminLogin, adminLoginVariables>
-            mutation={LOGIN_MUTATION}
-            variables={{
-              loginId: this.state.inputId,
-              loginPw: this.state.inputPw,
-            }}
-            onCompleted={(data) => {
-              const { AdminLogin } = data;
+      // <Mutation
+      //   mutation={LOG_USER_IN}
+      //   onCompleted={() => console.log("LOGINNN")}
+      //   onError={(error) => console.log("LOGIN ERROR", error)}
+      // >
+      //   {(logUserIn) => (
+      <Mutation<adminLogin, adminLoginVariables>
+        mutation={LOGIN_MUTATION}
+        variables={{
+          loginId: this.state.inputId,
+          loginPw: this.state.inputPw,
+        }}
+        onCompleted={(data) => {
+          const { AdminLogin } = data;
 
-              if (AdminLogin.ok) {
-                if (AdminLogin.token) {
-                  logUserIn({
-                    variables: {
-                      token: AdminLogin.token,
-                    },
-                  });
-                }
-              } else {
-                console.error("Login failed:", AdminLogin.error);
-              }
-            }}
-            onError={(error) => {
-              console.error(error);
-            }}
-          >
-            {(mutation, { loading }) => {
-              return (
-                <LoginPresenter
-                  idValue={this.state.inputId}
-                  pwValue={this.state.inputPw}
-                  onChange={this.onChange}
-                  // onSubmit={mutation}
-                  onClick={mutation}
-                ></LoginPresenter>
-              );
-            }}
-          </Mutation>
-        )}
+          if (AdminLogin.ok) {
+            if (AdminLogin.token) {
+              console.log(AdminLogin.token);
+              // logUserIn({
+              //   variables: {
+              //     token: AdminLogin.token,
+              //   },
+              // });
+            }
+          } else {
+            console.error("Login failed:", AdminLogin.error);
+          }
+        }}
+        onError={(error) => {
+          console.error(error);
+        }}
+      >
+        {(mutation, { loading }) => {
+          return (
+            <LoginPresenter
+              idValue={this.state.inputId}
+              pwValue={this.state.inputPw}
+              onChange={this.onChange}
+              // onSubmit={mutation}
+              onClick={mutation}
+            ></LoginPresenter>
+          );
+        }}
       </Mutation>
     );
   }
+  // </Mutation>
+  // );
+  // }
 }
 
 export default LoginContainer;

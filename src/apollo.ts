@@ -3,6 +3,9 @@
 import ApolloClient, { Operation, InMemoryCache } from "apollo-boost";
 
 const client = new ApolloClient({
+  // graphql endpoint
+  uri: "http://localhost:4000/graphql",
+
   cache: new InMemoryCache(),
 
   clientState: {
@@ -16,7 +19,6 @@ const client = new ApolloClient({
 
   resolvers: {
     Mutation: {
-      // user login
       logUserIn: (_, { token }, { cache }) => {
         localStorage.setItem("jwt", token);
         cache.writeData({
@@ -28,23 +30,25 @@ const client = new ApolloClient({
           },
         });
 
+        console.log("Im executing...");
+
         return null;
       },
 
       // user logout
-      logUserOut: (_, __, { cache }) => {
-        localStorage.removeItem("jwt");
-        cache.writeData({
-          data: {
-            auth: {
-              __typename: "Auth",
-              isLoggedIn: false,
-            },
-          },
-        });
+      // logUserOut: (_, __, { cache }) => {
+      //   localStorage.removeItem("jwt");
+      //   cache.writeData({
+      //     data: {
+      //       auth: {
+      //         __typename: "Auth",
+      //         isLoggedIn: false,
+      //       },
+      //     },
+      //   });
 
-        return null;
-      },
+      //   return null;
+      // },
     },
   },
 
@@ -55,9 +59,6 @@ const client = new ApolloClient({
       },
     });
   },
-
-  // graphql endpoint
-  uri: "http://localhost:4000/graphql",
 });
 
 export default client;

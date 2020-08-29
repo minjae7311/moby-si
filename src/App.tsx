@@ -3,16 +3,8 @@
 import React from "react";
 import "./App.css";
 import Root from "./Routes/Root";
-import { gql } from "apollo-boost";
 import { graphql } from "react-apollo";
-
-const IS_LOGGED_IN = gql`
-  {
-    auth {
-      isLoggedIn @client
-    }
-  }
-`;
+import { IS_LOGGED_IN } from "./App.queries.local";
 
 const App: any = ({ data }) => {
   // const App = () => {

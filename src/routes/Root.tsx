@@ -14,7 +14,6 @@ const Root: React.SFC<IProps> = ({ isLoggedIn }) => (
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={isLoggedIn ? Main : Login} />
-      {/* <Route path="/" exact component={Login} /> */}
       <Redirect path="*" to="/" />
     </Switch>
   </BrowserRouter>
