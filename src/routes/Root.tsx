@@ -2,18 +2,13 @@
 
 import * as React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import Login from "./Login";
-import Main from "./Main";
+import { AdminLogin } from "./Login";
 
-interface IProps {
-  isLoggedIn: boolean;
-}
-
-const Root: React.SFC<IProps> = ({ isLoggedIn }) => (
+const Root: React.SFC = () => (
   // const Root: React.SFC = () => (
   <BrowserRouter>
     <Switch>
-      <Route path="/" exact component={isLoggedIn ? Main : Login} />
+      <Route path="/" exact component={AdminLogin} />
       <Redirect path="*" to="/" />
     </Switch>
   </BrowserRouter>

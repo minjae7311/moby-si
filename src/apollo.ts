@@ -1,6 +1,6 @@
 /** @format */
 
-import ApolloClient, { Operation, InMemoryCache } from "apollo-boost";
+import { ApolloClient, InMemoryCache } from "@apollo/client";
 
 const client = new ApolloClient({
   // graphql endpoint
@@ -8,57 +8,42 @@ const client = new ApolloClient({
 
   cache: new InMemoryCache(),
 
-  clientState: {
-    defaults: {
-      auth: {
-        __typename: "Auth",
-        isLoggedIn: Boolean(localStorage.getItem("jwt")),
-      },
-    },
-  },
+  // clientState: {
+  //   defaults: {
+  //     auth: {
+  //       __typename: "Auth",
+  //       isLoggedIn: Boolean(localStorage.getItem("jwt")),
+  //     },
+  //   },
+  // },
 
-  resolvers: {
-    Mutation: {
-      logUserIn: (_, { token }, { cache }) => {
-        localStorage.setItem("jwt", token);
-        cache.writeData({
-          data: {
-            auth: {
-              __typename: "Auth",
-              isLoggedIn: true,
-            },
-          },
-        });
+  // resolvers: {
+  //   Mutation: {
+  //     logUserIn: (_, { token }, { cache }) => {
+  //       localStorage.setItem("jwt", token);
+  //       cache.writeData({
+  //         data: {
+  //           auth: {
+  //             __typename: "Auth",
+  //             isLoggedIn: true,
+  //           },
+  //         },
+  //       });
 
-        console.log("Im executing...");
+  //       console.log("Im executing...");
 
-        return null;
-      },
+  //       return null;
+  //     },
+  //   },
+  // },
 
-      // user logout
-      // logUserOut: (_, __, { cache }) => {
-      //   localStorage.removeItem("jwt");
-      //   cache.writeData({
-      //     data: {
-      //       auth: {
-      //         __typename: "Auth",
-      //         isLoggedIn: false,
-      //       },
-      //     },
-      //   });
-
-      //   return null;
-      // },
-    },
-  },
-
-  request: async (operation: Operation) => {
-    operation.setContext({
-      headers: {
-        "X-JWT": localStorage.getItem("jwt") || "",
-      },
-    });
-  },
+  // request: async (operation: Operation) => {
+  //   operation.setContext({
+  //     headers: {
+  //       "X-JWT": localStorage.getItem("jwt") || "",
+  //     },
+  //   });
+  // },
 });
 
 export default client;

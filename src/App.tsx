@@ -3,17 +3,13 @@
 import React from "react";
 import "./App.css";
 import Root from "./Routes/Root";
-import { graphql } from "react-apollo";
-import { IS_LOGGED_IN } from "./App.queries.local";
 
-const App: any = ({ data }) => {
-  // const App = () => {
+const App = () => {
   return (
     <React.Fragment>
-      <Root isLoggedIn={data.auth.isLoggedIn} />
-      {/* <Root /> */}
+      <Root />
     </React.Fragment>
   );
 };
 
-export default graphql(IS_LOGGED_IN)(App);
+export default App;
