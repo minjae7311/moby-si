@@ -1,10 +1,10 @@
 /** @format */
 
 import React from "react";
-import LoginPresenter from "./LoginPresenter";
+import LoginPresenter from "./Login.presenter";
 import { RouteComponentProps } from "react-router-dom";
 import { Mutation } from "react-apollo";
-import { LOGIN_MUTATION } from "./LoginMutations";
+import { LOGIN_MUTATION } from "./Login.mutations";
 import { adminLoginVariables, adminLogin } from "../../types/api";
 
 interface IState {
@@ -24,7 +24,7 @@ class LoginContainer extends React.Component<IProps, IState> {
     this.state = { inputId: "", inputPw: "" };
 
     if (!props.location.state) {
-      // props.history.push("/");
+      props.history.push("/");
     }
 
     this.onChange = this.onChange.bind(this);
@@ -38,11 +38,9 @@ class LoginContainer extends React.Component<IProps, IState> {
   };
 
   public render() {
-    // const { inputId, inputPw } = this.state;
-
     return (
       <Mutation mutation={LOGIN_MUTATION}>
-        {() => (
+        {(logUserIn) => (
           <Mutation<adminLogin, adminLoginVariables>
             mutation={LOGIN_MUTATION}
             variables={{
@@ -53,11 +51,15 @@ class LoginContainer extends React.Component<IProps, IState> {
               const { AdminLogin } = data;
 
               if (AdminLogin.ok) {
-                /**
-                 * @todo login succeed
-                 */
+                if (AdminLogin.token) {
+                  logUserIn({
+                    variables: {
+                      token: AdminLogin.token,
+                    },
+                  });
+                }
               } else {
-                console.log(AdminLogin.error);
+                console.error("Login failed:", AdminLogin.error);
               }
             }}
             onError={(error) => {

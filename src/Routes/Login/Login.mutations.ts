@@ -9,6 +9,7 @@ export const LOGIN_MUTATION = gql`
     AdminLogin(loginId: $loginId, loginPw: $loginPw) {
       ok
       error
+      token
     }
   }
 `;
