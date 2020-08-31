@@ -5,7 +5,8 @@ export const List: React.FC = ({ children }) =>
     style={{
       listStyle: 'none',
       paddingLeft: '0',
-      display:'flex'
+      display: 'flex',
+      flexWrap: 'wrap',
     }}>
     { children }
   </ul>
@@ -17,9 +18,9 @@ export const ListItem: React.FC = props => {
   return (
     <li
       style={{
-        padding: '15px',
-        borderBottom: '1px solid #ddd',
-        borderTop: '1px solid #ddd'
+        padding: '10px',
+        borderRight: '1px solid #ddd',
+        marginTop: 10
       }}
     >
       {children}

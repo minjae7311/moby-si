@@ -9,7 +9,7 @@ import Main from '../../Components/Style/Main';
 import { List, ListItem } from '../../Components/Style/List';
 import MenuItem from '../../Components/Style/MenuItem';
 
-const SIForm: React.FC = () => {
+export const SIForm: React.SFC = (props) => {
 
   return (
     <Layout>
@@ -17,20 +17,16 @@ const SIForm: React.FC = () => {
         <SidebarTitle>SIForm</SidebarTitle>
         <List>
           <ListItem>
-            <MenuItem to="../GetMyride">GetMyride</MenuItem>
+            <MenuItem to="/SIForm/GetInterest">GetInterest</MenuItem>
           </ListItem>
           <ListItem>
-            <MenuItem to="../GetInterest">GetInterest</MenuItem>
+            <MenuItem to="/SIForm/GetInterest">GetRide</MenuItem>
           </ListItem>
         </List>
       </Sidebar>
       <Main>
-        <div style={{
-          margin: '100px'
-        }}></div>
+        {props.children}
       </Main>
     </Layout>
   );
 }
-
-export default SIForm;

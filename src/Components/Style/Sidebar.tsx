@@ -6,7 +6,6 @@ const style: React.CSSProperties = {
   marginRight: '10px',
   marginBottom: '15px',
   borderRadius: '4px',
-  display:'flex'
 }
 
 const Sidebar: React.FC = (props) => {
@@ -22,6 +21,7 @@ export default Sidebar;
 export const SidebarTitle: React.FC = ({children}) => 
   <h1 style={{
     padding: '0 10px',
+    marginBottom: -10
   }}>
     {children}
   </h1>
