@@ -3,16 +3,13 @@
 import React from "react";
 import LoginForm from "../../Components/LoginForm/LoginForm";
 
-const onComplete = (data) => {
+const onComplete = async (data) => {
   const { AdminLogin } = data;
 
   if (AdminLogin.ok) {
     const { token } = AdminLogin;
 
-    /**
-     * @todo do something with token
-     */
-    console.log(token);
+    localStorage.setItem("jwt", token);
   } else {
     console.error("Login error:", AdminLogin.error);
   }
