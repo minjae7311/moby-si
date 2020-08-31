@@ -1,11 +1,11 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import { useMutation } from "@apollo/client";
 import { adminLogin_AdminLogin, adminLoginVariables } from "../../types/api";
 import { ADMIN_LOGIN } from "../../Routes/Login/mutation.gql";
 
-let loginId, loginPw;
+// let loginId, loginPw;
 
 interface loginFormInterface {
   onComplete: any;
@@ -13,6 +13,8 @@ interface loginFormInterface {
 }
 
 const LoginForm: React.SFC<loginFormInterface> = ({ onComplete, onError }) => {
+  const [loginId, setLoginId] = useState("");
+  const [loginPw, setLoginPw] = useState("");
   const [adminLogin] = useMutation<adminLogin_AdminLogin, adminLoginVariables>(
     ADMIN_LOGIN,
     {
@@ -28,20 +30,20 @@ const LoginForm: React.SFC<loginFormInterface> = ({ onComplete, onError }) => {
         event.preventDefault();
 
         await adminLogin({
-          variables: { loginId: loginId.value, loginPw: loginPw.value },
+          variables: { loginId, loginPw },
         });
       }}
     >
       <input
-        ref={(node) => (loginId = node)}
         type="text"
         name="loginId"
+        onChange={(e) => setLoginId(e.target.value)}
         placeholder="ID"
       />
       <input
-        ref={(node) => (loginPw = node)}
         type="password"
         name="loginPw"
+        onChange={(e) => setLoginPw(e.target.value)}
         placeholder="PW"
       />
       <button type="submit">LOGIN</button>
