@@ -1,66 +1,52 @@
 /** @format */
 
 import React from "react";
-import styled from "../../typed-components";
+import { useMutation } from "@apollo/client";
+import { adminLogin_AdminLogin, adminLoginVariables } from "../../types/api";
+import { ADMIN_LOGIN } from "../../Routes/Login/mutation.gql";
 
-const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-`;
+let loginId, loginPw;
 
-const Input = styled.input`
-  border: 1px solid gray;
-  width: 30vw;
-  height: 40px;
-  margin-bottom: 20px;
-`;
-
-const Button = styled.button`
-  width: 30vw;
-  height: 40px;
-  margin-bottom: 20px;
-  background-color: black;
-  border: 0;
-  color: white;
-`;
-
-interface IProps {
-  // onSubmit: any;
-  onClick: any;
-  onChange: any;
-  idValue: string;
-  pwValue: string;
+interface loginFormInterface {
+  onComplete: any;
+  onError: any;
 }
 
-const LoginForm: React.SFC<IProps> = ({
-  // onSubmit,
-  onClick,
-  onChange,
-  idValue = "",
-  pwValue = "",
-}) => (
-  // <Form onSubmit={onSubmit}>
-  <Form>
-    <Input
-      name="inputId"
-      value={idValue}
-      onChange={onChange}
-      placeholder={"ID"}
-    ></Input>
-    <Input
-      name="inputPw"
-      value={pwValue}
-      onChange={onChange}
-      placeholder={"PASSWORD"}
-    ></Input>
-    {/* <Button type="submit">LOGIN</Button> */}
-    <Button type="button" onClick={onClick}>
-      LOGIN
-    </Button>
-  </Form>
-);
+const LoginForm: React.SFC<loginFormInterface> = ({ onComplete, onError }) => {
+  const [adminLogin] = useMutation<adminLogin_AdminLogin, adminLoginVariables>(
+    ADMIN_LOGIN,
+    {
+      variables: { loginId, loginPw },
+      onCompleted: onComplete,
+      onError: onError,
+    }
+  );
+
+  return (
+    <form
+      onSubmit={async (event) => {
+        event.preventDefault();
+
+        await adminLogin({
+          variables: { loginId: loginId.value, loginPw: loginPw.value },
+        });
+      }}
+    >
+      <input
+        ref={(node) => (loginId = node)}
+        type="text"
+        name="loginId"
+        placeholder="ID"
+      />
+      <input
+        ref={(node) => (loginPw = node)}
+        type="password"
+        name="loginPw"
+        placeholder="PW"
+      />
+      <button type="submit">LOGIN</button>
+    </form>
+  );
+};
 
 export default LoginForm;
