@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 const style: React.CSSProperties = {
-  display: 'flex',
+  display: 'flow',
   flex: 1,
   margin: '10px',
 }

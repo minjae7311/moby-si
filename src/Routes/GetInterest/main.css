@@ -48,3 +48,14 @@
     display : inline-block;
     cursor: pointer;
 }
+
+.menu {
+    display: 'inline-block';
+    border: 'solid 1px #ccc';
+    margin: '0 10px 10px 0';
+    padding: '8px 16px';
+    width: 'auto';
+    overflow: 'visible';
+    background: '#337ab7';
+    color: 'inherit';
+}

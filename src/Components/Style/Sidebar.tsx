@@ -1,11 +1,12 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 
 const style: React.CSSProperties = {
-  width: '200px',
+  width: '100%',
   border: 'solid 1px #ccc',
   marginRight: '10px',
+  marginBottom: '15px',
   borderRadius: '4px',
+  display:'flex'
 }
 
 const Sidebar: React.FC = (props) => {
@@ -24,17 +25,3 @@ export const SidebarTitle: React.FC = ({children}) =>
   }}>
     {children}
   </h1>
-
-interface SidebarBackButtonProps {
-  to: string;
-}
-
-export const SidebarBackButton: React.FC<SidebarBackButtonProps> = ({to}) => 
-  <Link style={{
-      textDecoration: 'none',
-      fontSize: '24px',
-      padding: '10px',
-      display: 'block',
-    }}
-    to={to}
-    >{`<`}</Link>

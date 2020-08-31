@@ -1,27 +1,24 @@
 /** @format */
 
 import * as React from 'react';
-import { Link } from 'react-router-dom';
 import Layout from '../Style/Layout';
 import Sidebar, { SidebarTitle } from '../Style/Sidebar';
 import Main from '../Style/Main';
 import { List, ListItem } from '../Style/List';
-
+import MenuItem from '../Style/MenuItem';
 
 const SIForm: React.FC = () => {
+
   return (
     <Layout>
       <Sidebar>
         <SidebarTitle>SIForm</SidebarTitle>
         <List>
-          <ListItem first>
-            <Link to="/GetUserProfile">GetUserProfile</Link>
+          <ListItem>
+            <MenuItem to="../GetMyride">GetMyride</MenuItem>
           </ListItem>
           <ListItem>
-            <Link to="/GetMyride">GetMyride</Link>
-          </ListItem>
-          <ListItem>
-            <Link to="/GetInterest">GetInterest</Link>
+            <MenuItem to="../GetInterest">GetInterest</MenuItem>
           </ListItem>
         </List>
       </Sidebar>

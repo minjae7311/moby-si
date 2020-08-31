@@ -5,28 +5,24 @@ export const List: React.FC = ({ children }) =>
     style={{
       listStyle: 'none',
       paddingLeft: '0',
+      display:'flex'
     }}>
     { children }
   </ul>
 
 
-interface ListItemProps {
-  first?: boolean;
-}
-
-export const ListItem: React.FC<ListItemProps> = props => {
-  const { children, first } = props;
+export const ListItem: React.FC = props => {
+  const { children } = props;
 
   return (
     <li
       style={{
         padding: '15px',
         borderBottom: '1px solid #ddd',
-        borderTop: first ? '1px solid #ddd' : 'none',
+        borderTop: '1px solid #ddd'
       }}
     >
       {children}
     </li>
-
   )
 }

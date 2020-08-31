@@ -1,8 +1,6 @@
-/**
- * @format
- */
+/** @format */
 
-import { gql } from "apollo-boost";
+import { gql } from "@apollo/client";
 
 export const GET_INTEREST = gql`
   query GetAllInterest{
