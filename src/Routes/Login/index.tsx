@@ -26,7 +26,7 @@ const onError = (error) => {
   console.error(error);
 };
 
-export const AdminLogin = () => {
+export const AdminLogin: React.SFC = () => {
   const [adminLogin] = useMutation<adminLogin_AdminLogin, adminLoginVariables>(
     ADMIN_LOGIN,
     {
