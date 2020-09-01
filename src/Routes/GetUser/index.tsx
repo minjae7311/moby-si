@@ -1,32 +1,33 @@
 /** @format */
 
 import React, {useState} from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import {GET_INTEREST} from "./mutations.gql"
-import {GetAllInterest} from "../../types/api";
-import { SIForm } from '../SIForm';
-import './main.css'
 
-export const GetInterests: React.SFC = () => {
+import { useQuery } from '@apollo/react-hooks';
+import {GET_USER} from "./mutations.gql"
+import {GetAllUsers} from "../../types/api";
+import { SIForm } from '../SIForm';
+
+export const GetUsers: React.SFC = () => {
   const [page, setPage] = useState({
     page : 1
   })
  
-  const {data} = useQuery<GetAllInterest>(
-    GET_INTEREST
+  const {data} = useQuery<GetAllUsers>(
+    GET_USER
   )
-  const interestId = data?.GetAllInterests.interests?.map((item) => item)
-  const getInterest = interestId?.sort((a: any,b: any) => a.id - b.id);
-  const numInterest = getInterest?.length
+  const userId = data?.GetAllUsers.users?.map((item) => item)
+  const getUser = userId?.sort((a: any,b: any) => a.id - b.id);
+  const numUser = getUser?.length
   const limit = 10;
 
   const style={
-    gridTemplateColumns: '25% 25% 25% 25%'
+    gridTemplateColumns: '7% 12% 15% 10% 10% 10% 17% 17%'
   }
 
   let Page_Arr = [] as any;
 
-  for(let i = 1; i <= Math.ceil(numInterest as any / limit); i++) {
+
+  for(let i = 1; i <= Math.ceil(numUser as any / limit); i++) {
     Page_Arr.push(i);
   }
 
@@ -35,12 +36,16 @@ export const GetInterests: React.SFC = () => {
       <div className='List'>
         <div className='list_grid list_tit' style={style}>
           <div> Id </div>
-          <div> Interests </div>
+          <div> Name </div>
+          <div> PhoneNumb </div>
+          <div> Gender </div>
+          <div> BirthDate </div>
+          <div> Job </div>
           <div> Create </div>
           <div> Update </div>
         </div>
 
-        {getInterest ? getInterest.map( (item: any, index: any) => {
+        {getUser ? getUser.map( (item: any, index: any) => {
           const createStamp = item.createdAt * 1
           const updateStamp = item.updatedAt * 1
           const createDate = new Date(createStamp).toLocaleString()
@@ -48,13 +53,17 @@ export const GetInterests: React.SFC = () => {
             return(
               <div className='list_data list_text' style={style} key={index}>
                 <div> {item.id} </div>
-                <div> {item.name} </div>
+                <div> {item.fullName} </div>
+                <div> {item.phoneNumber} </div>
+                <div> {item.gender} </div>
+                <div> {item.birthDate} </div>
+                <div> {item.job} </div>
                 <div> {createDate} </div>
                 <div> {updateDate} </div>
               </div>
             )
           })
-        :null}
+        : null}
           
         <div className='paging_div'>
           <div> </div>
