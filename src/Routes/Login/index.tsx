@@ -10,6 +10,7 @@ const onComplete = async (data) => {
     const { token } = AdminLogin;
 
     localStorage.setItem("jwt", token);
+    window.location.href = "/";
   } else {
     console.error("Login error:", AdminLogin.error);
   }

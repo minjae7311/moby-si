@@ -28,6 +28,25 @@ export interface adminLoginVariables {
 // @generated
 // This file was automatically generated and should not be edited.
 
+// ====================================================
+// GraphQL mutation operation: aminResolverTest
+// ====================================================
+
+export interface aminResolverTest_AdminResolverTest {
+  __typename: "AdminResolverTestResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface aminResolverTest {
+  AdminResolverTest: aminResolverTest_AdminResolverTest;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
 //==============================================================
 // START Enums and Input Objects
 //==============================================================

@@ -2,11 +2,12 @@
 
 import React from "react";
 
-const logoutButton: React.FC = () => {
+const LogoutButton: React.FC = () => {
   return (
     <button
       onClick={() => {
         localStorage.removeItem("jwt");
+        window.location.href = "/";
       }}
     >
       LOGOUT
@@ -14,4 +15,4 @@ const logoutButton: React.FC = () => {
   );
 };
 
-export default logoutButton;
+export default LogoutButton;
