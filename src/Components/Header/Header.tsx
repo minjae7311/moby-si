@@ -2,6 +2,9 @@
 
 import * as React from "react";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import { getMenuList_GetMenuList } from "../../types/api";
+import { GET_MENU_LIST } from "./mutation.gql";
+import { useMutation } from "@apollo/client";
 
 const style: React.CSSProperties = {
   width: "100%",
@@ -11,16 +14,22 @@ const style: React.CSSProperties = {
   borderRadius: "4px",
 };
 
-export const Header: React.SFC = () => {
-  // const { loading, data } = useQuery<getMenuList_GetMenuList>(GET_MENU_LIST, {
-  //   onCompleted: (result) => {
-  //     console.log("completed", result.entityNames);
-  //   },
-  // });
+const Header: React.SFC = () => {
+  const [getMenuList] = useMutation<getMenuList_GetMenuList>(GET_MENU_LIST, {
+    onCompleted: (data) => {
+      console.log(data.entityNames);
+    },
+  });
 
   return (
     <div style={style}>
-      <h1>SIForm</h1>
+      <h1
+        onClick={async (e) => {
+          await getMenuList();
+        }}
+      >
+        SIForm
+      </h1>
       <ol>
         <li>User</li>
         <li>Ride</li>
