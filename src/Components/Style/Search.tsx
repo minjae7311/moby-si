@@ -1,7 +1,7 @@
 import * as React from 'react';
 import '../../Routes/GetInterest/main.css'
 
-const Search: React.FC = (props) => {
+const Search: React.FC = () => {
   return (
     <div>
         <form>

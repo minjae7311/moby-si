@@ -20,10 +20,15 @@ export interface GetAllInterest_GetAllInterest {
   ok: boolean;
   error: string | null;
   interests: (GetAllInterest_GetAllInterest_interests | null)[] | null;
+  number: number | null;
 }
 
 export interface GetAllInterest {
   GetAllInterest: GetAllInterest_GetAllInterest;
+}
+
+export interface GetAllInterestVariables {
+  page: number;
 }
 
 /* tslint:disable */

@@ -12,7 +12,7 @@ export const GetUsers: React.SFC = () => {
     page : 1
   })
 
-  const [limit, setLimit] = useState({
+  const [limit] = useState({
     limit : 10
   })
 
@@ -22,6 +22,7 @@ export const GetUsers: React.SFC = () => {
       variables: {page: page.page}
     }
   )
+
   const getUser = data?.GetAllUsers.users?.map((item) => item)
   const numUser = getUser?.length
   const style={

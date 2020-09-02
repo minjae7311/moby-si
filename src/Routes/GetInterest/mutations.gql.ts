@@ -13,6 +13,7 @@ export const GET_INTEREST = gql`
         createdAt
         updatedAt
       }
+      number
     }
   }
 `;
