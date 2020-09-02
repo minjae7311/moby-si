@@ -1,9 +1,6 @@
 /** @format */
 
 import * as React from "react";
-import { getMenuList_GetMenuList } from "../../types/api";
-import { GET_MENU_LIST } from "./mutation.gql";
-import { useQuery } from "@apollo/client";
 import LogoutButton from "../LogoutButton/LogoutButton";
 
 const style: React.CSSProperties = {
