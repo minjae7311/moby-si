@@ -3,8 +3,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_USER = gql`
-  query GetAllUsers{
-    GetAllUsers{
+  query GetAllUsers($page: Int!){
+    GetAllUsers(page:$page){
       ok
       error
       users{

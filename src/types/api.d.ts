@@ -7,7 +7,7 @@
 // GraphQL query operation: GetAllInterest
 // ====================================================
 
-export interface GetAllInterest_GetAllInterests_interests {
+export interface GetAllInterest_GetAllInterest_interests {
   __typename: "Interests";
   id: number;
   name: string;
@@ -15,15 +15,15 @@ export interface GetAllInterest_GetAllInterests_interests {
   updatedAt: string | null;
 }
 
-export interface GetAllInterest_GetAllInterests {
-  __typename: "GetAllInterestsResponse";
+export interface GetAllInterest_GetAllInterest {
+  __typename: "GetAllInterestResponse";
   ok: boolean;
   error: string | null;
-  interests: (GetAllInterest_GetAllInterests_interests | null)[] | null;
+  interests: (GetAllInterest_GetAllInterest_interests | null)[] | null;
 }
 
 export interface GetAllInterest {
-  GetAllInterests: GetAllInterest_GetAllInterests;
+  GetAllInterest: GetAllInterest_GetAllInterest;
 }
 
 /* tslint:disable */
@@ -61,6 +61,10 @@ export interface GetAllUsers_GetAllUsers {
 
 export interface GetAllUsers {
   GetAllUsers: GetAllUsers_GetAllUsers;
+}
+
+export interface GetAllUsersVariables {
+  page: number;
 }
 
 /* tslint:disable */

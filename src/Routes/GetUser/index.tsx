@@ -11,23 +11,25 @@ export const GetUsers: React.SFC = () => {
   const [page, setPage] = useState({
     page : 1
   })
- 
-  const {data} = useQuery<GetAllUsers>(
-    GET_USER
-  )
-  const userId = data?.GetAllUsers.users?.map((item) => item)
-  const getUser = userId?.sort((a: any,b: any) => a.id - b.id);
-  const numUser = getUser?.length
-  const limit = 10;
 
+  const [limit, setLimit] = useState({
+    limit : 10
+  })
+
+  const {data} = useQuery<GetAllUsers>(
+    GET_USER,
+    {
+      variables: {page: page.page}
+    }
+  )
+  const getUser = data?.GetAllUsers.users?.map((item) => item)
+  const numUser = getUser?.length
   const style={
     gridTemplateColumns: '7% 12% 15% 10% 10% 10% 17% 17%'
   }
 
   let Page_Arr = [] as any;
-
-
-  for(let i = 1; i <= Math.ceil(numUser as any / limit); i++) {
+  for(let i = 1; i <= Math.ceil(numUser as any / limit.limit); i++) {
     Page_Arr.push(i);
   }
 

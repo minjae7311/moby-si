@@ -9,6 +9,7 @@ import Sidebar, { SidebarTitle } from '../../Components/Style/Sidebar';
 import Main from '../../Components/Style/Main';
 import { List, ListItem } from '../../Components/Style/List';
 import MenuItem from '../../Components/Style/MenuItem';
+import Search from '../../Components/Style/MenuItem';
 
 export const SIForm: React.SFC = (props) => {
   return (
