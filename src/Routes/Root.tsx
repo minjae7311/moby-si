@@ -2,21 +2,26 @@
 
 import * as React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-// import { AdminLogin } from "./Login";
-import {SIForm} from "./SIForm";
-import {GetInterests} from "./GetInterest";
-import {GetUsers} from "./GetUser";
+import { AdminLogin } from "./Login";
+import { SIForm } from "./SIForm";
+
+const token = localStorage.getItem("jwt");
+
+const LoggedIn: React.FC = () => (
+  <Switch>
+    <Route path={"/"} exact={true} component={SIForm} />
+  </Switch>
+);
+
+const LoggedOut: React.FC = () => (
+  <Switch>
+    <Route path={"/"} exact={true} component={AdminLogin} />
+    <Redirect path="*" to="/" />
+  </Switch>
+);
 
 const Root: React.FC = () => (
-  <BrowserRouter>
-    <Switch>
-      {/* <Route path="/" exact component={AdminLogin} /> */}
-      <Route path="/SIForm" exact component={SIForm} />
-      <Route path="/SIForm/GetInterest" exact component={GetInterests} />
-      <Route path="/SIForm/GetUser" exact component={GetUsers} />
-      <Redirect path="*" to="/" />
-    </Switch>
-  </BrowserRouter>
+  <BrowserRouter>{token ? <LoggedIn /> : <LoggedOut />}</BrowserRouter>
 );
 
 export default Root;

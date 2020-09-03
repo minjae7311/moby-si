@@ -4,31 +4,18 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetAllInterest
+// GraphQL mutation operation: getMenuList
 // ====================================================
 
-export interface GetAllInterest_GetAllInterest_interests {
-  __typename: "Interests";
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string | null;
-}
-
-export interface GetAllInterest_GetAllInterest {
-  __typename: "GetAllInterestResponse";
+export interface getMenuList_GetMenuList {
+  __typename: "GetMenuListResponse";
   ok: boolean;
   error: string | null;
-  interests: (GetAllInterest_GetAllInterest_interests | null)[] | null;
-  number: number | null;
+  entityNames: (string | null)[] | null;
 }
 
-export interface GetAllInterest {
-  GetAllInterest: GetAllInterest_GetAllInterest;
-}
-
-export interface GetAllInterestVariables {
-  page: number;
+export interface getMenuList {
+  GetMenuList: getMenuList_GetMenuList;
 }
 
 /* tslint:disable */
@@ -37,39 +24,23 @@ export interface GetAllInterestVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: GetAllUsers
+// GraphQL mutation operation: adminLogin
 // ====================================================
 
-export interface GetAllUsers_GetAllUsers_users {
-  __typename: "User";
-  id: number;
-  bankAccount: string | null;
-  birthDate: string | null;
-  deviceId: string;
-  fullName: string | null;
-  gender: string | null;
-  isRiding: boolean | null;
-  job: string | null;
-  phoneNumber: string;
-  verifiedPhoneNumber: boolean;
-  pushToken: string | null;
-  createdAt: string;
-  updatedAt: string | null;
-}
-
-export interface GetAllUsers_GetAllUsers {
-  __typename: "GetAllUsersResponse";
+export interface adminLogin_AdminLogin {
+  __typename: "AdminLoginResponse";
   ok: boolean;
   error: string | null;
-  users: (GetAllUsers_GetAllUsers_users | null)[] | null;
+  token: string | null;
 }
 
-export interface GetAllUsers {
-  GetAllUsers: GetAllUsers_GetAllUsers;
+export interface adminLogin {
+  AdminLogin: adminLogin_AdminLogin;
 }
 
-export interface GetAllUsersVariables {
-  page: number;
+export interface adminLoginVariables {
+  loginId: string;
+  loginPw: string;
 }
 
 /* tslint:disable */

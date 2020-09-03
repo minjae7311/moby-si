@@ -1,65 +1,25 @@
 /** @format */
 
 import React from "react";
-// import { useMutation } from "@apollo/client";
-// import { adminLoginVariables, adminLogin_AdminLogin } from "../../types/api";
-// import { ADMIN_LOGIN } from "./mutation.gql";
+import LoginForm from "../../Components/LoginForm/LoginForm";
 
-// let loginId, loginPw;
+const onComplete = async (data) => {
+  const { AdminLogin } = data;
 
-// const onComplete = (data) => {
-//   const { AdminLogin } = data;
+  if (AdminLogin.ok) {
+    const { token } = AdminLogin;
 
-//   if (AdminLogin.ok) {
-//     const { token } = AdminLogin;
+    localStorage.setItem("jwt", token);
+    window.location.href = "/";
+  } else {
+    console.error("Login error:", AdminLogin.error);
+  }
+};
 
-//     /**
-//      * @todo do something with token
-//      */
-//     console.log(token);
-//   } else {
-//     console.error("Login error:", AdminLogin.error);
-//   }
-// };
+const onError = (error) => {
+  console.error(error);
+};
 
-// const onError = (error) => {
-//   console.error(error);
-// };
-
-// export const AdminLogin: React.SFC = () => {
-//   const [adminLogin] = useMutation<adminLogin_AdminLogin, adminLoginVariables>(
-//     ADMIN_LOGIN,
-//     {
-//       variables: { loginId, loginPw },
-//       onCompleted: onComplete,
-//       onError: onError,
-//     }
-//   );
-
-//   return (
-//     <form
-//       onSubmit={async (e) => {
-//         e.preventDefault();
-//         await adminLogin({
-//           variables: { loginId: loginId.value, loginPw: loginPw.value },
-//         });
-//       }}
-//     >
-//       <input
-//         ref={(node) => {
-//           loginId = node;
-//         }}
-//         name="loginId"
-//         placeholder="ID"
-//       ></input>
-//       <input
-//         ref={(node) => {
-//           loginPw = node;
-//         }}
-//         name="loginPw"
-//         placeholder="Pw"
-//       ></input>
-//       <button>LOGIN</button>
-//     </form>
-//   );
-// };
+export const AdminLogin: React.SFC = () => {
+  return <LoginForm onComplete={onComplete} onError={onError}></LoginForm>;
+};
