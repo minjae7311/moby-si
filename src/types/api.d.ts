@@ -4,6 +4,45 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getEnquries
+// ====================================================
+
+export interface getEnquries_GetEnquries_enquries_user {
+  __typename: "User";
+  fullName: string | null;
+  phoneNumber: string;
+  pushToken: string | null;
+}
+
+export interface getEnquries_GetEnquries_enquries {
+  __typename: "Enquiry";
+  id: number;
+  user: getEnquries_GetEnquries_enquries_user;
+  questionTitle: string;
+  questionContent: string;
+  answerTitle: string | null;
+  answerContent: string | null;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getEnquries_GetEnquries {
+  __typename: "GetEnquriesResponse";
+  ok: boolean;
+  error: string | null;
+  enquries: (getEnquries_GetEnquries_enquries | null)[] | null;
+}
+
+export interface getEnquries {
+  GetEnquries: getEnquries_GetEnquries;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getUserList
 // ====================================================
 
