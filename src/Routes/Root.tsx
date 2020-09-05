@@ -5,6 +5,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { AdminLogin } from "./Login";
 import { SIForm } from "./SIForm";
 import EnquiryList from "../Components/EnquiryList";
+import UserList from "./UserList";
 
 const token = localStorage.getItem("jwt");
 
@@ -12,6 +13,7 @@ const LoggedIn: React.FC = () => (
   <Switch>
     <Route path={"/"} exact={true} component={SIForm} />
     <Route path={"/faq"} exact={true} component={EnquiryList} />
+    <Route path={"/users"} exact={true} component={UserList} />
   </Switch>
 );
 

@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
-import { GET_USER_LIST } from "./mutation.gql";
+import { GET_USER_LIST } from "../../Routes/UserList/mutation.gql";
 
 const Main: React.SFC = () => {
   // eslint-disable-next-line
