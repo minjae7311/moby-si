@@ -9,6 +9,7 @@ const LogoutButton: React.FC = () => {
         localStorage.removeItem("jwt");
         window.location.href = "/";
       }}
+      style={{marginLeft:'94.5%'}}
     >
       LOGOUT
     </button>

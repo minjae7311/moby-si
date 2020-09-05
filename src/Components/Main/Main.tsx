@@ -2,11 +2,17 @@
 
 import * as React from "react";
 
-
+const style: React.CSSProperties = {
+  width: "98%",
+  border: "solid 1px #ccc",
+  margin: "1%",
+  borderRadius: "4px",
+  display: 'flow-root',
+};
 
 const Main: React.SFC = () => {
   return (
-    <div>
+    <div style={style}>
       <ul>
         <li>DATA</li>
         <li>DATA</li>

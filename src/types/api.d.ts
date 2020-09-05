@@ -4,26 +4,6 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL mutation operation: getMenuList
-// ====================================================
-
-export interface getMenuList_GetMenuList {
-  __typename: "GetMenuListResponse";
-  ok: boolean;
-  error: string | null;
-  entityNames: (string | null)[] | null;
-}
-
-export interface getMenuList {
-  GetMenuList: getMenuList_GetMenuList;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
 // GraphQL mutation operation: adminLogin
 // ====================================================
 

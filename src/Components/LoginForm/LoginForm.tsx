@@ -33,6 +33,7 @@ const LoginForm: React.SFC<loginFormInterface> = ({ onComplete, onError }) => {
           variables: { loginId, loginPw },
         });
       }}
+      
     >
       <input
         type="text"
