@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import { Link } from 'react-router-dom';
 
 const style: React.CSSProperties = {
   width: "98%",
@@ -31,8 +32,8 @@ const Header: React.SFC = () => {
             paddingLeft: '0',
             display: 'flex',
         }}>
+          <Link to="/GetRide"><li style={list}>Ride</li></Link>
           <li style={list}>User</li>
-          <li style={list}>Ride</li>
           <li style={list}>Credit</li>
         </ul>
       </div>
