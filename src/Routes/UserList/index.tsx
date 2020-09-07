@@ -4,6 +4,33 @@ import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_USER_LIST } from "./mutation.gql";
 import LoadingForm from "../../Components/LoadingForm";
+import styled from "../../typed-components";
+
+const Container = styled.div`
+  width: 80%;
+  margin: 0 auto;
+`;
+
+const Table = styled.table`
+  width: 100%;
+  text-align: center;
+`;
+
+const Thead = styled.thead``;
+
+const Tbody = styled.tbody``;
+
+const Tr = styled.tr`
+  height: 30px;
+`;
+
+const Th = styled.th`
+  border-bottom: 1px solid #dddddd;
+`;
+
+const Td = styled.td`
+  border-bottom: 1px solid #dddddd;
+`;
 
 const UserList: React.SFC = () => {
   // eslint-disable-next-line
@@ -20,47 +47,52 @@ const UserList: React.SFC = () => {
 
   const userCols = [
     "id",
-    "bankAccount",
+    // "bankAccount",
     "fullName",
-    "profilePhotoUrl",
+    // "profilePhotoUrl",
     "phoneNumber",
-    "verifiedPhoneNumber",
+    // "verifiedPhoneNumber",
     "gender",
-    "pushToken",
+    // "pushToken",
     "birthDate",
     "job",
-    "deviceId",
+    // "deviceId",
     "isRiding",
-    "createdAt",
-    "updatedAt",
+    // "createdAt",
+    // "updatedAt",
   ];
 
   return (
-    <div>
+    <Container>
       {loading ? (
         <LoadingForm />
       ) : (
-        <table>
-          <thead>
-            <tr>
+        <Table>
+          <Thead>
+            <Tr>
               {userCols.map((col, index) => (
-                <th key={index}>{col}</th>
+                <Th key={index}>{col}</Th>
               ))}
-            </tr>
-          </thead>
-          <tbody>
+            </Tr>
+          </Thead>
+          <Tbody>
             {data &&
               data.GetUserList.users.map((user) => (
-                <tr id={user.id} key={user.id}>
-                  {userCols.map((col, coli) => (
-                    <td key={coli}>{user[col]}</td>
-                  ))}
-                </tr>
+                <Tr id={user.id} key={user.id}>
+                  {userCols.map((col, coli) => {
+                    if (col === "isRiding") {
+                      if (user[col] === true) return <Td key={coli}>riding</Td>;
+                      else return <Td key={coli}>not riding</Td>;
+                    } else {
+                      return <Td key={coli}>{user[col]}</Td>;
+                    }
+                  })}
+                </Tr>
               ))}
-          </tbody>
-        </table>
+          </Tbody>
+        </Table>
       )}
-    </div>
+    </Container>
   );
 };
 
