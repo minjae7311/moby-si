@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_USER_LIST } from "./mutation.gql";
@@ -47,19 +45,12 @@ const UserList: React.SFC = () => {
 
   const userCols = [
     "id",
-    // "bankAccount",
     "fullName",
-    // "profilePhotoUrl",
     "phoneNumber",
-    // "verifiedPhoneNumber",
     "gender",
-    // "pushToken",
     "birthDate",
     "job",
-    // "deviceId",
     "isRiding",
-    // "createdAt",
-    // "updatedAt",
   ];
 
   return (

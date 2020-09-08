@@ -43,6 +43,137 @@ export interface getEnquries {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: adminLogin
+// ====================================================
+
+export interface adminLogin_AdminLogin {
+  __typename: "AdminLoginResponse";
+  ok: boolean;
+  error: string | null;
+  token: string | null;
+}
+
+export interface adminLogin {
+  AdminLogin: adminLogin_AdminLogin;
+}
+
+export interface adminLoginVariables {
+  loginId: string;
+  loginPw: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getUserDetail
+// ====================================================
+
+export interface getUserDetail_GetUserDetail_user_interests {
+  __typename: "Interests";
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getUserDetail_GetUserDetail_user_credit {
+  __typename: "Credit";
+  id: number;
+  nickname: string | null;
+  card_name: string | null;
+  card_number: string;
+  expiry: string;
+  isMain: boolean;
+  createdAt: string;
+  updatedAt: string | null;
+  first4numbers: string | null;
+}
+
+export interface getUserDetail_GetUserDetail_user_verification {
+  __typename: "Verification";
+  id: number;
+  target: string;
+  payload: string;
+  key: string;
+  verified: boolean;
+  expired: boolean;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getUserDetail_GetUserDetail_user_rides_from {
+  __typename: "Place";
+  name: string | null;
+  address: string;
+}
+
+export interface getUserDetail_GetUserDetail_user_rides_to {
+  __typename: "Place";
+  name: string | null;
+  address: string;
+}
+
+export interface getUserDetail_GetUserDetail_user_rides {
+  __typename: "Ride";
+  id: number;
+  from: getUserDetail_GetUserDetail_user_rides_from | null;
+  to: getUserDetail_GetUserDetail_user_rides_to | null;
+  finalFee: number | null;
+  surveyCompleted: boolean;
+  status: string;
+  /**
+   * findingDistance: Float
+   */
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getUserDetail_GetUserDetail_user {
+  __typename: "User";
+  id: number;
+  bankAccount: string | null;
+  fullName: string | null;
+  profilePhotoUrl: string | null;
+  phoneNumber: string;
+  verifiedPhoneNumber: boolean;
+  gender: string | null;
+  pushToken: string | null;
+  birthDate: string | null;
+  job: string | null;
+  deviceId: string;
+  isRiding: boolean | null;
+  createdAt: string;
+  updatedAt: string | null;
+  interests: (getUserDetail_GetUserDetail_user_interests | null)[] | null;
+  credit: (getUserDetail_GetUserDetail_user_credit | null)[] | null;
+  verification: getUserDetail_GetUserDetail_user_verification | null;
+  rides: (getUserDetail_GetUserDetail_user_rides | null)[] | null;
+}
+
+export interface getUserDetail_GetUserDetail {
+  __typename: "GetUserDetailResponse";
+  ok: boolean;
+  error: string | null;
+  user: getUserDetail_GetUserDetail_user | null;
+}
+
+export interface getUserDetail {
+  GetUserDetail: getUserDetail_GetUserDetail;
+}
+
+export interface getUserDetailVariables {
+  id: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getUserList
 // ====================================================
 
@@ -78,31 +209,6 @@ export interface getUserList {
 export interface getUserListVariables {
   take: number;
   page: number;
-}
-
-/* tslint:disable */
-/* eslint-disable */
-// @generated
-// This file was automatically generated and should not be edited.
-
-// ====================================================
-// GraphQL mutation operation: adminLogin
-// ====================================================
-
-export interface adminLogin_AdminLogin {
-  __typename: "AdminLoginResponse";
-  ok: boolean;
-  error: string | null;
-  token: string | null;
-}
-
-export interface adminLogin {
-  AdminLogin: adminLogin_AdminLogin;
-}
-
-export interface adminLoginVariables {
-  loginId: string;
-  loginPw: string;
 }
 
 /* tslint:disable */
