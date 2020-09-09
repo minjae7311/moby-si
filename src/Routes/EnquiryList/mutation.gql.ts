@@ -1,18 +1,14 @@
-/** @format */
-
 import { gql } from "@apollo/client";
 
-export const GET_ENQUIRY_LIST = gql`
-  query getEnquries {
-    GetEnquries {
+export const GET_ENQUIRIES = gql`
+  query getEnquiries($take: Int!, $page: Int!) {
+    GetEnquiries(take: $take, page: $page) {
       ok
       error
-      enquries {
+      enquiries {
         id
         user {
           fullName
-          phoneNumber
-          pushToken
         }
         questionTitle
         questionContent

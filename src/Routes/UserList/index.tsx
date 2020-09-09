@@ -2,31 +2,10 @@ import React, { useState } from "react";
 import { useQuery } from "@apollo/client";
 import { GET_USER_LIST } from "./mutation.gql";
 import LoadingForm from "../../Components/LoadingForm";
-import styled from "../../typed-components";
 import { useHistory } from "react-router-dom";
-import { Container } from "../../Components/Container/Container";
 import { goDetail } from "../../Functions/functions";
-
-const Table = styled.table`
-  width: 100%;
-  text-align: center;
-`;
-
-const Thead = styled.thead``;
-
-const Tbody = styled.tbody``;
-
-const Tr = styled.tr`
-  height: 30px;
-`;
-
-const Th = styled.th`
-  border-bottom: 1px solid #dddddd;
-`;
-
-const Td = styled.td`
-  border-bottom: 1px solid #dddddd;
-`;
+import { Container } from "../../Components/Container/Container";
+import { Table, Thead, Tr, Tbody, Td, Th } from "../../Components/Table/Table";
 
 const UserList: React.SFC = () => {
   // eslint-disable-next-line
@@ -45,6 +24,9 @@ const UserList: React.SFC = () => {
 
   const history = useHistory();
 
+  /**
+   * @todo change to state
+   */
   const userCols = [
     "id",
     "fullName",

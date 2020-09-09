@@ -4,20 +4,18 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
-// GraphQL query operation: getEnquries
+// GraphQL query operation: getEnquiries
 // ====================================================
 
-export interface getEnquries_GetEnquries_enquries_user {
+export interface getEnquiries_GetEnquiries_enquiries_user {
   __typename: "User";
   fullName: string | null;
-  phoneNumber: string;
-  pushToken: string | null;
 }
 
-export interface getEnquries_GetEnquries_enquries {
+export interface getEnquiries_GetEnquiries_enquiries {
   __typename: "Enquiry";
   id: number;
-  user: getEnquries_GetEnquries_enquries_user;
+  user: getEnquiries_GetEnquiries_enquiries_user;
   questionTitle: string;
   questionContent: string;
   answerTitle: string | null;
@@ -26,15 +24,20 @@ export interface getEnquries_GetEnquries_enquries {
   updatedAt: string | null;
 }
 
-export interface getEnquries_GetEnquries {
-  __typename: "GetEnquriesResponse";
+export interface getEnquiries_GetEnquiries {
+  __typename: "GetEnquiriesResponse";
   ok: boolean;
   error: string | null;
-  enquries: (getEnquries_GetEnquries_enquries | null)[] | null;
+  enquiries: (getEnquiries_GetEnquiries_enquiries | null)[] | null;
 }
 
-export interface getEnquries {
-  GetEnquries: getEnquries_GetEnquries;
+export interface getEnquiries {
+  GetEnquiries: getEnquiries_GetEnquiries;
+}
+
+export interface getEnquiriesVariables {
+  take: number;
+  page: number;
 }
 
 /* tslint:disable */
