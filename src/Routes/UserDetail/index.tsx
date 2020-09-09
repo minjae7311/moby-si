@@ -8,27 +8,9 @@ import {
   updateUserData_UpdateUserData,
   updateUserDataVariables,
 } from "../../types/api";
-import { Container } from "../../Components/Container/Container";
-
-const Wrapper = styled.div``;
-
-const Ul = styled.ul`
-  list-style: none;
-`;
-
-const Li = styled.li``;
-
-const Input = styled.input`
-  width: 100%;
-  border: 0;
-  disabled: ${(props) => (props.disabled ? true : false)};
-`;
-
-const H4 = styled.h4``;
-
-const Button = styled.button`
-  display: ${(props) => (props.visible ? "block" : "none")};
-`;
+import { Container, Wrapper } from "../../Components/Container/Container";
+import { H4, Ul, Li, Input, Button } from "../../Components/Forms/Forms";
+import { goBack } from "../../Functions/functions";
 
 const UserDetail: React.SFC = () => {
   // get param
@@ -72,11 +54,6 @@ const UserDetail: React.SFC = () => {
     console.log(result);
 
     setIsEditing(false);
-  };
-
-  // go to list page
-  const goBack = () => {
-    history.goBack();
   };
 
   /**
@@ -202,7 +179,7 @@ const UserDetail: React.SFC = () => {
             <Button onClick={confirmEdit} visible={isEditing}>
               확인
             </Button>
-            <Button onClick={goBack} visible={true}>
+            <Button onClick={() => goBack(history)} visible={true}>
               뒤로가기
             </Button>
             <Button onClick={deleteUser} visible={true}>

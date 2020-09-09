@@ -4,6 +4,76 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: anwserEnquiry
+// ====================================================
+
+export interface anwserEnquiry_AnswerEnquiry {
+  __typename: "AnswerEnquiryResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface anwserEnquiry {
+  AnswerEnquiry: anwserEnquiry_AnswerEnquiry;
+}
+
+export interface anwserEnquiryVariables {
+  id: number;
+  answerTitle: string;
+  answerContent: string;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getEnquiryDetail
+// ====================================================
+
+export interface getEnquiryDetail_GetEnquiryDetail_enquiry_user {
+  __typename: "User";
+  id: number;
+  fullName: string | null;
+  pushToken: string | null;
+  profilePhotoUrl: string | null;
+  phoneNumber: string;
+}
+
+export interface getEnquiryDetail_GetEnquiryDetail_enquiry {
+  __typename: "Enquiry";
+  id: number;
+  user: getEnquiryDetail_GetEnquiryDetail_enquiry_user;
+  questionTitle: string;
+  questionContent: string;
+  answerTitle: string | null;
+  answerContent: string | null;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getEnquiryDetail_GetEnquiryDetail {
+  __typename: "GetEnquiryDetailResponse";
+  ok: boolean;
+  error: string | null;
+  enquiry: getEnquiryDetail_GetEnquiryDetail_enquiry | null;
+}
+
+export interface getEnquiryDetail {
+  GetEnquiryDetail: getEnquiryDetail_GetEnquiryDetail;
+}
+
+export interface getEnquiryDetailVariables {
+  id: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getEnquiries
 // ====================================================
 
