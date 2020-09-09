@@ -61,7 +61,16 @@ const EnquiryList: React.SFC = () => {
                 >
                   {enquiryCols.map((key, index) => {
                     if (key === "user") {
-                      return <Td key={index}>{enquiry.user.fullName}</Td>;
+                      return (
+                        <Td
+                          key={index}
+                          onClick={() =>
+                            goDetail(history, "user", enquiry.user.id)
+                          }
+                        >
+                          {enquiry.user.fullName}
+                        </Td>
+                      );
                     } else {
                       return <Td key={index}>{enquiry[key]}</Td>;
                     }

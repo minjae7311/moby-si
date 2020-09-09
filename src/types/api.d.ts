@@ -4,6 +4,96 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getAnsweredSurveyList
+// ====================================================
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_user {
+  __typename: "User";
+  id: number;
+  bankAccount: string | null;
+  fullName: string | null;
+  phoneNumber: string;
+  gender: string | null;
+  pushToken: string | null;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_from {
+  __typename: "Place";
+  address: string;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_to {
+  __typename: "Place";
+  address: string;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_payment {
+  __typename: "Payment";
+  price: number;
+  status: string | null;
+  imp_uid: string | null;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_vehicle {
+  __typename: "Vehicle";
+  id: number;
+  discount: number | null;
+  company: string | null;
+  carType: string;
+  carNumber: string;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride {
+  __typename: "Ride";
+  id: number;
+  from: getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_from | null;
+  to: getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_to | null;
+  payment: (getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_payment | null)[] | null;
+  finalFee: number | null;
+  vehicle: getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride_vehicle | null;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_surveyForm {
+  __typename: "SurveyForm";
+  id: number;
+  contentsJson: any;
+  formTitle: string | null;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey {
+  __typename: "SurveyAnswered";
+  id: number;
+  user: getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_user;
+  ride: getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_ride;
+  surveyForm: getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey_surveyForm;
+  answeredJson: any;
+  paybacked: boolean | null;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getAnsweredSurveyList_GetAnsweredSurveyList {
+  __typename: "GetAnsweredSurveyListResponse";
+  ok: boolean;
+  error: string | null;
+  answeredSurvey: (getAnsweredSurveyList_GetAnsweredSurveyList_answeredSurvey | null)[] | null;
+}
+
+export interface getAnsweredSurveyList {
+  GetAnsweredSurveyList: getAnsweredSurveyList_GetAnsweredSurveyList;
+}
+
+export interface getAnsweredSurveyListVariables {
+  take: number;
+  page: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: anwserEnquiry
 // ====================================================
 

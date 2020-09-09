@@ -8,6 +8,7 @@ import UserList from "./UserList";
 import UserDetail from "./UserDetail";
 import EnquiryList from "./EnquiryList";
 import EnquiryDetail from "./EnquiryDetail";
+import AnsweredSurveyList from "./AnsweredSurveyList";
 
 const token = localStorage.getItem("jwt");
 
@@ -18,6 +19,11 @@ const LoggedIn: React.FC = () => (
     <Route path={"/enquiry/:id"} exact={true} component={EnquiryDetail} />
     <Route path={"/users"} exact={true} component={UserList} />
     <Route path={"/user/:id"} exact={true} component={UserDetail} />
+    <Route
+      path={"/answeredSurvey"}
+      exact={true}
+      component={AnsweredSurveyList}
+    />
   </Switch>
 );
 
