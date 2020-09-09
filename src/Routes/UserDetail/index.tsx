@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { GET_USER_DETAIL, UPDATE_USER_DATA } from "./mutation.gql";
 import { useQuery, useMutation } from "@apollo/client";
-import styled from "../../typed-components";
 import LoadingForm from "../../Components/LoadingForm";
 import {
   updateUserData_UpdateUserData,

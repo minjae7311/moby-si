@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { GET_ENQUIRY_DETAIL } from "./mutation.gql";
-import { useQuery } from "@apollo/client";
+import { GET_ENQUIRY_DETAIL, ANSWER_ENQUIRY } from "./mutation.gql";
+import { useQuery, useMutation } from "@apollo/client";
 import { Container, Wrapper } from "../../Components/Container/Container";
 import LoadingForm from "../../Components/LoadingForm";
 import { Button, H4, Input, Textarea } from "../../Components/Forms/Forms";
 import { goBack } from "../../Functions/functions";
+import {
+  anwserEnquiry_AnswerEnquiry,
+  anwserEnquiryVariables,
+} from "../../types/api";
 
 const EnquiryDetail: React.SFC = () => {
   const { id } = useParams();
@@ -18,13 +22,27 @@ const EnquiryDetail: React.SFC = () => {
     },
   });
 
+  const [anwserEnquiry, { error }] = useMutation<
+    anwserEnquiry_AnswerEnquiry,
+    anwserEnquiryVariables
+  >(ANSWER_ENQUIRY, {
+    variables: {
+      id,
+      ...enquiryData,
+    },
+    onError: () => console.error(error),
+  });
+
   const history = useHistory();
 
   const answer = async () => {
-    // const result = await updateUserData();
+    const result = await anwserEnquiry()
+      .then((res) => alert("completed"))
+      .catch((err) => alert(err));
     /**
      * @todo how to get result.ok
      */
+    console.log(result);
   };
 
   /**
