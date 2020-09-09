@@ -7,7 +7,7 @@ import LoadingForm from "../../Components/LoadingForm";
 import { Table, Thead, Tr, Th, Tbody, Td } from "../../Components/Table/Table";
 import { goDetail } from "../../Functions/functions";
 
-export const EnquiryList: React.SFC = () => {
+const EnquiryList: React.SFC = () => {
   // eslint-disable-next-line
   const [page, setPage] = useState(1);
   // eslint-disable-next-line
@@ -75,3 +75,5 @@ export const EnquiryList: React.SFC = () => {
     </Container>
   );
 };
+
+export default EnquiryList;

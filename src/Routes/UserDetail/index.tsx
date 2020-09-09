@@ -8,11 +8,7 @@ import {
   updateUserData_UpdateUserData,
   updateUserDataVariables,
 } from "../../types/api";
-
-const Container = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
+import { Container } from "../../Components/Container/Container";
 
 const Wrapper = styled.div``;
 
@@ -94,6 +90,9 @@ const UserDetail: React.SFC = () => {
     setUserData({ ...userData, [header]: event.target.value });
   };
 
+  /**
+   * @todo change to state
+   */
   const headerList = [
     "id",
     "bankAccount",
