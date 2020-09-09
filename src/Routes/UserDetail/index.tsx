@@ -48,13 +48,12 @@ const UserDetail: React.SFC = () => {
     },
   });
 
-  const [updateUserData, { ...rest }] = useMutation<
+  const [updateUserData, { error }] = useMutation<
     updateUserData_UpdateUserData,
     updateUserDataVariables
   >(UPDATE_USER_DATA, {
     variables: { data: userData },
-    onCompleted: () => console.log(rest),
-    onError: () => console.error(rest),
+    onError: () => console.error(error),
   });
 
   const history = useHistory();
@@ -70,8 +69,14 @@ const UserDetail: React.SFC = () => {
   const deleteUser = () => {};
 
   const confirmEdit = async () => {
-    console.log(userData);
-    await updateUserData();
+    const result = await updateUserData();
+
+    /**
+     * @todo how to get result.ok
+     */
+    console.log(result);
+
+    setIsEditing(false);
   };
 
   const onChange = (event, header) => {
@@ -242,23 +247,23 @@ const UserDetail: React.SFC = () => {
                 </Li>
               ))}
             </Ul> */}
+
+            {/* @todo position fixed */}
+            <Button onClick={editUser} visible={!isEditing}>
+              수정하기
+            </Button>
+            <Button onClick={confirmEdit} visible={isEditing}>
+              확인
+            </Button>
+            <Button onClick={goBack} visible={true}>
+              뒤로가기
+            </Button>
+            <Button onClick={deleteUser} visible={true}>
+              삭제하기
+            </Button>
           </Wrapper>
         )
       )}
-
-      {/* @todo position fixed */}
-      <Button onClick={editUser} visible={!isEditing}>
-        수정하기
-      </Button>
-      <Button onClick={confirmEdit} visible={isEditing}>
-        확인
-      </Button>
-      <Button onClick={goBack} visible={true}>
-        뒤로가기
-      </Button>
-      <Button onClick={deleteUser} visible={true}>
-        삭제하기
-      </Button>
     </Container>
   );
 };
