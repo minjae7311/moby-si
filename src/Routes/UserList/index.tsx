@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client";
 import { GET_USER_LIST } from "./mutation.gql";
 import LoadingForm from "../../Components/LoadingForm";
 import styled from "../../typed-components";
+import { useHistory } from "react-router-dom";
 
 const Container = styled.div`
   width: 80%;
@@ -38,10 +39,13 @@ const UserList: React.SFC = () => {
 
   const { loading, data } = useQuery(GET_USER_LIST, {
     variables: { page, take },
-    onCompleted: () => {
-      console.log(data);
-    },
   });
+
+  const history = useHistory();
+
+  const userOnClick = (id) => {
+    history.push(`/user/${id}`);
+  };
 
   const userCols = [
     "id",
@@ -69,7 +73,11 @@ const UserList: React.SFC = () => {
           <Tbody>
             {data &&
               data.GetUserList.users.map((user) => (
-                <Tr id={user.id} key={user.id}>
+                <Tr
+                  id={user.id}
+                  key={user.id}
+                  onClick={() => userOnClick(user.id)}
+                >
                   {userCols.map((col, coli) => {
                     if (col === "isRiding") {
                       if (user[col] === true) return <Td key={coli}>riding</Td>;
