@@ -4,11 +4,8 @@ import { GET_USER_LIST } from "./mutation.gql";
 import LoadingForm from "../../Components/LoadingForm";
 import styled from "../../typed-components";
 import { useHistory } from "react-router-dom";
-
-const Container = styled.div`
-  width: 80%;
-  margin: 0 auto;
-`;
+import { Container } from "../../Components/Container/Container";
+import { goDetail } from "../../Functions/functions";
 
 const Table = styled.table`
   width: 100%;
@@ -37,15 +34,16 @@ const UserList: React.SFC = () => {
   // eslint-disable-next-line
   const [take, setTake] = useState(10);
 
+  const [userList, setUserList] = useState();
+
   const { loading, data } = useQuery(GET_USER_LIST, {
     variables: { page, take },
+    onCompleted: () => {
+      setUserList(data.GetUserList.users);
+    },
   });
 
   const history = useHistory();
-
-  const userOnClick = (id) => {
-    history.push(`/user/${id}`);
-  };
 
   const userCols = [
     "id",
@@ -72,11 +70,12 @@ const UserList: React.SFC = () => {
           </Thead>
           <Tbody>
             {data &&
-              data.GetUserList.users.map((user) => (
+              userList &&
+              userList.map((user) => (
                 <Tr
                   id={user.id}
                   key={user.id}
-                  onClick={() => userOnClick(user.id)}
+                  onClick={() => goDetail(history, "user", user.id)}
                 >
                   {userCols.map((col, coli) => {
                     if (col === "isRiding") {
