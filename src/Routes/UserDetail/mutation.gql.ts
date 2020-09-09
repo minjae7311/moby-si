@@ -1,5 +1,14 @@
 import { gql } from "@apollo/client";
 
+export const UPDATE_USER_DATA = gql`
+  mutation updateUserData($data: JSON) {
+    UpdateUserData(data: $data) {
+      ok
+      error
+    }
+  }
+`;
+
 export const GET_USER_DETAIL = gql`
   query getUserDetail($id: Int!) {
     GetUserDetail(id: $id) {

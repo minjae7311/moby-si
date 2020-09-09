@@ -1,9 +1,13 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { GET_USER_DETAIL } from "./mutation.gql";
-import { useQuery } from "@apollo/client";
+import { GET_USER_DETAIL, UPDATE_USER_DATA } from "./mutation.gql";
+import { useQuery, useMutation } from "@apollo/client";
 import styled from "../../typed-components";
 import LoadingForm from "../../Components/LoadingForm";
+import {
+  updateUserData_UpdateUserData,
+  updateUserDataVariables,
+} from "../../types/api";
 
 const Container = styled.div`
   width: 80%;
@@ -26,22 +30,37 @@ const Input = styled.input`
 
 const H4 = styled.h4``;
 
-const Button = styled.button``;
+const Button = styled.button`
+  display: ${(props) => (props.visible ? "block" : "none")};
+`;
 
 const UserDetail: React.SFC = () => {
   // get param
   const { id } = useParams();
 
   const [isEditing, setIsEditing] = useState(false);
+  const [userData, setUserData] = useState({});
 
   const { loading, data } = useQuery(GET_USER_DETAIL, {
     variables: { id: Number(id) },
+    onCompleted: () => {
+      setUserData(data.GetUserDetail.user);
+    },
+  });
+
+  const [updateUserData, { ...rest }] = useMutation<
+    updateUserData_UpdateUserData,
+    updateUserDataVariables
+  >(UPDATE_USER_DATA, {
+    variables: { data: userData },
+    onCompleted: () => console.log(rest),
+    onError: () => console.error(rest),
   });
 
   const history = useHistory();
 
   const editUser = () => {
-    setIsEditing(false);
+    setIsEditing(true);
   };
 
   const goBack = () => {
@@ -50,8 +69,13 @@ const UserDetail: React.SFC = () => {
 
   const deleteUser = () => {};
 
-  const onChange = (e) => {
-    console.log(e.target.value);
+  const confirmEdit = async () => {
+    console.log(userData);
+    await updateUserData();
+  };
+
+  const onChange = (event, header) => {
+    setUserData({ ...userData, [header]: event.target.value });
   };
 
   const headerList = [
@@ -86,149 +110,155 @@ const UserDetail: React.SFC = () => {
     "가입일",
   ];
 
-  console.log(data);
-
   return (
     <Container>
       {loading ? (
         <LoadingForm />
       ) : (
-        <Wrapper>
-          <H4>기본 정보</H4>
-          <Ul>
-            {/* base infos */}
-            {headerList.map((header, index) => {
-              return (
+        data &&
+        userData && (
+          <Wrapper>
+            <H4>기본 정보</H4>
+            <Ul>
+              {/* base infos */}
+              {headerList.map((header, index) => {
+                return (
+                  <Li key={index}>
+                    <H4>{korHeader[index]}</H4>
+                    <Input
+                      value={userData[header] !== null ? userData[header] : ""}
+                      onChange={(event) => onChange(event, header)}
+                      disabled={!isEditing}
+                    ></Input>
+                  </Li>
+                );
+              })}
+            </Ul>
+
+            {/* interest */}
+            {/* <H4>주요 관심사</H4>
+            <Ul>
+              {userData.interests.map((interest, index) => (
+                <Li key={index}>{interest.name}</Li>
+              ))}
+            </Ul> */}
+
+            {/* credit */}
+            {/* <H4>등록 결제 수단</H4>
+            <Ul>
+              {userData.credit.map((credit, index) => (
                 <Li key={index}>
-                  <H4>{korHeader[index]}</H4>
+                  <H4>nickname</H4>
                   <Input
-                    value={
-                      data.GetUserDetail.user[header] !== null
-                        ? data.GetUserDetail.user[header]
-                        : "---- Empty ----"
-                    }
+                    value={credit.nickname}
                     onChange={onChange}
-                    disabled={isEditing}
+                    disabled={true}
+                  ></Input>
+                  <H4>card_name</H4>
+                  <Input
+                    value={credit.card_name}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
+                  <H4>card_number</H4>
+                  <Input
+                    value={credit.card_number}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
+                  <H4>expiry</H4>
+                  <Input
+                    value={credit.expiry}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
+                  <H4>isMain</H4>
+                  <Input
+                    value={credit.isMain}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
+                  <H4>createdAt</H4>
+                  <Input
+                    value={credit.createdAt}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
+                  <H4>updatedAt</H4>
+                  <Input
+                    value={credit.updatedAt}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
+                  <H4>first4numbers</H4>
+                  <Input
+                    value={credit.first4numbers}
+                    onChange={onChange}
+                    disabled={true}
                   ></Input>
                 </Li>
-              );
-            })}
-          </Ul>
+              ))}
+            </Ul> */}
 
-          {/* interest */}
-          <H4>주요 관심사</H4>
-          <Ul>
-            {data.GetUserDetail.user.interests.map((interest, index) => (
-              <Li key={index}>{interest.name}</Li>
-            ))}
-          </Ul>
+            {/* rides @todo add payment */}
+            {/* <H4>탑승 기록</H4>
+            <Ul>
+              {userData.rides.map((ride, index) => (
+                <Li key={index}>
+                  <H4>출발지</H4>
+                  <Input
+                    value={ride.to.address}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
 
-          {/* credit */}
-          <H4>등록 결제 수단</H4>
-          <Ul>
-            {data.GetUserDetail.user.credit.map((credit, index) => (
-              <Li key={index}>
-                <H4>nickname</H4>
-                <Input
-                  value={credit.nickname}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-                <H4>card_name</H4>
-                <Input
-                  value={credit.card_name}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-                <H4>card_number</H4>
-                <Input
-                  value={credit.card_number}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-                <H4>expiry</H4>
-                <Input
-                  value={credit.expiry}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-                <H4>isMain</H4>
-                <Input
-                  value={credit.isMain}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-                <H4>createdAt</H4>
-                <Input
-                  value={credit.createdAt}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-                <H4>updatedAt</H4>
-                <Input
-                  value={credit.updatedAt}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-                <H4>first4numbers</H4>
-                <Input
-                  value={credit.first4numbers}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-              </Li>
-            ))}
-          </Ul>
+                  <H4>도착지</H4>
+                  <Input
+                    value={ride.from.address}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
 
-          {/* rides @todo add payment */}
-          <H4>탑승 기록</H4>
-          <Ul>
-            {data.GetUserDetail.user.rides.map((ride, index) => (
-              <Li key={index}>
-                <H4>출발지</H4>
-                <Input
-                  value={ride.to.address}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
+                  <H4>최종 요금</H4>
+                  <Input
+                    value={ride.finalFee}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
 
-                <H4>도착지</H4>
-                <Input
-                  value={ride.from.address}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
+                  <H4>설문 참여 여부</H4>
+                  <Input
+                    value={ride.surveyCompleted}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
 
-                <H4>최종 요금</H4>
-                <Input
-                  value={ride.finalFee}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-
-                <H4>설문 참여 여부</H4>
-                <Input
-                  value={ride.surveyCompleted}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-
-                <H4>현 상태</H4>
-                <Input
-                  value={ride.status}
-                  onChange={onChange}
-                  disabled={true}
-                ></Input>
-              </Li>
-            ))}
-          </Ul>
-        </Wrapper>
+                  <H4>현 상태</H4>
+                  <Input
+                    value={ride.status}
+                    onChange={onChange}
+                    disabled={true}
+                  ></Input>
+                </Li>
+              ))}
+            </Ul> */}
+          </Wrapper>
+        )
       )}
 
       {/* @todo position fixed */}
-      <Button onClick={editUser}>수정하기</Button>
-      <Button onClick={goBack}>뒤로가기</Button>
-      <Button onClick={deleteUser}>삭제하기</Button>
+      <Button onClick={editUser} visible={!isEditing}>
+        수정하기
+      </Button>
+      <Button onClick={confirmEdit} visible={isEditing}>
+        확인
+      </Button>
+      <Button onClick={goBack} visible={true}>
+        뒤로가기
+      </Button>
+      <Button onClick={deleteUser} visible={true}>
+        삭제하기
+      </Button>
     </Container>
   );
 };

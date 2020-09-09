@@ -68,6 +68,29 @@ export interface adminLoginVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: updateUserData
+// ====================================================
+
+export interface updateUserData_UpdateUserData {
+  __typename: "UpdateUserDataResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface updateUserData {
+  UpdateUserData: updateUserData_UpdateUserData;
+}
+
+export interface updateUserDataVariables {
+  data?: any | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getUserDetail
 // ====================================================
 
