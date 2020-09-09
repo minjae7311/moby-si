@@ -39,12 +39,13 @@ const UserDetail: React.SFC = () => {
   const { id } = useParams();
 
   const [isEditing, setIsEditing] = useState(false);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState();
 
   const { loading, data } = useQuery(GET_USER_DETAIL, {
     variables: { id: Number(id) },
     onCompleted: () => {
       setUserData(data.GetUserDetail.user);
+      console.log(userData);
     },
   });
 
@@ -141,15 +142,15 @@ const UserDetail: React.SFC = () => {
             </Ul>
 
             {/* interest */}
-            {/* <H4>주요 관심사</H4>
+            <H4>주요 관심사</H4>
             <Ul>
               {userData.interests.map((interest, index) => (
                 <Li key={index}>{interest.name}</Li>
               ))}
-            </Ul> */}
+            </Ul>
 
             {/* credit */}
-            {/* <H4>등록 결제 수단</H4>
+            <H4>등록 결제 수단</H4>
             <Ul>
               {userData.credit.map((credit, index) => (
                 <Li key={index}>
@@ -203,10 +204,10 @@ const UserDetail: React.SFC = () => {
                   ></Input>
                 </Li>
               ))}
-            </Ul> */}
+            </Ul>
 
             {/* rides @todo add payment */}
-            {/* <H4>탑승 기록</H4>
+            <H4>탑승 기록</H4>
             <Ul>
               {userData.rides.map((ride, index) => (
                 <Li key={index}>
@@ -246,7 +247,7 @@ const UserDetail: React.SFC = () => {
                   ></Input>
                 </Li>
               ))}
-            </Ul> */}
+            </Ul>
 
             {/* @todo position fixed */}
             <Button onClick={editUser} visible={!isEditing}>
