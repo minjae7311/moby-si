@@ -9,6 +9,7 @@ import UserDetail from "./UserDetail";
 import EnquiryList from "./EnquiryList";
 import EnquiryDetail from "./EnquiryDetail";
 import AnsweredSurveyList from "./AnsweredSurveyList";
+import Download from "../Components/ExcelSample/Excel";
 
 const token = localStorage.getItem("jwt");
 
@@ -24,6 +25,7 @@ const LoggedIn: React.FC = () => (
       exact={true}
       component={AnsweredSurveyList}
     />
+    <Route path={"/download"} exact={true} component={Download} />
   </Switch>
 );
 
