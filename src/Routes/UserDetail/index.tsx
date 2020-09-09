@@ -38,17 +38,19 @@ const UserDetail: React.SFC = () => {
   // get param
   const { id } = useParams();
 
+  // states
   const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState();
 
+  // get user data
   const { loading, data } = useQuery(GET_USER_DETAIL, {
     variables: { id: Number(id) },
     onCompleted: () => {
       setUserData(data.GetUserDetail.user);
-      console.log(userData);
     },
   });
 
+  // update user data
   const [updateUserData, { error }] = useMutation<
     updateUserData_UpdateUserData,
     updateUserDataVariables
@@ -57,17 +59,13 @@ const UserDetail: React.SFC = () => {
     onError: () => console.error(error),
   });
 
+  // history
   const history = useHistory();
 
+  // edit user data
   const editUser = () => {
     setIsEditing(true);
   };
-
-  const goBack = () => {
-    history.goBack();
-  };
-
-  const deleteUser = () => {};
 
   const confirmEdit = async () => {
     const result = await updateUserData();
@@ -80,6 +78,18 @@ const UserDetail: React.SFC = () => {
     setIsEditing(false);
   };
 
+  // go to list page
+  const goBack = () => {
+    history.goBack();
+  };
+
+  /**
+   * @todo delete user
+   */
+  // delete user
+  const deleteUser = () => {};
+
+  // user data value change handler
   const onChange = (event, header) => {
     setUserData({ ...userData, [header]: event.target.value });
   };
@@ -154,54 +164,16 @@ const UserDetail: React.SFC = () => {
             <Ul>
               {userData.credit.map((credit, index) => (
                 <Li key={index}>
-                  <H4>nickname</H4>
-                  <Input
-                    value={credit.nickname}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-                  <H4>card_name</H4>
-                  <Input
-                    value={credit.card_name}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-                  <H4>card_number</H4>
-                  <Input
-                    value={credit.card_number}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-                  <H4>expiry</H4>
-                  <Input
-                    value={credit.expiry}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-                  <H4>isMain</H4>
-                  <Input
-                    value={credit.isMain}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-                  <H4>createdAt</H4>
-                  <Input
-                    value={credit.createdAt}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-                  <H4>updatedAt</H4>
-                  <Input
-                    value={credit.updatedAt}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-                  <H4>first4numbers</H4>
-                  <Input
-                    value={credit.first4numbers}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
+                  {Object.keys(credit).map((key, index) => (
+                    <div key={index}>
+                      <H4>{key}</H4>
+                      <Input
+                        value={credit[key] ? credit[key] : ""}
+                        onChange={() => {}}
+                        disabled={true}
+                      ></Input>
+                    </div>
+                  ))}
                 </Li>
               ))}
             </Ul>
@@ -211,45 +183,20 @@ const UserDetail: React.SFC = () => {
             <Ul>
               {userData.rides.map((ride, index) => (
                 <Li key={index}>
-                  <H4>출발지</H4>
-                  <Input
-                    value={ride.to.address}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-
-                  <H4>도착지</H4>
-                  <Input
-                    value={ride.from.address}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-
-                  <H4>최종 요금</H4>
-                  <Input
-                    value={ride.finalFee}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-
-                  <H4>설문 참여 여부</H4>
-                  <Input
-                    value={ride.surveyCompleted}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
-
-                  <H4>현 상태</H4>
-                  <Input
-                    value={ride.status}
-                    onChange={onChange}
-                    disabled={true}
-                  ></Input>
+                  {Object.keys(ride).map((key, index) => (
+                    <div key={index}>
+                      <H4>{key}</H4>
+                      <Input
+                        value={ride[key] ? ride[key] : ""}
+                        onChange={() => {}}
+                        disabled={true}
+                      ></Input>
+                    </div>
+                  ))}
                 </Li>
               ))}
             </Ul>
 
-            {/* @todo position fixed */}
             <Button onClick={editUser} visible={!isEditing}>
               수정하기
             </Button>
