@@ -85,7 +85,7 @@ export const GetRideList: React.SFC = () => {
                   <Tr id={ride.id} key={ride.id}>
                     <Td key={ride.id}>
                       <Link
-                        to={"/GetRide/" + `${ride.id}`}
+                        to={"/ride/" + `${ride.id}`}
                         style={{ textDecoration: "none" }}
                       >
                         {ride.id}

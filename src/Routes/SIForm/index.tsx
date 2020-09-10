@@ -2,7 +2,6 @@
 
 import * as React from "react";
 
-import Main from "../../Components/Main/Main";
 import Header from "../../Components/Header/Header";
 import Layout from "../../Components/Header/Layout";
 
