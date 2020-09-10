@@ -57,7 +57,6 @@ export const GetRide: React.SFC = () => {
     "Status",
     "기사ID",
     "차량",
-    "승객ID",
     "요금",
     "From",
     "To",
@@ -87,13 +86,12 @@ export const GetRide: React.SFC = () => {
               data.GetRideList.rides.map((ride) => (
                 <Tr id={ride.id} key={ride.id}>
                   <Td key={ride.id}><Link to={"/GetRide/"+`${ride.id}`} style={{textDecoration: 'none'}}>{ride.id}</Link></Td>
-                  <Td key={ride.id}>{ride.status}</Td>
-                  <Td key={ride.id}>{ride.driver?.id}</Td>
-                  <Td key={ride.id}>{ride.vehicle?.company}</Td>
-                  <Td key={ride.id}>{ride.passenger?.id}</Td>
-                  <Td key={ride.id}>{ride.finalFee}</Td>
-                  <Td key={ride.id}>{ride.from?.address}</Td>
-                  <Td key={ride.id}>{ride.to?.address}</Td>
+                  <Td key={"Status" + ride.id}>{ride.status}</Td>
+                  <Td key={"Id" + ride.id}>{ride.driver?.id}</Td>
+                  <Td key={"CarNum" + ride.id}>{ride.vehicle?.carNumber}</Td>
+                  <Td key={"Fee"+ride.id}>{ride.finalFee}</Td>
+                  <Td key={"Form"+ride.id}>{ride.from?.address}</Td>
+                  <Td key={"To"+ride.id}>{ride.to?.address}</Td>
                 </Tr>
               ))}
           </Tbody>

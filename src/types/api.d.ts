@@ -30,6 +30,7 @@ export interface GetRideList_GetRideList_rides_driver {
 export interface GetRideList_GetRideList_rides_vehicle {
   __typename: "Vehicle";
   company: string | null;
+  carNumber: string;
 }
 
 export interface GetRideList_GetRideList_rides {

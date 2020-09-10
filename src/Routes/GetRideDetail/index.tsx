@@ -23,7 +23,7 @@ export const GetRideDetail: React.SFC = ({match}: any) => {
   const {loading, data} = useQuery(GET_RIDE_DETAIL,
     {
       variables: {id: RideId.id},
-      onCompleted: () => {return console.log(data.GetRideDetail.ride.vehicle.surveyForm)},
+      onCompleted: () => {return console.log(data)},
     }
   );
 
@@ -74,10 +74,10 @@ export const GetRideDetail: React.SFC = ({match}: any) => {
                     <div className="col-md-6">
                         <div className="profile-head">
                             <h5>
-                                {data?.GetRideDetail.ride.driver.fullName} ({data?.GetRideDetail.ride.driver.id})
+                                {data?.GetRideDetail.ride.driver?.fullName} ({data?.GetRideDetail.ride.driver?.id})
                             </h5>
                             <h6>
-                                {data?.GetRideDetail.ride.driver.phoneNumber}
+                                {data?.GetRideDetail.ride.driver?.phoneNumber}
                             </h6>
                             <p className="proile-rating">평점 : <span>10점</span></p>
                             <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -107,14 +107,14 @@ export const GetRideDetail: React.SFC = ({match}: any) => {
                                         <div className="col-md-6">
                                         {aboutCols.map((col, index) => (
                                             <div>
-                                            <p style={{color:'black'}}>{col}</p>
+                                            <p key={index} style={{color:'black'}}>{col}</p>
                                             </div>
                                         ))}
                                         </div>
                                         <div className="col-md-6">
                                         {aboutColsAnswer.map((col, index) => (
                                             <div>
-                                            <p>{col}</p>
+                                            <p key={index}>{col}</p>
                                             </div>
                                         ))}
                                         </div>
@@ -125,24 +125,24 @@ export const GetRideDetail: React.SFC = ({match}: any) => {
                                         <div className="col-md-6">
                                         {detailCols.map((col, index) => (
                                             <div>
-                                            <p style={{color:'black'}}>{col}</p>
+                                            <p key={index} style={{color:'black'}}>{col}</p>
                                             </div>
                                         ))}
                                         </div>
                                         <div className="col-md-6">
                                         {detailColsAnswer.map((col, index) => (
                                             <div>
-                                            <p>{col}</p>
+                                            <p key={index}>{col}</p>
                                             </div>
                                         ))}
                                         </div>
                                     </div>
-                                    <div className="row">
+                                    {/* <div className="row">
                                         <div className="col-md-12">
                                             <label>Sub</label><br/>
                                             <p>**</p>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>
