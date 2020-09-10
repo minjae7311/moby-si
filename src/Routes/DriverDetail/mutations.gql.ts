@@ -1,4 +1,3 @@
-// GetDriverDetail
 import { gql } from "@apollo/client";
 
 export const GET_DRIVER_DETAIL = gql`
