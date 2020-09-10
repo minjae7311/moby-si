@@ -78,6 +78,87 @@ export interface GetRideListVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: GetRideDetail
+// ====================================================
+
+export interface GetRideDetail_GetRideDetail_ride_from {
+  __typename: "Place";
+  address: string;
+}
+
+export interface GetRideDetail_GetRideDetail_ride_to {
+  __typename: "Place";
+  address: string;
+}
+
+export interface GetRideDetail_GetRideDetail_ride_passenger {
+  __typename: "User";
+  id: number;
+  phoneNumber: string;
+  fullName: string | null;
+  profilePhotoUrl: string | null;
+}
+
+export interface GetRideDetail_GetRideDetail_ride_driver {
+  __typename: "Driver";
+  id: number;
+  fullName: string;
+  phoneNumber: string | null;
+}
+
+export interface GetRideDetail_GetRideDetail_ride_vehicle {
+  __typename: "Vehicle";
+  id: number;
+  carType: string;
+  carNumber: string;
+  company: string | null;
+  discount: number | null;
+}
+
+export interface GetRideDetail_GetRideDetail_ride {
+  __typename: "Ride";
+  id: number;
+  from: GetRideDetail_GetRideDetail_ride_from | null;
+  to: GetRideDetail_GetRideDetail_ride_to | null;
+  finalFee: number | null;
+  passenger: GetRideDetail_GetRideDetail_ride_passenger;
+  driver: GetRideDetail_GetRideDetail_ride_driver | null;
+  status: string;
+  requestedDate: string | null;
+  acceptedDate: string | null;
+  finishedDate: string | null;
+  cancelledDate: string | null;
+  surveyCompleted: boolean;
+  vehicle: GetRideDetail_GetRideDetail_ride_vehicle | null;
+  distanceBetween: number | null;
+  /**
+   * findingDistance: Float
+   */
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface GetRideDetail_GetRideDetail {
+  __typename: "GetRideDetailResponse";
+  ok: boolean;
+  error: string | null;
+  ride: GetRideDetail_GetRideDetail_ride | null;
+}
+
+export interface GetRideDetail {
+  GetRideDetail: GetRideDetail_GetRideDetail;
+}
+
+export interface GetRideDetailVariables {
+  id: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: adminLogin
 // ====================================================
 

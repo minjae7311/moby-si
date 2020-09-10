@@ -8,7 +8,7 @@ import './main.css'
 import { useQuery } from '@apollo/client';
 import LoadingForm from "../../Components/LoadingForm";
 import styled from "../../typed-components";
-
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   width: 80%;
@@ -41,8 +41,8 @@ export const GetRide: React.SFC = () => {
     page : 1
   })
 
-  const [take, setTake] = useState({
-    limit : 40
+  const [take] = useState({
+    limit : 10
   })
  
   const {loading, data} = useQuery(GET_RIDE,
@@ -53,14 +53,22 @@ export const GetRide: React.SFC = () => {
   );
 
   const rideCols = [
-    "id",
-    "기사Id",
+    "ID",
+    "Status",
+    "기사ID",
     "차량",
-    "승객Id",
+    "승객ID",
     "요금",
-    "from",
-    "to",
+    "From",
+    "To",
   ];
+
+  const prePage = () => {
+    return (page.page > 1)? setPage({page: page.page-1}) : setPage({page: 1})
+  }
+  const postPage = () => {
+    return (data.GetRideList.rides.length === take.limit)? setPage({page: page.page+1}) : setPage({page: page.page})
+  }  
 
   return (
     <SIForm>
@@ -78,7 +86,8 @@ export const GetRide: React.SFC = () => {
             {data &&
               data.GetRideList.rides.map((ride) => (
                 <Tr id={ride.id} key={ride.id}>
-                  <Td key={ride.id}>{ride.id}</Td>
+                  <Td key={ride.id}><Link to={"/GetRide/"+`${ride.id}`} style={{textDecoration: 'none'}}>{ride.id}</Link></Td>
+                  <Td key={ride.id}>{ride.status}</Td>
                   <Td key={ride.id}>{ride.driver?.id}</Td>
                   <Td key={ride.id}>{ride.vehicle?.company}</Td>
                   <Td key={ride.id}>{ride.passenger?.id}</Td>
@@ -90,8 +99,9 @@ export const GetRide: React.SFC = () => {
           </Tbody>
         </Table>
         )}
-        <li className='page_num'><a onClick={() => setPage({page: page.page-1})}><b>이전</b></a></li>
-        <li className='page_num'><a onClick={() => setPage({page: page.page+1})}><b>다음</b></a></li>
+        <li className='page_num'><a onClick={() => prePage()}><b>이전</b></a></li>
+        <li className='page_num'>{page.page}</li>
+        <li className='page_num'><a onClick={() => postPage()}><b>다음</b></a></li>
         <Search />
       </Container>
     </SIForm>
