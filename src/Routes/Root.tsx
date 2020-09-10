@@ -11,6 +11,8 @@ import EnquiryDetail from "./EnquiryDetail";
 import AnsweredSurveyList from "./AnsweredSurveyList";
 import DriverList from "./DriverList";
 import DriverDetail from "./DriverDetail";
+import { GetRide } from "./GetRide";
+import { GetRideDetail } from "./GetRideDetail";
 
 const token = localStorage.getItem("jwt");
 
@@ -28,6 +30,10 @@ const LoggedIn: React.FC = () => (
       exact={true}
       component={AnsweredSurveyList}
     />
+    {/**
+     * @todo path name */}
+    <Route path={"/GetRide"} exact={true} component={GetRide} />
+    <Route path={"/GetRide/:RideId"} exact={true} component={GetRideDetail} />
   </Switch>
 );
 

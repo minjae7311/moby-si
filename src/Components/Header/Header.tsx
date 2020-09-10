@@ -2,37 +2,41 @@
 
 import * as React from "react";
 import LogoutButton from "../LogoutButton/LogoutButton";
+import { Link } from 'react-router-dom';
 
 const style: React.CSSProperties = {
-  width: "100%",
+  width: "98%",
   border: "solid 1px #ccc",
-  marginRight: "10px",
-  marginBottom: "15px",
+  margin: "1%",
   borderRadius: "4px",
+  display: 'flow-root'
 };
 
-const Header: React.SFC = () => {
-  // const [getMenuList] = useMutation<getMenuList_GetMenuList>(GET_MENU_LIST, {
-  //   onCompleted: (data) => {
-  //     console.log(data.entityNames);
-  //   },
-  // });
+const list: React.CSSProperties = {
+  padding: '10px',
+  borderRight: '1px solid #ddd',
+  marginTop: 10
+}
 
+const Header: React.SFC = () => {
   return (
-    <div style={style}>
-      <h1
-        onClick={async (e) => {
-          // await getMenuList();
-        }}
-      >
-        SIForm
-      </h1>
-      <ol>
-        <li>User</li>
-        <li>Ride</li>
-        <li>Credit</li>
-      </ol>
-      <LogoutButton />
+    <div>
+    <LogoutButton />
+      <div style={style}>
+        <h1 style={{marginLeft: '1%'}}>
+          SIForm
+        </h1>
+        <ul
+          style={{
+            listStyle: 'none',
+            paddingLeft: '0',
+            display: 'flex',
+        }}>
+          <Link to="/GetRide"><li style={list}>Ride</li></Link>
+          <li style={list}>User</li>
+          <li style={list}>Credit</li>
+        </ul>
+      </div>
     </div>
   );
 };

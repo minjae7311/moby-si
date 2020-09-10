@@ -5,8 +5,6 @@ import { useMutation } from "@apollo/client";
 import { adminLogin_AdminLogin, adminLoginVariables } from "../../types/api";
 import { ADMIN_LOGIN } from "../../Routes/Login/mutation.gql";
 
-// let loginId, loginPw;
-
 interface loginFormInterface {
   onComplete: any;
   onError: any;
@@ -33,6 +31,7 @@ const LoginForm: React.SFC<loginFormInterface> = ({ onComplete, onError }) => {
           variables: { loginId, loginPw },
         });
       }}
+      
     >
       <input
         type="text"
