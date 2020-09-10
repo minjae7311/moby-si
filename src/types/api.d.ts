@@ -94,6 +94,125 @@ export interface getAnsweredSurveyListVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL query operation: getDriverDetail
+// ====================================================
+
+export interface getDriverDetail_GetDriverDetail_driver_rides_from {
+  __typename: "Place";
+  address: string;
+}
+
+export interface getDriverDetail_GetDriverDetail_driver_rides_to {
+  __typename: "Place";
+  address: string;
+}
+
+export interface getDriverDetail_GetDriverDetail_driver_rides {
+  __typename: "Ride";
+  from: getDriverDetail_GetDriverDetail_driver_rides_from | null;
+  to: getDriverDetail_GetDriverDetail_driver_rides_to | null;
+  finalFee: number | null;
+  acceptedDate: string | null;
+  finishedDate: string | null;
+}
+
+export interface getDriverDetail_GetDriverDetail_driver_vehicle {
+  __typename: "Vehicle";
+  id: number;
+  discount: number | null;
+  company: string | null;
+  carType: string;
+  carNumber: string;
+}
+
+export interface getDriverDetail_GetDriverDetail_driver {
+  __typename: "Driver";
+  id: number;
+  lat: number | null;
+  lng: number | null;
+  isDriving: boolean;
+  workingOn: boolean;
+  rides: (getDriverDetail_GetDriverDetail_driver_rides | null)[] | null;
+  vehicle: getDriverDetail_GetDriverDetail_driver_vehicle | null;
+  loginId: string;
+  loginPw: string;
+  privateTaxi: boolean;
+  company: string | null;
+  driveLicenseNumber: string;
+  taxiLicenseNumber: string;
+  fullName: string;
+  profilePhotoUrl: string | null;
+  phoneNumber: string | null;
+  verifiedPhoneNumber: boolean | null;
+  gender: boolean | null;
+  accepted: boolean | null;
+  birthDate: string | null;
+}
+
+export interface getDriverDetail_GetDriverDetail {
+  __typename: "GetDriverDetailResponse";
+  ok: boolean;
+  error: string | null;
+  driver: getDriverDetail_GetDriverDetail_driver | null;
+}
+
+export interface getDriverDetail {
+  GetDriverDetail: getDriverDetail_GetDriverDetail;
+}
+
+export interface getDriverDetailVariables {
+  id: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL query operation: getDriverList
+// ====================================================
+
+export interface getDriverList_GetDriverList_drivers {
+  __typename: "Driver";
+  id: number;
+  lat: number | null;
+  lng: number | null;
+  isDriving: boolean;
+  workingOn: boolean;
+  loginId: string;
+  privateTaxi: boolean;
+  company: string | null;
+  driveLicenseNumber: string;
+  fullName: string;
+  phoneNumber: string | null;
+  accepted: boolean | null;
+  createdAt: string;
+  updatedAt: string | null;
+}
+
+export interface getDriverList_GetDriverList {
+  __typename: "GetDriverListResponse";
+  ok: boolean;
+  error: string | null;
+  drivers: (getDriverList_GetDriverList_drivers | null)[] | null;
+}
+
+export interface getDriverList {
+  GetDriverList: getDriverList_GetDriverList;
+}
+
+export interface getDriverListVariables {
+  take: number;
+  page: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: anwserEnquiry
 // ====================================================
 

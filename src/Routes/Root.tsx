@@ -9,6 +9,8 @@ import UserDetail from "./UserDetail";
 import EnquiryList from "./EnquiryList";
 import EnquiryDetail from "./EnquiryDetail";
 import AnsweredSurveyList from "./AnsweredSurveyList";
+import DriverList from "./DriverList";
+import DriverDetail from "./DriverDetail";
 
 const token = localStorage.getItem("jwt");
 
@@ -19,6 +21,8 @@ const LoggedIn: React.FC = () => (
     <Route path={"/enquiry/:id"} exact={true} component={EnquiryDetail} />
     <Route path={"/users"} exact={true} component={UserList} />
     <Route path={"/user/:id"} exact={true} component={UserDetail} />
+    <Route path={"/drivers"} exact={true} component={DriverList} />
+    <Route path={"/driver/:id"} exact={true} component={DriverDetail} />
     <Route
       path={"/answeredSurvey"}
       exact={true}
