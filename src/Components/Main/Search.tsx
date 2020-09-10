@@ -1,5 +1,5 @@
 import * as React from 'react';
-import '../../Routes/GetRide/main.css'
+import '../../Routes/GetRideList/main.css'
 
 const Search: React.FC = () => {
   return (
