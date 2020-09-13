@@ -1,5 +1,5 @@
 import * as React from "react";
-import "../../main.css";
+// import "../../main.css";
 
 const Search: React.FC = () => {
 	return (
