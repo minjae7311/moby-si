@@ -32,8 +32,8 @@ const Header: React.SFC = () => {
             paddingLeft: '0',
             display: 'flex',
         }}>
-          <Link to="/GetRide"><li style={list}>Ride</li></Link>
-          <li style={list}>User</li>
+          <Link to="/rides"><li style={list}>Ride</li></Link>
+          <Link to="/users"><li style={list}>User</li></Link>
           <li style={list}>Credit</li>
         </ul>
       </div>

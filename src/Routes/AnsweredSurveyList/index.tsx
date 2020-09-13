@@ -3,7 +3,6 @@ import { useQuery } from "@apollo/client";
 import { GET_ANSWERED_SURVEY } from "./mutation.gql";
 import { Container, Wrapper } from "../../Components/Container/Container";
 import LoadingForm from "../../Components/LoadingForm";
-import { ExcelFile, ExcelSheet } from "react-export-excel";
 
 const AnsweredSurveyList: React.SFC = () => {
   // eslint-disable-next-line

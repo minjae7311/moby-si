@@ -32,8 +32,8 @@ const LoggedIn: React.FC = () => (
     />
     {/**
      * @todo path name */}
-    <Route path={"/GetRide"} exact={true} component={GetRide} />
-    <Route path={"/GetRide/:RideId"} exact={true} component={GetRideDetail} />
+    <Route path={"/rides"} exact={true} component={GetRide} />
+    <Route path={"/ride/:id"} exact={true} component={GetRideDetail} />
   </Switch>
 );
 
