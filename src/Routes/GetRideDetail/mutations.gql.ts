@@ -26,6 +26,7 @@ export const GET_RIDE_DETAIL = gql`
           id
           fullName
           phoneNumber
+          profilePhotoUrl
         }
         status
         requestedDate

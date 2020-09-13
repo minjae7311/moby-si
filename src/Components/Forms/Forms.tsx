@@ -7,7 +7,7 @@ export const Ul = styled.ul`
 export const Li = styled.li``;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 70%;
   border: ${(props) => (props.disabled ? "0" : "1px solid gray")};
   disabled: ${(props) => (props.disabled ? true : false)};
 `;

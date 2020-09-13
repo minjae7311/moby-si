@@ -7,11 +7,9 @@
 }
 .profile-img{
     text-align: center;
+    width: 75%;
 }
-.profile-img img{
-    width: 70%;
-    height: 100%;
-}
+
 .profile-img .file {
     position: relative;
     overflow: hidden;
@@ -89,4 +87,25 @@
 .profile-tab p{
     font-weight: 600;
     color: #0062cc;
+}
+
+.page_num {
+    margin-right: 20px;
+    margin-top: 10px;
+    list-style: none;
+    display : inline-block;
+    cursor: pointer;
+}
+
+.search_input {
+    padding: 2px;
+    margin-right: 5px;
+    margin-top: 14px;
+    width: 15%;
+}
+
+.serach_submit {
+    position: absolute;
+    margin-top: 15px;
+    cursor: pointer;
 }

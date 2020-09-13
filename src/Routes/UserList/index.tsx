@@ -6,6 +6,8 @@ import { useHistory } from "react-router-dom";
 import { goDetail } from "../../Functions/functions";
 import { Container } from "../../Components/Container/Container";
 import { Table, Thead, Tr, Tbody, Td, Th } from "../../Components/Table/Table";
+import { SIForm } from "../SIForm";
+import Search from "../../Components/Main/Search";
 
 const UserList: React.SFC = () => {
   // eslint-disable-next-line
@@ -13,7 +15,7 @@ const UserList: React.SFC = () => {
   // eslint-disable-next-line
   const [take, setTake] = useState(10);
 
-  const [userList, setUserList] = useState();
+  const [userList, setUserList]= useState(null as any);
 
   const { loading, data } = useQuery(GET_USER_LIST, {
     variables: { page, take },
@@ -37,7 +39,15 @@ const UserList: React.SFC = () => {
     "isRiding",
   ];
 
+  const prePage = () => {
+    return (page > 1)? setPage(page-1) : setPage(1)
+  }
+  const postPage = () => {
+    return (userList?.length > take)? setPage(page+1) : setPage(page)
+  }  
+
   return (
+    <SIForm>
     <Container>
       {loading ? (
         <LoadingForm />
@@ -72,7 +82,14 @@ const UserList: React.SFC = () => {
           </Tbody>
         </Table>
       )}
+      <div style={{marginLeft: '45%'}}>
+        <li className='page_num'><a onClick={() => prePage()}><b>이전</b></a></li>
+        <li className='page_num'>{page}</li>
+        <li className='page_num'><a onClick={() => postPage()}><b>다음</b></a></li>
+      </div>
+      <Search></Search>
     </Container>
+    </SIForm>
   );
 };
 
