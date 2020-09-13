@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
 export const GET_ANSWERED_SURVEY = gql`
-	query getAnsweredSurveyList($take: Int!, $page: Int!) {
-		GetAnsweredSurveyList(take: $take, page: $page) {
+	query getAnsweredSurveyList {
+		GetAnsweredSurveyList {
 			ok
 			error
 			answeredSurvey {

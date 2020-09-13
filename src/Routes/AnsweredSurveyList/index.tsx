@@ -6,20 +6,30 @@ import LoadingForm from "../../Components/LoadingForm";
 import { ExportCSV } from "../../Components/ExportExcel";
 
 const AnsweredSurveyList: React.SFC = () => {
-	// eslint-disable-next-line
-	const [page, setPage] = useState(1);
-	// eslint-disable-next-line
-	const [take, setTake] = useState(10);
-
 	const [answeredSurvey, setAnsweredSurvey] = useState();
-
-	const [testCsvData, setTestCsvData] = useState([{}]);
+	const [excelData, setExcelData] = useState([]);
 
 	const { loading, data } = useQuery(GET_ANSWERED_SURVEY, {
-		variables: { page, take },
 		onCompleted: () => {
 			setAnsweredSurvey(data.GetAnsweredSurveyList.answeredSurvey);
-			console.log(data.GetAnsweredSurveyList.answeredSurvey);
+
+			setExcelData(
+				data.GetAnsweredSurveyList.answeredSurvey.reduce((acc, survey) => {
+					acc.push({
+						연번: survey.id,
+						페이백: survey.paybacked ? "완료" : "",
+						"출발지 주소": survey.ride.from.address,
+						"목적지 주소": survey.ride.to.address,
+						"결제 금액": survey.ride.finalFee,
+						"페이백 금액": survey.ride.vehicle.discount,
+						"설문 회사 명": survey.ride.vehicle.company,
+						"탑승객 이름": survey.user.fullName,
+						"탑승객 아이디": survey.user.id,
+						"탑승객 계좌번호": survey.user.bankAccount,
+						"탑승객 휴대폰번호": survey.user.phoneNumber,
+					});
+				}, [])
+			);
 		},
 	});
 
@@ -45,9 +55,9 @@ const AnsweredSurveyList: React.SFC = () => {
 										<div>{survey.ride.vehicle.discount}</div>
 									</li>
 								);
-							})}{" "}
+							})}
 						</ul>
-						<ExportCSV csvData={answeredSurvey} fileName={"test"} />
+						<ExportCSV csvData={excelData} fileName={"Payback List"} />
 					</Wrapper>
 				)
 			)}
