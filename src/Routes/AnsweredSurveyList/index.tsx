@@ -28,6 +28,8 @@ const AnsweredSurveyList: React.SFC = () => {
 						"탑승객 계좌번호": survey.user.bankAccount,
 						"탑승객 휴대폰번호": survey.user.phoneNumber,
 					});
+
+					return acc;
 				}, [])
 			);
 		},
