@@ -21,6 +21,7 @@ export const GET_DRIVER_DETAIL = gql`
           finalFee
           acceptedDate
           finishedDate
+          status
         }
         vehicle {
           id
