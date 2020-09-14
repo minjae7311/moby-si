@@ -46,11 +46,6 @@ const EnquiryDetail: React.SFC = () => {
 		console.log(result);
 	};
 
-	/**
-	 * @todo delete enquiry
-	 */
-	const deleteEnquiry = () => {};
-
 	const onChange = (event, header) => {
 		setEnquiryData({ ...enquiryData, [header]: event.target.value });
 	};

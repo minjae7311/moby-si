@@ -24,6 +24,7 @@ export const GET_USER_DETAIL = gql`
 			ok
 			error
 			user {
+				id
 				bankAccount
 				fullName
 				profilePhotoUrl

@@ -1,5 +1,32 @@
 import { gql } from "@apollo/client";
 
+export const UPDATE_DRIVER_DATA = gql`
+	mutation updateDriverData($data: JSON) {
+		UpdateDriverData(data: $data) {
+			ok
+			error
+		}
+	}
+`;
+
+export const APPROVE_DRIVER = gql`
+	mutation approveDriver($driverId: Int!) {
+		ApproveDriver(driverId: $driverId) {
+			ok
+			error
+		}
+	}
+`;
+
+export const DELTE_DRIVER = gql`
+	mutation deleteDriver($driverId: Int!) {
+		DeleteDriver(driverId: $driverId) {
+			ok
+			error
+		}
+	}
+`;
+
 export const GET_DRIVER_DETAIL = gql`
 	query getDriverDetail($id: Int!) {
 		GetDriverDetail(id: $id) {
@@ -31,7 +58,7 @@ export const GET_DRIVER_DETAIL = gql`
 					carNumber
 				}
 				loginId
-				loginPw
+				# loginPw
 				privateTaxi
 				company
 				driveLicenseNumber

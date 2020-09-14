@@ -13,7 +13,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-// import Image from "react-bootstrap/Image";
+import Image from "react-bootstrap/Image";
 import Badge from "react-bootstrap/Badge";
 import styled from "../../typed-components";
 
@@ -99,7 +99,18 @@ const UserDetail: React.SFC = () => {
 							삭제하기
 						</Button>
 
-						<Form onSubmit={(e) => e.preventDefault()}>
+						<Form style={{ marginTop: "50px" }} onSubmit={(e) => e.preventDefault()}>
+							<Image
+								width={"180px"}
+								height={"180px"}
+								src={
+									userData.profilePhotoUrl
+										? userData.profilePhotoUrl
+										: "https://firebasestorage.googleapis.com/v0/b/moby-4febf.appspot.com/o/defaultProfilePhoto.png?alt=media&token=df9090e8-6aff-4a05-9fc7-d9657481fc0e"
+								}
+								roundedCircle
+							/>
+
 							<H1>About</H1>
 							{Object.keys(userData).map((key) => {
 								// when userData[key] is not an object, just print out.

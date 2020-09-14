@@ -89,6 +89,75 @@ export interface getAnsweredSurveyList {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: updateDriverData
+// ====================================================
+
+export interface updateDriverData_UpdateDriverData {
+  __typename: "UpdateDriverDataResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface updateDriverData {
+  UpdateDriverData: updateDriverData_UpdateDriverData;
+}
+
+export interface updateDriverDataVariables {
+  data?: any | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: approveDriver
+// ====================================================
+
+export interface approveDriver_ApproveDriver {
+  __typename: "ApproveDriverResponse";
+  ok: boolean | null;
+  error: string | null;
+}
+
+export interface approveDriver {
+  ApproveDriver: approveDriver_ApproveDriver;
+}
+
+export interface approveDriverVariables {
+  driverId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: deleteDriver
+// ====================================================
+
+export interface deleteDriver_DeleteDriver {
+  __typename: "DeleteDriverResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface deleteDriver {
+  DeleteDriver: deleteDriver_DeleteDriver;
+}
+
+export interface deleteDriverVariables {
+  driverId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getDriverDetail
 // ====================================================
 
@@ -627,7 +696,6 @@ export interface getUserDetail_GetUserDetail_user_rides {
 
 export interface getUserDetail_GetUserDetail_user {
   __typename: "User";
-  id: number;
   bankAccount: string | null;
   fullName: string | null;
   profilePhotoUrl: string | null;
