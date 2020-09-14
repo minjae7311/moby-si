@@ -172,8 +172,6 @@ export interface getDriverDetailVariables {
 export interface getDriverList_GetDriverList_drivers {
   __typename: "Driver";
   id: number;
-  lat: number | null;
-  lng: number | null;
   isDriving: boolean;
   workingOn: boolean;
   loginId: string;
@@ -285,6 +283,8 @@ export interface getEnquiryDetailVariables {
 export interface getEnquiries_GetEnquiries_enquiries_user {
   __typename: "User";
   fullName: string | null;
+  gender: string | null;
+  phoneNumber: string;
 }
 
 export interface getEnquiries_GetEnquiries_enquiries {
@@ -313,6 +313,29 @@ export interface getEnquiries {
 export interface getEnquiriesVariables {
   take: number;
   page: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: deleteRide
+// ====================================================
+
+export interface deleteRide_DeleteRide {
+  __typename: "DeleteRideResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface deleteRide {
+  DeleteRide: deleteRide_DeleteRide;
+}
+
+export interface deleteRideVariables {
+  rideId: number;
 }
 
 /* tslint:disable */
@@ -419,11 +442,13 @@ export interface GetRideList_GetRideList_rides_to {
 export interface GetRideList_GetRideList_rides_passenger {
   __typename: "User";
   id: number;
+  fullName: string | null;
 }
 
 export interface GetRideList_GetRideList_rides_driver {
   __typename: "Driver";
   id: number;
+  fullName: string;
 }
 
 export interface GetRideList_GetRideList_rides_vehicle {
@@ -550,18 +575,6 @@ export interface getUserDetail_GetUserDetail_user_credit {
   first4numbers: string | null;
 }
 
-export interface getUserDetail_GetUserDetail_user_verification {
-  __typename: "Verification";
-  id: number;
-  target: string;
-  payload: string;
-  key: string;
-  verified: boolean;
-  expired: boolean;
-  createdAt: string;
-  updatedAt: string | null;
-}
-
 export interface getUserDetail_GetUserDetail_user_rides_from {
   __typename: "Place";
   name: string | null;
@@ -607,7 +620,6 @@ export interface getUserDetail_GetUserDetail_user {
   updatedAt: string | null;
   interests: (getUserDetail_GetUserDetail_user_interests | null)[] | null;
   credit: (getUserDetail_GetUserDetail_user_credit | null)[] | null;
-  verification: getUserDetail_GetUserDetail_user_verification | null;
   rides: (getUserDetail_GetUserDetail_user_rides | null)[] | null;
 }
 

@@ -26,8 +26,8 @@ const UserDetail: React.SFC = () => {
 	const { id } = useParams();
 
 	// states
-	const [ridepage, setridePage] = useState(1);
-	const [creditpage, setcreditPage] = useState(1);
+	// const [ridepage, setridePage] = useState(1);
+	// const [creditpage, setcreditPage] = useState(1);
 	const [isEditing, setIsEditing] = useState(false);
 	const [userData, setUserData] = useState(null as any);
 
@@ -35,7 +35,6 @@ const UserDetail: React.SFC = () => {
 	const { loading, data } = useQuery(GET_USER_DETAIL, {
 		variables: { id: Number(id) },
 		onCompleted: () => {
-			console.log(data.GetUserDetail.user);
 			setUserData(data.GetUserDetail.user);
 		},
 	});
@@ -51,7 +50,6 @@ const UserDetail: React.SFC = () => {
 
 	// edit user data
 	const editUser = () => {
-		console.log("editUser");
 
 		setIsEditing(true);
 	};
@@ -75,18 +73,18 @@ const UserDetail: React.SFC = () => {
 		setUserData({ ...userData, [header]: event.target.value });
 	};
 
-	const preRidePage = () => {
-		return ridepage > 1 ? setridePage(ridepage - 1) : setridePage(1);
-	};
-	const postRidePage = () => {
-		return userData?.rides.length !== ridepage ? setridePage(ridepage + 1) : setridePage(ridepage);
-	};
-	const preCreditPage = () => {
-		return creditpage > 1 ? setcreditPage(creditpage - 1) : setcreditPage(1);
-	};
-	const postCreditPage = () => {
-		return userData?.credit.length !== creditpage ? setcreditPage(creditpage + 1) : setcreditPage(creditpage);
-	};
+	// const preRidePage = () => {
+	// 	return ridepage > 1 ? setridePage(ridepage - 1) : setridePage(1);
+	// };
+	// const postRidePage = () => {
+	// 	return userData?.rides.length !== ridepage ? setridePage(ridepage + 1) : setridePage(ridepage);
+	// };
+	// const preCreditPage = () => {
+	// 	return creditpage > 1 ? setcreditPage(creditpage - 1) : setcreditPage(1);
+	// };
+	// const postCreditPage = () => {
+	// 	return userData?.credit.length !== creditpage ? setcreditPage(creditpage + 1) : setcreditPage(creditpage);
+	// };
 
 	return (
 		<SIForm>

@@ -2,6 +2,15 @@
 
 import { gql } from "@apollo/client";
 
+export const DELETE_RIDE = gql`
+	mutation deleteRide($rideId: Int!) {
+		DeleteRide(rideId: $rideId) {
+			ok
+			error
+		}
+	}
+`;
+
 export const GET_RIDE_DETAIL = gql`
 	query GetRideDetail($id: Int!) {
 		GetRideDetail(id: $id) {

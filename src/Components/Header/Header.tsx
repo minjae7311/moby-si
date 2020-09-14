@@ -18,9 +18,9 @@ const Header: React.SFC = () => {
 					<Nav className="mr-auto">
 						<Nav.Link onClick={() => goList(history, "rides")}>Ride</Nav.Link>
 						<Nav.Link onClick={() => goList(history, "users")}>User</Nav.Link>
-						<Nav.Link onClick={() => goList(history, "enquiries")}>Enquiry</Nav.Link>
 						<Nav.Link onClick={() => goList(history, "drivers")}>Driver</Nav.Link>
 						<Nav.Link onClick={() => goList(history, "answeredSurvey")}>Survey / Payback</Nav.Link>
+						<Nav.Link onClick={() => goList(history, "enquiries")}>Enquiry</Nav.Link>
 					</Nav>
 					<Nav>
 						<Nav.Link>

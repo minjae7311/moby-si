@@ -4,9 +4,12 @@ import { GET_DRIVER_LIST } from "./mutation.gql";
 import { useHistory } from "react-router-dom";
 import { Container } from "../../Components/Container/Container";
 import LoadingForm from "../../Components/LoadingForm";
-import { Table, Thead, Tr, Th, Tbody, Td } from "../../Components/Table/Table";
 import { goDetail } from "../../Functions/functions";
 import { SIForm } from "../SIForm";
+
+import Table from "react-bootstrap/Table";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
 
 const DriverList: React.SFC = () => {
 	// eslint-disable-next-line
@@ -36,36 +39,55 @@ const DriverList: React.SFC = () => {
 
 	const history = useHistory();
 
+	const prePage = () => {
+		return page > 1 ? setPage(page - 1) : setPage(1);
+	};
+	const postPage = () => {
+		return drivers?.length > take ? setPage(page + 1) : setPage(page);
+	};
+
 	return (
 		<SIForm>
-			<Container>
-				{loading ? (
-					<LoadingForm />
-				) : (
-					data &&
-					drivers && (
-						<Table>
-							<Thead>
-								<Tr>
+			{loading ? (
+				<LoadingForm />
+			) : (
+				data &&
+				drivers && (
+					<Container>
+						<Table responsive hover>
+							<thead>
+								<tr>
 									{driverCols.map((col, index) => {
-										if (col !== "__typename" && col !== "updatedAt") return <Th key={index}>{col}</Th>;
+										if (col !== "__typename" && col !== "updatedAt") return <th key={index}>{col}</th>;
 										else return null;
 									})}
-								</Tr>
-							</Thead>
-							<Tbody>
+								</tr>
+							</thead>
+							<tbody>
 								{drivers.map((driver) => (
-									<Tr id={driver.id} key={driver.id} onClick={() => goDetail(history, "driver", driver.id)}>
+									<tr id={driver.id} key={driver.id} onClick={() => goDetail(history, "driver", driver.id)}>
 										{driverCols.map((key, index) => {
-											return <Td key={index}>{driver[key]}</Td>;
+											return <td key={index}>{driver[key]}</td>;
 										})}
-									</Tr>
+									</tr>
 								))}
-							</Tbody>
+							</tbody>
 						</Table>
-					)
-				)}
-			</Container>
+
+						<ButtonGroup className="d-block ml-auto mr-auto" aria-label="Basic example">
+							<Button variant="secondary" onClick={() => prePage()}>
+								이전
+							</Button>
+							<Button variant="secondary" disabled>
+								{page}
+							</Button>
+							<Button variant="secondary" onClick={() => postPage()}>
+								다음
+							</Button>
+						</ButtonGroup>
+					</Container>
+				)
+			)}
 		</SIForm>
 	);
 };

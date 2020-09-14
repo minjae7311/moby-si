@@ -1,14 +1,35 @@
 import React, { useState } from "react";
-import { Container, Wrapper } from "../../Components/Container/Container";
-import { useParams } from "react-router-dom";
+import { DetailContainer } from "../../Components/Container/Container";
+import { useParams, useHistory } from "react-router-dom";
 import { useQuery } from "@apollo/client";
 import { GET_DRIVER_DETAIL } from "./mutations.gql";
 import LoadingForm from "../../Components/LoadingForm";
 import { H4 } from "../../Components/Forms/Forms";
+import { SIForm } from "../SIForm";
+
+import Button from "react-bootstrap/Button";
+import { goBack } from "../../Functions/functions";
 
 const DriverDetail: React.SFC = () => {
 	const { id } = useParams();
 	const [driverData, setDriverData] = useState();
+	const [isEditing, setIsEditing] = useState(false);
+
+	const history = useHistory();
+
+	const editDriver = () => {
+		setIsEditing(true);
+	};
+
+	const confirmEdit = async () => {
+		console.log("confirmEdit");
+
+		// await updateUserData();
+
+		setIsEditing(false);
+	};
+
+	const deleteDriver = () => {};
 
 	const { loading, data } = useQuery(GET_DRIVER_DETAIL, {
 		variables: { id: Number(id) },
@@ -34,18 +55,28 @@ const DriverDetail: React.SFC = () => {
 	});
 
 	return (
-		<Container>
+		<SIForm>
 			{loading ? (
 				<LoadingForm />
 			) : (
 				data &&
 				driverData && (
-					<Wrapper>
+					<DetailContainer>
+						<Button style={{ marginRight: "20px" }} variant="secondary" onClick={() => goBack(history)}>
+							뒤로가기
+						</Button>
+						<Button style={{ marginRight: "20px" }} variant="warning" onClick={isEditing ? confirmEdit : editDriver}>
+							{isEditing ? "확인" : "수정하기"}
+						</Button>
+						<Button style={{ marginRight: "20px" }} variant="danger" onClick={deleteDriver}>
+							삭제하기
+						</Button>
+
 						<H4>{driverData.fullName}</H4>
-					</Wrapper>
+					</DetailContainer>
 				)
 			)}
-		</Container>
+		</SIForm>
 	);
 };
 

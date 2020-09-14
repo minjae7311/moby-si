@@ -1,10 +1,10 @@
 /** @format */
 
 import React, { useState, useEffect } from "react";
-import { GET_RIDE_DETAIL } from "./mutations.gql";
+import { GET_RIDE_DETAIL, DELETE_RIDE } from "./mutations.gql";
 import { SIForm } from "../SIForm";
 import { DetailContainer } from "../../Components/Container/Container";
-import { useQuery } from "@apollo/client";
+import { useQuery, useMutation } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
 import { useParams, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
@@ -30,26 +30,26 @@ export const GetRideDetail: React.SFC = () => {
 		},
 	});
 
+	const [deleteRide, { error }] = useMutation(DELETE_RIDE, {
+		variables: { rideId: Number(id) },
+		onError: () => {
+			console.log("delete failed", error);
+		},
+	});
+
 	useEffect(() => {
 		console.log(rideData);
 	}, [rideData]);
 
 	const history = useHistory();
 
-	// const aboutCols = ["Ride ID", "Vehicle", "Final Fee", "Accepted", "Finished", "From", "To"];
-	// const aboutColsAnswer = [
-	// 	`${rideData?.id}`,
-	// 	`${rideData?.vehicle.carNumber}, ${rideData?.vehicle.carType}`,
-	// 	`${rideData?.finalFee}원`,
-	// 	`${rideData?.acceptedDate}`,
-	// 	`${rideData?.finishedDate}`,
-	// 	`${rideData?.from.address}`,
-	// 	`${rideData?.to.address}`,
-	// ];
+	const deleteThisRide = async () => {
+		console.log("deleting this ride");
 
-	// const detailCols = ["Passenger", "PhoneNumb", "SurveyComple"];
-
-	// const detailColsAnswer = [`${rideData?.passenger.fullName} (${rideData?.passenger.id})`, `${rideData?.passenger.phoneNumber}`, `${rideData?.surveyCompleted}`];
+		await deleteRide()
+			.then((res) => alert("completed"))
+			.catch((err) => alert(err));
+	};
 
 	return (
 		<SIForm>
@@ -185,7 +185,7 @@ export const GetRideDetail: React.SFC = () => {
 						<Button style={{ marginRight: "20px" }} variant="secondary" onClick={() => goBack(history)}>
 							뒤로가기
 						</Button>
-						<Button style={{ marginRight: "20px" }} variant="danger" onClick={() => {}}>
+						<Button style={{ marginRight: "20px" }} variant="danger" onClick={deleteThisRide}>
 							삭제하기
 						</Button>
 					</DetailContainer>
