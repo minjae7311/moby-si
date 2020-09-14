@@ -46,16 +46,16 @@ export const GET_USER_DETAIL = gql`
           updatedAt
           first4numbers
         }
-        verification {
-          id
-          target
-          payload
-          key
-          verified
-          expired
-          createdAt
-          updatedAt
-        }
+        # verification {
+        #   id
+        #   target
+        #   payload
+        #   key
+        #   verified
+        #   expired
+        #   createdAt
+        #   updatedAt
+        # }
         rides {
           id
           from {

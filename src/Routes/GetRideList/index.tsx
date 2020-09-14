@@ -1,8 +1,6 @@
 import React, { useState } from "react";
 import { GET_RIDE } from "./mutations.gql";
 import { SIForm } from "../SIForm";
-import Search from "../../Components/SearchForm/SearchForm";
-import "./main.css";
 import { useQuery } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
 import { useHistory } from "react-router-dom";
@@ -84,7 +82,6 @@ export const GetRideList: React.SFC = () => {
 						</Button>
 					</ButtonGroup>
 
-					{/* <Search /> */}
 				</Container>
 			)}
 		</SIForm>

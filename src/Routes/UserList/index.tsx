@@ -5,9 +5,11 @@ import LoadingForm from "../../Components/LoadingForm";
 import { useHistory } from "react-router-dom";
 import { goDetail } from "../../Functions/functions";
 import { Container } from "../../Components/Container/Container";
-import { Table, Thead, Tr, Tbody, Td, Th } from "../../Components/Table/Table";
 import { SIForm } from "../SIForm";
-import Search from "../../Components/SearchForm/SearchForm";
+
+import Table from "react-bootstrap/Table";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
 
 const UserList: React.SFC = () => {
 	// eslint-disable-next-line
@@ -40,51 +42,49 @@ const UserList: React.SFC = () => {
 
 	return (
 		<SIForm>
-			<Container>
-				{loading ? (
-					<LoadingForm />
-				) : (
-					<Table>
-						<Thead>
-							<Tr>
+			{loading ? (
+				<LoadingForm />
+			) : (
+				<Container>
+					<Table responsive hover>
+						<thead>
+							<tr>
 								{userCols.map((col, index) => (
-									<Th key={index}>{col}</Th>
+									<th key={index}>{col}</th>
 								))}
-							</Tr>
-						</Thead>
-						<Tbody>
+							</tr>
+						</thead>
+						<tbody>
 							{data &&
 								userList &&
 								userList.map((user) => (
-									<Tr id={user.id} key={user.id} onClick={() => goDetail(history, "user", user.id)}>
+									<tr id={user.id} key={user.id} onClick={() => goDetail(history, "user", user.id)}>
 										{userCols.map((col, coli) => {
 											if (col === "isRiding") {
-												if (user[col] === true) return <Td key={coli}>riding</Td>;
-												else return <Td key={coli}>not riding</Td>;
+												if (user[col] === true) return <td key={coli}>riding</td>;
+												else return <td key={coli}>not riding</td>;
 											} else {
-												return <Td key={coli}>{user[col]}</Td>;
+												return <td key={coli}>{user[col]}</td>;
 											}
 										})}
-									</Tr>
+									</tr>
 								))}
-						</Tbody>
+						</tbody>
 					</Table>
-				)}
-				<div style={{ marginLeft: "45%" }}>
-					<li className="page_num">
-						<div onClick={() => prePage()}>
-							<b>이전</b>
-						</div>
-					</li>
-					<li className="page_num">{page}</li>
-					<li className="page_num">
-						<div onClick={() => postPage()}>
-							<b>다음</b>
-						</div>
-					</li>
-				</div>
-				<Search></Search>
-			</Container>
+
+					<ButtonGroup className="d-block ml-auto mr-auto" aria-label="Basic example">
+						<Button variant="secondary" onClick={() => prePage()}>
+							이전
+						</Button>
+						<Button variant="secondary" disabled>
+							{page}
+						</Button>
+						<Button variant="secondary" onClick={() => postPage()}>
+							다음
+						</Button>
+					</ButtonGroup>
+				</Container>
+			)}
 		</SIForm>
 	);
 };

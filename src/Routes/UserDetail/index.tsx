@@ -5,10 +5,21 @@ import { useQuery, useMutation } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
 import { SIForm } from "../SIForm";
 import { updateUserData_UpdateUserData, updateUserDataVariables } from "../../types/api";
-import { Container } from "../../Components/Container/Container";
-import { Input } from "../../Components/Forms/Forms";
-import { goBack } from "../../Functions/functions";
+import { DetailContainer } from "../../Components/Container/Container";
+import { goBack, goDetail } from "../../Functions/functions";
+
+import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+// import Image from "react-bootstrap/Image";
+import Badge from "react-bootstrap/Badge";
+import styled from "../../typed-components";
+
+const H1 = styled.h1`
+	margin-top: 20px;
+`;
 
 const UserDetail: React.SFC = () => {
 	// get param
@@ -24,7 +35,7 @@ const UserDetail: React.SFC = () => {
 	const { loading, data } = useQuery(GET_USER_DETAIL, {
 		variables: { id: Number(id) },
 		onCompleted: () => {
-			console.log(data.GetUserDetail.user?.rides);
+			console.log(data.GetUserDetail.user);
 			setUserData(data.GetUserDetail.user);
 		},
 	});
@@ -40,16 +51,15 @@ const UserDetail: React.SFC = () => {
 
 	// edit user data
 	const editUser = () => {
+		console.log("editUser");
+
 		setIsEditing(true);
 	};
 
 	const confirmEdit = async () => {
-		const result = await updateUserData();
+		console.log("confirmEdit");
 
-		/**
-		 * @todo how to get result.ok
-		 */
-		console.log(result);
+		await updateUserData();
 
 		setIsEditing(false);
 	};
@@ -78,226 +88,108 @@ const UserDetail: React.SFC = () => {
 		return userData?.credit.length !== creditpage ? setcreditPage(creditpage + 1) : setcreditPage(creditpage);
 	};
 
-	/**
-	 * @todo change to state
-	 */
-	const aboutCols = ["ID", "FullName", "PhoneNumber", "VerifiedPhoneNumber", "Gender", "BirthDate", "Job", "DeviceId", "IsRiding", "CreatedAt", "PushToken"];
-
-	const aboutColsAnswer = [
-		`${userData?.id}`,
-		`${userData?.fullName}`,
-		`${userData?.phoneNumber}`,
-		`${userData?.verifiedPhoneNumber}`,
-		`${userData?.gender}`,
-		`${userData?.birthDate}`,
-		`${userData?.job}`,
-		`${userData?.deviceId}`,
-		`${userData?.isriding}`,
-		`${userData?.createdAt}`,
-		`${userData?.pushToken}`,
-	];
-
-	const rideCols = ["ID", "From", "To", "SurveyComp"];
-
-	const rideColsAnswer = [
-		`${userData?.rides[ridepage - 1]?.id}`,
-		`${userData?.rides[ridepage - 1]?.from.address}`,
-		`${userData?.rides[ridepage - 1]?.to.address}`,
-		`${userData?.rides[ridepage - 1]?.surveyCompleted}`,
-	];
-
-	const creditCols = ["ID", "Name", "CardName", "CardNumb"];
-
-	const creditColsAnswer = [
-		`${userData?.credit[creditpage - 1]?.id}`,
-		`${userData?.credit[creditpage - 1]?.nickname}`,
-		`${userData?.credit[creditpage - 1]?.card_name}`,
-		`${userData?.credit[creditpage - 1]?.card_number}`,
-	];
-
-	const editBtn: React.CSSProperties = {
-		marginLeft: "1%",
-	};
-	const nonEditBtn: React.CSSProperties = {
-		marginLeft: "1%",
-		display: "none",
-	};
-
 	return (
 		<SIForm>
-			<Container>
-				{loading ? (
-					<LoadingForm />
-				) : (
-					data &&
-					userData && (
-						<div className="container emp-profile">
-							<div className="row">
-								<div className="col-md-4">
-									<div className="profile-img">
-										<img
-											src={
-												userData?.profilePhotoUrl === ""
-													? "https://firebasestorage.googleapis.com/v0/b/moby-4febf.appspot.com/o/defaultProfilePhoto.png?alt=media&token=df9090e8-6aff-4a05-9fc7-d9657481fc0e"
-													: userData?.profilePhotoUrl
-											}
-											alt="user_profile"
-										/>
-									</div>
-								</div>
-								<div className="col-md-6">
-									<div className="profile-head">
-										<h5>
-											{userData?.fullName} ({userData?.id})
-										</h5>
-										<h6>{userData?.phoneNumber}</h6>
-										{/* <p className="proile-rating">
-												평점 : <span>10점</span>
-											</p> */}
-										<ul className="nav nav-tabs" id="myTab" role="tablist">
-											<li className="nav-item">
-												<a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-													About
-												</a>
-											</li>
-											<li className="nav-item">
-												<a className="nav-link" id="ride-tab" data-toggle="tab" href="#ride" role="tab" aria-controls="profile" aria-selected="false">
-													Ride
-												</a>
-											</li>
-											<li className="nav-item">
-												<a className="nav-link" id="credit-tab" data-toggle="tab" href="#credit" role="tab" aria-controls="profile" aria-selected="false">
-													Credit
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-							</div>
-							<div className="row">
-								<div className="col-md-4">{/* <div className="profile-work">
-											<p>WORK LINK</p>
-											<a href="">Driver Profile</a>
-											<br />
-											<a href="">SurveyForm</a>
-											<br />
-											<a href="">Vehicle</a>
-										</div> */}</div>
-								<div className="col-md-8">
-									<div className="tab-content profile-tab" id="myTabContent">
-										<div className="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-											<div className="row">
-												<div className="col-md-6">
-													{aboutCols.map((col, index) => (
-														<div key={index}>
-															<p style={{ color: "black" }}>{col}</p>
-														</div>
-													))}
-												</div>
-												<div className="col-md-6">
-													{aboutColsAnswer.map((col, index) => (
-														<p key={index}>
-															<Input value={userData[col] !== null ? col : ""} onChange={(event) => onChange(event, col)} disabled={!isEditing} style={{ marginLeft: -25 }} />
-														</p>
-													))}
-												</div>
+			{loading ? (
+				<LoadingForm />
+			) : (
+				data &&
+				userData && (
+					<DetailContainer>
+						<Button style={{ marginRight: "20px" }} variant="secondary" onClick={() => goBack(history)}>
+							뒤로가기
+						</Button>
+						<Button style={{ marginRight: "20px" }} variant="warning" onClick={isEditing ? confirmEdit : editUser}>
+							{isEditing ? "확인" : "수정하기"}
+						</Button>
+						<Button style={{ marginRight: "20px" }} variant="danger" onClick={deleteUser}>
+							삭제하기
+						</Button>
+
+						<Form onSubmit={(e) => e.preventDefault()}>
+							<H1>About</H1>
+							{Object.keys(userData).map((key) => {
+								// when userData[key] is not an object, just print out.
+								if (typeof userData[key] !== "object" && !["__typename", "updatedAt"].includes(key)) {
+									return (
+										<Form.Group key={key} as={Row} controlId="formHorizontalEmail">
+											<Form.Label column sm={2}>
+												{key}
+											</Form.Label>
+											<Col sm={10}>
+												<Form.Control
+													readOnly={!isEditing}
+													onChange={(e) => {
+														onChange(e, key);
+													}}
+													value={userData[key]}
+												/>
+											</Col>
+										</Form.Group>
+									);
+								} else if (typeof userData[key] === "object") {
+									// when userData[key] is object..
+									if (key === "interests") {
+										return (
+											<div key={key}>
+												<H1>{key}</H1>
+												{userData[key].map((interest, i) => (
+													<Badge key={i} variant="info" style={{ marginRight: "10px", fontSize: "15px" }}>
+														{interest.name}
+													</Badge>
+												))}
 											</div>
-										</div>
-										<div className="tab-pane fade" id="ride" role="tabpanel" aria-labelledby="profile-tab">
-											<div className="row">
-												<div className="col-md-6">
-													{rideCols.map((col, index) => (
-														<div key={index}>
-															<p style={{ color: "black" }}>{col}</p>
-														</div>
-													))}
-												</div>
-												<div className="col-md-6">
-													{rideColsAnswer.map((col, index) => (
-														<div key={index}>
-															<p>{col}</p>
-														</div>
-													))}
-												</div>
-												<div style={{ marginLeft: "25%" }}>
-													<li className="page_num">
-														<div onClick={() => preRidePage()}>
-															<b>이전</b>
-														</div>
-													</li>
-													<li className="page_num">{ridepage}</li>
-													<li className="page_num">
-														<div onClick={() => postRidePage()}>
-															<b>다음</b>
-														</div>
-													</li>
-												</div>
+										);
+									} else if (key === "rides") {
+										return (
+											<div key={key}>
+												<H1>{key}</H1>
+												{userData[key].map((ride, i) => (
+													<Card key={i}>
+														<Card.Body>
+															<Card.Title>
+																{ride.from.address} ~ {ride.to.address}
+															</Card.Title>
+															<Card.Text>{ride.status}</Card.Text>
+															<Button variant="primary" onClick={() => goDetail(history, "ride", ride.id)}>
+																운행 정보 확인
+															</Button>
+														</Card.Body>
+													</Card>
+												))}
 											</div>
-											{/* <div className="row">
-                                        <div className="col-md-12">
-                                            <label>Sub</label><br/>
-                                            <p>**</p>
-                                        </div>
-                                    </div> */}
-										</div>
-										<div className="tab-pane fade" id="credit" role="tabpanel" aria-labelledby="profile-tab">
-											<div className="row">
-												<div className="col-md-6">
-													{creditCols.map((col, index) => (
-														<div>
-															<p key={index} style={{ color: "black" }}>
-																{col}
-															</p>
+										);
+									} else if (key === "credit") {
+										return (
+											<div key={key}>
+												<H1>{key}</H1>
+												{userData[key].map((credit, i) => {
+													return (
+														<div key={i}>
+															<Form.Group key={key} as={Row} controlId="formHorizontalEmail">
+																<Form.Label column sm={2}>
+																	카드 이름
+																</Form.Label>
+																<Col sm={10}>
+																	<Form.Control readOnly onChange={(e) => {}} value={credit.card_name + (credit.isMain ? "(메인)" : "")} />
+																</Col>
+															</Form.Group>
 														</div>
-													))}
-												</div>
-												<div className="col-md-6">
-													{creditColsAnswer.map((col, index) => (
-														<div>
-															<p key={index}>{col}</p>
-														</div>
-													))}
-												</div>
-												<div style={{ marginLeft: "25%" }}>
-													<li className="page_num">
-														<div onClick={() => preCreditPage()}>
-															<b>이전</b>
-														</div>
-													</li>
-													<li className="page_num">{creditpage}</li>
-													<li className="page_num">
-														<div onClick={() => postCreditPage()}>
-															<b>다음</b>
-														</div>
-													</li>
-												</div>
+													);
+												})}
 											</div>
-											{/* <div className="row">
-                                        <div className="col-md-12">
-                                            <label>Sub</label><br/>
-                                            <p>**</p>
-                                        </div>
-                                    </div> */}
-										</div>
-									</div>
-								</div>
-							</div>
-							<Button variant="success" style={editBtn} onClick={() => goBack(history)}>
-								뒤로가기
-							</Button>
-							<Button variant="secondary" style={isEditing === false ? editBtn : nonEditBtn} onClick={editUser}>
-								수정
-							</Button>
-							<Button variant="secondary" style={isEditing === true ? editBtn : nonEditBtn} onClick={confirmEdit}>
-								확인
-							</Button>
-							<Button variant="danger" style={editBtn} onClick={deleteUser}>
-								삭제
-							</Button>
-						</div>
-					)
-				)}
-			</Container>
+										);
+									} else {
+										return null;
+									}
+								} else {
+									return null;
+								}
+							})}
+						</Form>
+					</DetailContainer>
+				)
+			)}
 		</SIForm>
 	);
 };

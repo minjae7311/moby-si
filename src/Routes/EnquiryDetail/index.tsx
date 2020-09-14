@@ -4,7 +4,6 @@ import { GET_ENQUIRY_DETAIL, ANSWER_ENQUIRY } from "./mutation.gql";
 import { useQuery, useMutation } from "@apollo/client";
 import { DetailContainer } from "../../Components/Container/Container";
 import LoadingForm from "../../Components/LoadingForm";
-import { Input, Textarea } from "../../Components/Forms/Forms";
 import { goBack, goDetail } from "../../Functions/functions";
 import { anwserEnquiry_AnswerEnquiry, anwserEnquiryVariables } from "../../types/api";
 import { SIForm } from "../SIForm";
