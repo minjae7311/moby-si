@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { DetailContainer } from "../../Components/Container/Container";
 import { useParams, useHistory } from "react-router-dom";
 import { useQuery, useMutation } from "@apollo/client";
-import { GET_DRIVER_DETAIL, APPROVE_DRIVER, DELTE_DRIVER, UPDATE_DRIVER_DATA } from "./mutations.gql";
+import { GET_DRIVER_DETAIL, APPROVE_DRIVER, DELTE_DRIVER, UPDATE_DRIVER_DATA, UPDATE_VEHICLE } from "./mutations.gql";
 import LoadingForm from "../../Components/LoadingForm";
 import { SIForm } from "../SIForm";
 import { goBack, goDetail } from "../../Functions/functions";
@@ -45,6 +45,7 @@ const DriverDetail: React.SFC = () => {
 			});
 
 			setDriverData({ ...data.GetDriverDetail.driver, drivedMinute });
+			setVehicleData(data.GetDriverDetail.driver.vehicle);
 		},
 	});
 
@@ -71,7 +72,9 @@ const DriverDetail: React.SFC = () => {
 	const confirmEdit = async () => {
 		console.log("confirmEdit");
 
-		await updateDriverData()
+		console.log(vehicleData);
+
+		await Promise.all([updateDriverData(), updateVehicle()])
 			.then((res) => {
 				alert("completed");
 			})
@@ -101,6 +104,19 @@ const DriverDetail: React.SFC = () => {
 
 	const onChange = (event, header) => {
 		setDriverData({ ...driverData, [header]: event.target.value });
+	};
+
+	/********** @VEHICLE **********/
+	const [vehicleData, setVehicleData] = useState();
+	const [updateVehicle] = useMutation(UPDATE_VEHICLE, {
+		variables: { data: vehicleData },
+		onError: (error) => console.log(error),
+	});
+	// UpdateVehicle
+	const vehicleOnChange = (event, header) => {
+		setVehicleData({ ...vehicleData, [header]: event.target.value });
+		console.log(vehicleData);
+		setDriverData({ ...driverData, vehicle: vehicleData });
 	};
 
 	return (
@@ -136,10 +152,33 @@ const DriverDetail: React.SFC = () => {
 								roundedCircle
 							/>
 
+							<H1>Vehicle</H1>
+							{Object.keys(vehicleData).map((key, i) => {
+								if (key === "__typename") return null;
+								return (
+									<div key={i}>
+										<Form.Group key={key} as={Row} controlId="formHorizontalEmail">
+											<Form.Label column sm={2}>
+												{key}
+											</Form.Label>
+											<Col sm={10}>
+												<Form.Control
+													readOnly={!isEditing}
+													onChange={(e) => {
+														vehicleOnChange(e, key);
+													}}
+													value={vehicleData[key]}
+												/>
+											</Col>
+										</Form.Group>
+									</div>
+								);
+							})}
+
 							<H1>About</H1>
 							{Object.keys(driverData).map((key) => {
 								// when driverData[key] is not an object, just print out.
-								if (typeof driverData[key] !== "object" && !["__typename", "updatedAt"].includes(key)) {
+								if (typeof driverData[key] !== "object" && !["__typename", "updatedAt", "drivedMinute"].includes(key)) {
 									return (
 										<Form.Group key={key} as={Row} controlId="formHorizontalEmail">
 											<Form.Label column sm={2}>

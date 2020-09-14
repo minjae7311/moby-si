@@ -1,5 +1,14 @@
 import { gql } from "@apollo/client";
 
+export const UPDATE_VEHICLE = gql`
+	mutation updateVehicle($data: JSON) {
+		UpdateVehicle(data: $data) {
+			ok
+			error
+		}
+	}
+`;
+
 export const UPDATE_DRIVER_DATA = gql`
 	mutation updateDriverData($data: JSON) {
 		UpdateDriverData(data: $data) {
@@ -38,25 +47,6 @@ export const GET_DRIVER_DETAIL = gql`
 				lng
 				isDriving
 				workingOn
-				rides {
-					from {
-						address
-					}
-					to {
-						address
-					}
-					finalFee
-					acceptedDate
-					finishedDate
-					status
-				}
-				vehicle {
-					id
-					discount
-					company
-					carType
-					carNumber
-				}
 				loginId
 				# loginPw
 				privateTaxi
@@ -70,6 +60,27 @@ export const GET_DRIVER_DETAIL = gql`
 				gender
 				accepted
 				birthDate
+
+				vehicle {
+					id
+					discount
+					company
+					carType
+					carNumber
+				}
+
+				rides {
+					from {
+						address
+					}
+					to {
+						address
+					}
+					finalFee
+					acceptedDate
+					finishedDate
+					status
+				}
 			}
 		}
 	}
