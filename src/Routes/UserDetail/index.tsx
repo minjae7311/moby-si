@@ -24,7 +24,7 @@ const UserDetail: React.SFC = () => {
 	const { loading, data } = useQuery(GET_USER_DETAIL, {
 		variables: { id: Number(id) },
 		onCompleted: () => {
-			console.log(data.GetUserDetail.user.rides);
+			console.log(data.GetUserDetail.user?.rides);
 			setUserData(data.GetUserDetail.user);
 		},
 	});

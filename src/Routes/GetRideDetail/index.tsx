@@ -1,15 +1,23 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GET_RIDE_DETAIL } from "./mutations.gql";
 import { SIForm } from "../SIForm";
-import { Container } from "../../Components/Container/Container";
+import { DetailContainer } from "../../Components/Container/Container";
 import { useQuery } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
+import { useParams, useHistory } from "react-router-dom";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "../CSS/index.css";
-import { useParams } from "react-router-dom";
+import { goDetail, goBack } from "../../Functions/functions";
+
+import Form from "react-bootstrap/Form";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
+import Image from "react-bootstrap/Image";
 
 export const GetRideDetail: React.SFC = () => {
 	const { id } = useParams();
@@ -23,6 +31,12 @@ export const GetRideDetail: React.SFC = () => {
 		},
 	});
 
+	useEffect(() => {
+		console.log(rideData);
+	}, [rideData]);
+
+	const history = useHistory();
+
 	// const aboutCols = ["Ride ID", "Vehicle", "Final Fee", "Accepted", "Finished", "From", "To"];
 	// const aboutColsAnswer = [
 	// 	`${rideData?.id}`,
@@ -34,77 +48,150 @@ export const GetRideDetail: React.SFC = () => {
 	// 	`${rideData?.to.address}`,
 	// ];
 
-	const detailCols = ["Passenger", "PhoneNumb", "SurveyComple"];
+	// const detailCols = ["Passenger", "PhoneNumb", "SurveyComple"];
 
-	const detailColsAnswer = [`${rideData?.passenger.fullName} (${rideData?.passenger.id})`, `${rideData?.passenger.phoneNumber}`, `${rideData?.surveyCompleted}`];
+	// const detailColsAnswer = [`${rideData?.passenger.fullName} (${rideData?.passenger.id})`, `${rideData?.passenger.phoneNumber}`, `${rideData?.surveyCompleted}`];
 
 	return (
 		<SIForm>
-			<Container>
-				{loading ? (
-					<LoadingForm />
-				) : (
-					<div className="container emp-profile">
-						<form method="post">
-							<div className="row">
-								<div className="col-md-4">
-									<div className="profile-img">
-										<img
-											src={
-												rideData?.driver.profilePhotoUrl === ""
-													? "https://firebasestorage.googleapis.com/v0/b/moby-4febf.appspot.com/o/defaultProfilePhoto.png?alt=media&token=df9090e8-6aff-4a05-9fc7-d9657481fc0e"
-													: rideData?.driver.profilePhotoUrl
-											}
-											alt="driver_profile"
-										/>
-									</div>
-								</div>
-								<div className="col-md-6">
-									<div className="profile-head">
-										<h5>
-											{rideData?.driver.fullName} ({rideData?.driver.id})
-										</h5>
-										<h6>{rideData?.driver.phoneNumber}</h6>
-										<p className="proile-rating">
-											평점 : <span>10점</span>
-										</p>
-										<ul className="nav nav-tabs" id="myTab" role="tablist">
-											<li className="nav-item">
-												<a className="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">
-													About
-												</a>
-											</li>
-											<li className="nav-item">
-												<a className="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">
-													Detail
-												</a>
-											</li>
-										</ul>
-									</div>
-								</div>
-								<div className="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-									<div className="row">
-										<div className="col-md-6">
-											{detailCols.map((col, index) => (
-												<div key={index}>
-													<p style={{ color: "black" }}>{col}</p>
-												</div>
-											))}
-										</div>
-										<div className="col-md-6">
-											{detailColsAnswer.map((col, index) => (
-												<div key={index}>
-													<p>{col}</p>
-												</div>
-											))}
-										</div>
-									</div>
-								</div>
-							</div>
-						</form>
-					</div>
-				)}
-			</Container>
+			{loading ? (
+				<LoadingForm />
+			) : (
+				data &&
+				rideData && (
+					<DetailContainer>
+						<div className="card-wrapper" style={{ display: "flex", justifyContent: "left", marginBottom: "30px" }}>
+							<Card style={{ width: "18rem" }}>
+								<Image
+									roundedCircle
+									style={{ width: "18rem", height: "18rem" }}
+									src={
+										!rideData?.driver.profilePhotoUrl
+											? "https://firebasestorage.googleapis.com/v0/b/moby-4febf.appspot.com/o/defaultProfilePhoto.png?alt=media&token=df9090e8-6aff-4a05-9fc7-d9657481fc0e"
+											: rideData?.driver.profilePhotoUrl
+									}
+								/>
+								<Card.Body>
+									<Card.Title>운전자</Card.Title>
+									<Card.Text>{rideData?.driver.fullName}</Card.Text>
+									<Button variant="secondary" onClick={() => goDetail(history, "driver", rideData.driver.id)}>
+										드라이버 정보
+									</Button>
+								</Card.Body>
+							</Card>
+
+							<Card style={{ width: "18rem", marginLeft: "30px" }}>
+								<Image
+									roundedCircle
+									style={{ width: "18rem", height: "18rem" }}
+									src={
+										!rideData?.passenger.profilePhotoUrl
+											? "https://firebasestorage.googleapis.com/v0/b/moby-4febf.appspot.com/o/defaultProfilePhoto.png?alt=media&token=df9090e8-6aff-4a05-9fc7-d9657481fc0e"
+											: rideData?.passenger.profilePhotoUrl
+									}
+								/>
+								<Card.Body>
+									<Card.Title>탑승객</Card.Title>
+									<Card.Text>{rideData?.passenger.fullName}</Card.Text>
+									<Button variant="secondary" onClick={() => goDetail(history, "user", rideData.driver.id)}>
+										탑승객 정보
+									</Button>
+								</Card.Body>
+							</Card>
+						</div>
+
+						<Form onSubmit={(e) => e.preventDefault()}>
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									출발지
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={rideData.from.address} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									도착지
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={rideData.to.address} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									요청 시각
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={new Date(Number(rideData.requestedDate)).toLocaleString()} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									배차 시각
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={new Date(Number(rideData.acceptedDate)).toLocaleString()} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									종료 시각
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={new Date(Number(rideData.finishedDate)).toLocaleString()} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									설문 완료
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={rideData.surveyCompleted ? "완료" : "미완료F"} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									할인 금액
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={rideData.vehicle.discount} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									차량 번호
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={rideData.vehicle.carNumber} />
+								</Col>
+							</Form.Group>
+
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									설문 회사
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={rideData.vehicle.company} />
+								</Col>
+							</Form.Group>
+						</Form>
+
+						<Button style={{ marginRight: "20px" }} variant="secondary" onClick={() => goBack(history)}>
+							뒤로가기
+						</Button>
+						<Button style={{ marginRight: "20px" }} variant="danger" onClick={() => {}}>
+							삭제하기
+						</Button>
+					</DetailContainer>
+				)
+			)}
 		</SIForm>
 	);
 };

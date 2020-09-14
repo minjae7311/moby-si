@@ -8,3 +8,8 @@ export const Container = styled.div`
 `;
 
 export const Wrapper = styled.div``;
+
+export const DetailContainer = styled.div`
+	width: 100%;
+	padding: 30px;
+`;
