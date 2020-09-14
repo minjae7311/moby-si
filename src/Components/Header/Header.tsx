@@ -1,57 +1,35 @@
-/** @format */
-
 import * as React from "react";
 import LogoutButton from "../LogoutButton/LogoutButton";
 import { useHistory } from "react-router-dom";
 import { goList } from "../../Functions/functions";
-
-const style: React.CSSProperties = {
-	width: "98%",
-	border: "solid 1px #ccc",
-	margin: "1%",
-	borderRadius: "4px",
-	display: "flow-root",
-};
-
-const list: React.CSSProperties = {
-	padding: "10px",
-	borderRight: "1px solid #ddd",
-	marginTop: 10,
-	cursor: "pointer",
-};
+import Navbar from "react-bootstrap/Navbar";
+import Nav from "react-bootstrap/Nav";
+import { Container } from "../Container/Container";
 
 const Header: React.SFC = () => {
 	const history = useHistory();
 
 	return (
-		<div>
-			<LogoutButton />
-			<div style={style}>
-				<h1 style={{ marginLeft: "1%" }}>SIForm</h1>
-				<ul
-					style={{
-						listStyle: "none",
-						paddingLeft: "0",
-						display: "flex",
-					}}>
-					<li style={list} onClick={() => goList(history, "rides")}>
-						Ride
-					</li>
-					<li style={list} onClick={() => goList(history, "users")}>
-						User
-					</li>
-					<li style={list} onClick={() => goList(history, "enquiries")}>
-						Enquiry
-					</li>
-					<li style={list} onClick={() => goList(history, "drivers")}>
-						Driver
-					</li>
-					<li style={list} onClick={() => goList(history, "answeredSurvey")}>
-						Survey / Payback
-					</li>
-				</ul>
-			</div>
-		</div>
+		<Container>
+			<Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+				<Navbar.Brand onClick={() => goList(history, "")}>Moby Admin</Navbar.Brand>
+				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
+				<Navbar.Collapse id="responsive-navbar-nav">
+					<Nav className="mr-auto">
+						<Nav.Link onClick={() => goList(history, "rides")}>Ride</Nav.Link>
+						<Nav.Link onClick={() => goList(history, "users")}>User</Nav.Link>
+						<Nav.Link onClick={() => goList(history, "enquiries")}>Enquiry</Nav.Link>
+						<Nav.Link onClick={() => goList(history, "drivers")}>Driver</Nav.Link>
+						<Nav.Link onClick={() => goList(history, "answeredSurvey")}>Survey / Payback</Nav.Link>
+					</Nav>
+					<Nav>
+						<Nav.Link>
+							<LogoutButton />
+						</Nav.Link>
+					</Nav>
+				</Navbar.Collapse>
+			</Navbar>
+		</Container>
 	);
 };
 export default Header;
