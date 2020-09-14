@@ -1,16 +1,14 @@
-/** @format */
-
 import React from "react";
+import Spinner from "react-bootstrap/Spinner";
 
-/**
- * @todo make pretty
- */
 const LoadingForm: React.SFC = () => {
-  return (
-    <div>
-      <p>Loading....</p>
-    </div>
-  );
+	return (
+		<div style={{ display: "flex", justifyContent: "center", alignItems: "center", width: "100%", height: "50vh" }}>
+			<Spinner animation="border" role="status">
+				<span className="sr-only">Loading...</span>
+			</Spinner>
+		</div>
+	);
 };
 
 export default LoadingForm;

@@ -7,7 +7,6 @@ import Search from "../../Components/SearchForm/SearchForm";
 import "./main.css";
 import { useQuery } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
-import styled from "../../typed-components";
 import { useHistory } from "react-router-dom";
 import { goDetail } from "../../Functions/functions";
 import { Table, Tbody, Thead, Tr, Th, Td } from "../../Components/Table/Table";
