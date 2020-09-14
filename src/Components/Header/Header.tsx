@@ -2,7 +2,8 @@
 
 import * as React from "react";
 import LogoutButton from "../LogoutButton/LogoutButton";
-import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { goList } from "../../Functions/functions";
 
 const style: React.CSSProperties = {
 	width: "98%",
@@ -16,9 +17,12 @@ const list: React.CSSProperties = {
 	padding: "10px",
 	borderRight: "1px solid #ddd",
 	marginTop: 10,
+	cursor: "pointer",
 };
 
 const Header: React.SFC = () => {
+	const history = useHistory();
+
 	return (
 		<div>
 			<LogoutButton />
@@ -30,21 +34,21 @@ const Header: React.SFC = () => {
 						paddingLeft: "0",
 						display: "flex",
 					}}>
-					<Link to="/rides">
-						<li style={list}>Ride</li>
-					</Link>
-					<Link to="/users">
-						<li style={list}>User</li>
-					</Link>
-					<Link to="/enquiries">
-						<li style={list}>Enquiry</li>
-					</Link>
-					<Link to="/drivers">
-						<li style={list}>Driver</li>
-					</Link>
-					<Link to="/answeredSurvey">
-						<li style={list}>Survey / Payback</li>
-					</Link>
+					<li style={list} onClick={() => goList(history, "rides")}>
+						Ride
+					</li>
+					<li style={list} onClick={() => goList(history, "users")}>
+						User
+					</li>
+					<li style={list} onClick={() => goList(history, "enquiries")}>
+						Enquiry
+					</li>
+					<li style={list} onClick={() => goList(history, "drivers")}>
+						Driver
+					</li>
+					<li style={list} onClick={() => goList(history, "answeredSurvey")}>
+						Survey / Payback
+					</li>
 				</ul>
 			</div>
 		</div>

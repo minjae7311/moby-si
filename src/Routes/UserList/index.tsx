@@ -7,7 +7,7 @@ import { goDetail } from "../../Functions/functions";
 import { Container } from "../../Components/Container/Container";
 import { Table, Thead, Tr, Tbody, Td, Th } from "../../Components/Table/Table";
 import { SIForm } from "../SIForm";
-import Search from "../../Components/Main/Search";
+import Search from "../../Components/SearchForm/SearchForm";
 
 const UserList: React.SFC = () => {
 	// eslint-disable-next-line

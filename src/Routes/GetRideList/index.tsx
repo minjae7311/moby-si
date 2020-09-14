@@ -3,39 +3,15 @@
 import React, { useState } from "react";
 import { GET_RIDE } from "./mutations.gql";
 import { SIForm } from "../SIForm";
-import Search from "../../Components/Main/Search";
+import Search from "../../Components/SearchForm/SearchForm";
 import "./main.css";
 import { useQuery } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
 import styled from "../../typed-components";
 import { useHistory } from "react-router-dom";
 import { goDetail } from "../../Functions/functions";
-
-const Container = styled.div`
-	width: 80%;
-	margin: 0 auto;
-`;
-
-const Table = styled.table`
-	width: 100%;
-	text-align: center;
-`;
-
-const Thead = styled.thead``;
-
-const Tbody = styled.tbody``;
-
-const Tr = styled.tr`
-	height: 30px;
-`;
-
-const Th = styled.th`
-	border-bottom: 1px solid #dddddd;
-`;
-
-const Td = styled.td`
-	border-bottom: 1px solid #dddddd;
-`;
+import { Table, Tbody, Thead, Tr, Th, Td } from "../../Components/Table/Table";
+import { Container } from "../../Components/Container/Container";
 
 export const GetRideList: React.SFC = () => {
 	const [page, setPage] = useState({
