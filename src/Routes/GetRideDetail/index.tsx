@@ -9,7 +9,6 @@ import LoadingForm from "../../Components/LoadingForm";
 import { useParams, useHistory } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
-import "../CSS/index.css";
 import { goDetail, goBack } from "../../Functions/functions";
 
 import Card from "react-bootstrap/Card";
