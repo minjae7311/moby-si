@@ -5,12 +5,11 @@ import { GET_RIDE_DETAIL } from "./mutations.gql";
 import { SIForm } from "../SIForm";
 import { Container } from "../../Components/Container/Container";
 import { useQuery } from "@apollo/client";
-import styled from "../../typed-components";
 import LoadingForm from "../../Components/LoadingForm";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "../CSS/index.css";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 export const GetRideDetail: React.SFC = () => {
 	const { id } = useParams();
@@ -24,16 +23,16 @@ export const GetRideDetail: React.SFC = () => {
 		},
 	});
 
-	const aboutCols = ["Ride ID", "Vehicle", "Final Fee", "Accepted", "Finished", "From", "To"];
-	const aboutColsAnswer = [
-		`${rideData?.id}`,
-		`${rideData?.vehicle.carNumber}, ${rideData?.vehicle.carType}`,
-		`${rideData?.finalFee}원`,
-		`${rideData?.acceptedDate}`,
-		`${rideData?.finishedDate}`,
-		`${rideData?.from.address}`,
-		`${rideData?.to.address}`,
-	];
+	// const aboutCols = ["Ride ID", "Vehicle", "Final Fee", "Accepted", "Finished", "From", "To"];
+	// const aboutColsAnswer = [
+	// 	`${rideData?.id}`,
+	// 	`${rideData?.vehicle.carNumber}, ${rideData?.vehicle.carType}`,
+	// 	`${rideData?.finalFee}원`,
+	// 	`${rideData?.acceptedDate}`,
+	// 	`${rideData?.finishedDate}`,
+	// 	`${rideData?.from.address}`,
+	// 	`${rideData?.to.address}`,
+	// ];
 
 	const detailCols = ["Passenger", "PhoneNumb", "SurveyComple"];
 
@@ -52,7 +51,7 @@ export const GetRideDetail: React.SFC = () => {
 									<div className="profile-img">
 										<img
 											src={
-												rideData?.driver.profilePhotoUrl == ""
+												rideData?.driver.profilePhotoUrl === ""
 													? "https://firebasestorage.googleapis.com/v0/b/moby-4febf.appspot.com/o/defaultProfilePhoto.png?alt=media&token=df9090e8-6aff-4a05-9fc7-d9657481fc0e"
 													: rideData?.driver.profilePhotoUrl
 											}
@@ -87,17 +86,15 @@ export const GetRideDetail: React.SFC = () => {
 									<div className="row">
 										<div className="col-md-6">
 											{detailCols.map((col, index) => (
-												<div>
-													<p key={index} style={{ color: "black" }}>
-														{col}
-													</p>
+												<div key={index}>
+													<p style={{ color: "black" }}>{col}</p>
 												</div>
 											))}
 										</div>
 										<div className="col-md-6">
 											{detailColsAnswer.map((col, index) => (
-												<div>
-													<p key={index}>{col}</p>
+												<div key={index}>
+													<p>{col}</p>
 												</div>
 											))}
 										</div>

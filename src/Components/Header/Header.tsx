@@ -36,7 +36,15 @@ const Header: React.SFC = () => {
 					<Link to="/users">
 						<li style={list}>User</li>
 					</Link>
-					<li style={list}>Credit</li>
+					<Link to="/enquiries">
+						<li style={list}>Enquiry</li>
+					</Link>
+					<Link to="/drivers">
+						<li style={list}>Driver</li>
+					</Link>
+					<Link to="/answeredSurvey">
+						<li style={list}>Survey / Payback</li>
+					</Link>
 				</ul>
 			</div>
 		</div>
