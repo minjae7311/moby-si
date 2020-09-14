@@ -130,9 +130,6 @@ const EnquiryDetail: React.SFC = () => {
 						<Button style={{ marginRight: "20px" }} variant="success" onClick={answer}>
 							답변하기
 						</Button>
-						<Button style={{ marginRight: "20px" }} variant="danger" onClick={deleteEnquiry}>
-							삭제하기
-						</Button>
 					</DetailContainer>
 				)
 			)}

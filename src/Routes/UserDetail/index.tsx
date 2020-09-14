@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
-import { GET_USER_DETAIL, UPDATE_USER_DATA } from "./mutation.gql";
+import { GET_USER_DETAIL, UPDATE_USER_DATA, DELETE_USER } from "./mutation.gql";
 import { useQuery, useMutation } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
 import { SIForm } from "../SIForm";
@@ -25,9 +25,6 @@ const UserDetail: React.SFC = () => {
 	// get param
 	const { id } = useParams();
 
-	// states
-	// const [ridepage, setridePage] = useState(1);
-	// const [creditpage, setcreditPage] = useState(1);
 	const [isEditing, setIsEditing] = useState(false);
 	const [userData, setUserData] = useState(null as any);
 
@@ -45,12 +42,16 @@ const UserDetail: React.SFC = () => {
 		onError: () => console.error(error),
 	});
 
+	const [deleteUser] = useMutation(DELETE_USER, {
+		variables: { userId: Number(id) },
+		onError: (error) => console.log(error),
+	});
+
 	// history
 	const history = useHistory();
 
 	// edit user data
 	const editUser = () => {
-
 		setIsEditing(true);
 	};
 
@@ -66,25 +67,19 @@ const UserDetail: React.SFC = () => {
 	 * @todo delete user
 	 */
 	// delete user
-	const deleteUser = () => {};
+	const deleteThisUser = async () => {
+		await deleteUser()
+			.then((res) => {
+				alert("completed");
+				goBack(history);
+			})
+			.catch((err) => alert(err));
+	};
 
 	// user data value change handler
 	const onChange = (event, header) => {
 		setUserData({ ...userData, [header]: event.target.value });
 	};
-
-	// const preRidePage = () => {
-	// 	return ridepage > 1 ? setridePage(ridepage - 1) : setridePage(1);
-	// };
-	// const postRidePage = () => {
-	// 	return userData?.rides.length !== ridepage ? setridePage(ridepage + 1) : setridePage(ridepage);
-	// };
-	// const preCreditPage = () => {
-	// 	return creditpage > 1 ? setcreditPage(creditpage - 1) : setcreditPage(1);
-	// };
-	// const postCreditPage = () => {
-	// 	return userData?.credit.length !== creditpage ? setcreditPage(creditpage + 1) : setcreditPage(creditpage);
-	// };
 
 	return (
 		<SIForm>
@@ -100,7 +95,7 @@ const UserDetail: React.SFC = () => {
 						<Button style={{ marginRight: "20px" }} variant="warning" onClick={isEditing ? confirmEdit : editUser}>
 							{isEditing ? "확인" : "수정하기"}
 						</Button>
-						<Button style={{ marginRight: "20px" }} variant="danger" onClick={deleteUser}>
+						<Button style={{ marginRight: "20px" }} variant="danger" onClick={deleteThisUser}>
 							삭제하기
 						</Button>
 

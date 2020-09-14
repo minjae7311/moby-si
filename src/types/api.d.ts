@@ -528,6 +528,29 @@ export interface adminLoginVariables {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: deleteUser
+// ====================================================
+
+export interface deleteUser_DeleteUser {
+  __typename: "DeleteUserResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface deleteUser {
+  DeleteUser: deleteUser_DeleteUser;
+}
+
+export interface deleteUserVariables {
+  userId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: updateUserData
 // ====================================================
 

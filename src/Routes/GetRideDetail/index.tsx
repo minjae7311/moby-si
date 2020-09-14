@@ -47,7 +47,10 @@ export const GetRideDetail: React.SFC = () => {
 		console.log("deleting this ride");
 
 		await deleteRide()
-			.then((res) => alert("completed"))
+			.then((res) => {
+				alert("completed");
+				goBack(history);
+			})
 			.catch((err) => alert(err));
 	};
 
@@ -100,6 +103,15 @@ export const GetRideDetail: React.SFC = () => {
 						</div>
 
 						<Form onSubmit={(e) => e.preventDefault()}>
+							<Form.Group as={Row} controlId="formHorizontalEmail">
+								<Form.Label column sm={2}>
+									ID
+								</Form.Label>
+								<Col sm={10}>
+									<Form.Control readOnly onChange={() => {}} value={rideData.id} />
+								</Col>
+							</Form.Group>
+
 							<Form.Group as={Row} controlId="formHorizontalEmail">
 								<Form.Label column sm={2}>
 									출발지
