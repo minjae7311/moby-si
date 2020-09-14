@@ -1,18 +1,17 @@
-/** @format */
-
 import React from "react";
+import Button from "react-bootstrap/Button";
 
 const LogoutButton: React.FC = () => {
-  return (
-    <button
-      onClick={() => {
-        localStorage.removeItem("jwt");
-        window.location.href = "/";
-      }}
-    >
-      LOGOUT
-    </button>
-  );
+	return (
+		<Button
+			variant="outline-secondary"
+			onClick={() => {
+				localStorage.removeItem("jwt");
+				window.location.href = "/";
+			}}>
+			LOGOUT
+		</Button>
+	);
 };
 
 export default LogoutButton;

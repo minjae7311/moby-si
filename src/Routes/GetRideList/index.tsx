@@ -1,5 +1,3 @@
-/** @format */
-
 import React, { useState } from "react";
 import { GET_RIDE } from "./mutations.gql";
 import { SIForm } from "../SIForm";
@@ -9,8 +7,10 @@ import { useQuery } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
 import { useHistory } from "react-router-dom";
 import { goDetail } from "../../Functions/functions";
-import { Table, Tbody, Thead, Tr, Th, Td } from "../../Components/Table/Table";
 import { Container } from "../../Components/Container/Container";
+import Table from "react-bootstrap/Table";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
 
 export const GetRideList: React.SFC = () => {
 	const [page, setPage] = useState({
@@ -30,7 +30,7 @@ export const GetRideList: React.SFC = () => {
 		},
 	});
 
-	const rideCols = ["ID", "Status", "기사ID", "차량", "요금", "From", "To"];
+	const rideCols = ["ID", "상태", "기사 이름", "승객 이름", "차량", "요금", "출발지", "목적지"];
 
 	const prePage = () => {
 		return page.page > 1 ? setPage({ page: page.page - 1 }) : setPage({ page: 1 });
@@ -41,51 +41,52 @@ export const GetRideList: React.SFC = () => {
 
 	return (
 		<SIForm>
-			<Container>
-				{loading ? (
-					<LoadingForm />
-				) : (
-					<Table>
-						<Thead>
-							<Tr>
+			{loading ? (
+				<LoadingForm />
+			) : (
+				<Container>
+					<Table responsive hover>
+						<thead>
+							<tr>
 								{rideCols.map((col, index) => (
-									<Th key={index}>{col}</Th>
+									<th key={index}>{col}</th>
 								))}
-							</Tr>
-						</Thead>
-						<Tbody>
+							</tr>
+						</thead>
+						<tbody>
 							{data &&
 								data.GetRideList.rides.map((ride) => (
-									<Tr id={ride.id} key={ride.id}>
-										<Td key={ride.id}>
-											<div onClick={() => goDetail(history, "ride", ride.id)} style={{ textDecoration: "none" }}>
-												{ride.id}
-											</div>
-										</Td>
-										<Td key={"Status" + ride.id}>{ride.status}</Td>
-										<Td key={"Id" + ride.id}>{ride.driver?.id}</Td>
-										<Td key={"CarNum" + ride.id}>{ride.vehicle?.carNumber}</Td>
-										<Td key={"Fee" + ride.id}>{ride.finalFee}</Td>
-										<Td key={"Form" + ride.id}>{ride.from?.address}</Td>
-										<Td key={"To" + ride.id}>{ride.to?.address}</Td>
-									</Tr>
+									<tr id={ride.id} key={ride.id} onClick={() => goDetail(history, "ride", ride.id)}>
+										<td>
+											<div>{ride.id}</div>
+										</td>
+										<td>{ride.status}</td>
+										<td>{ride.driver?.fullName}</td>
+										<td>{ride.passenger?.fullName}</td>
+										<td>{ride.vehicle?.carNumber}</td>
+										<td>{ride.finalFee}</td>
+										<td>{ride.from?.address}</td>
+										<td>{ride.to?.address}</td>
+									</tr>
 								))}
-						</Tbody>
+						</tbody>
 					</Table>
-				)}
-				<li className="page_num">
-					<div onClick={() => prePage()}>
-						<b>이전</b>
-					</div>
-				</li>
-				<li className="page_num">{page.page}</li>
-				<li className="page_num">
-					<div onClick={() => postPage()}>
-						<b>다음</b>
-					</div>
-				</li>
-				<Search />
-			</Container>
+
+					<ButtonGroup className="d-block ml-auto mr-auto" aria-label="Basic example">
+						<Button variant="secondary" onClick={() => prePage()}>
+							이전
+						</Button>
+						<Button variant="secondary" disabled>
+							{page.page}
+						</Button>
+						<Button variant="secondary" onClick={() => postPage()}>
+							다음
+						</Button>
+					</ButtonGroup>
+
+					{/* <Search /> */}
+				</Container>
+			)}
 		</SIForm>
 	);
 };
