@@ -7,13 +7,13 @@ import { DetailContainer } from "../../Components/Container/Container";
 import { useQuery } from "@apollo/client";
 import LoadingForm from "../../Components/LoadingForm";
 import { useParams, useHistory } from "react-router-dom";
-import Card from "react-bootstrap/Card";
-import Button from "react-bootstrap/Button";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/js/bootstrap.bundle";
 import "../CSS/index.css";
 import { goDetail, goBack } from "../../Functions/functions";
 
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
