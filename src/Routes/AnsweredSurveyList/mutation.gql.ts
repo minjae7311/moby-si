@@ -1,5 +1,14 @@
 import { gql } from "@apollo/client";
 
+export const PAYBACK_SURVEY = gql`
+	mutation paybackSurvey($surveyId: Int!) {
+		PaybackSurvey(surveyId: $surveyId) {
+			ok
+			error
+		}
+	}
+`;
+
 export const GET_ANSWERED_SURVEY = gql`
 	query getAnsweredSurveyList {
 		GetAnsweredSurveyList {

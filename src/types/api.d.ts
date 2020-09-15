@@ -4,6 +4,29 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: paybackSurvey
+// ====================================================
+
+export interface paybackSurvey_PaybackSurvey {
+  __typename: "PaybackSurveyResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface paybackSurvey {
+  PaybackSurvey: paybackSurvey_PaybackSurvey;
+}
+
+export interface paybackSurveyVariables {
+  surveyId: number;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL query operation: getAnsweredSurveyList
 // ====================================================
 
@@ -89,6 +112,29 @@ export interface getAnsweredSurveyList {
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: updateVehicle
+// ====================================================
+
+export interface updateVehicle_UpdateVehicle {
+  __typename: "UpdateVehicleResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface updateVehicle {
+  UpdateVehicle: updateVehicle_UpdateVehicle;
+}
+
+export interface updateVehicleVariables {
+  data?: any | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: updateDriverData
 // ====================================================
 
@@ -161,6 +207,15 @@ export interface deleteDriverVariables {
 // GraphQL query operation: getDriverDetail
 // ====================================================
 
+export interface getDriverDetail_GetDriverDetail_driver_vehicle {
+  __typename: "Vehicle";
+  id: number;
+  discount: number | null;
+  company: string | null;
+  carType: string;
+  carNumber: string;
+}
+
 export interface getDriverDetail_GetDriverDetail_driver_rides_from {
   __typename: "Place";
   address: string;
@@ -181,15 +236,6 @@ export interface getDriverDetail_GetDriverDetail_driver_rides {
   status: string;
 }
 
-export interface getDriverDetail_GetDriverDetail_driver_vehicle {
-  __typename: "Vehicle";
-  id: number;
-  discount: number | null;
-  company: string | null;
-  carType: string;
-  carNumber: string;
-}
-
 export interface getDriverDetail_GetDriverDetail_driver {
   __typename: "Driver";
   id: number;
@@ -197,10 +243,7 @@ export interface getDriverDetail_GetDriverDetail_driver {
   lng: number | null;
   isDriving: boolean;
   workingOn: boolean;
-  rides: (getDriverDetail_GetDriverDetail_driver_rides | null)[] | null;
-  vehicle: getDriverDetail_GetDriverDetail_driver_vehicle | null;
   loginId: string;
-  loginPw: string;
   privateTaxi: boolean;
   company: string | null;
   driveLicenseNumber: string;
@@ -212,6 +255,8 @@ export interface getDriverDetail_GetDriverDetail_driver {
   gender: boolean | null;
   accepted: boolean | null;
   birthDate: string | null;
+  vehicle: getDriverDetail_GetDriverDetail_driver_vehicle | null;
+  rides: (getDriverDetail_GetDriverDetail_driver_rides | null)[] | null;
 }
 
 export interface getDriverDetail_GetDriverDetail {
@@ -696,6 +741,7 @@ export interface getUserDetail_GetUserDetail_user_rides {
 
 export interface getUserDetail_GetUserDetail_user {
   __typename: "User";
+  id: number;
   bankAccount: string | null;
   fullName: string | null;
   profilePhotoUrl: string | null;

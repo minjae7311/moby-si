@@ -1,15 +1,26 @@
 import React, { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_ANSWERED_SURVEY } from "./mutation.gql";
+import { useQuery, useMutation } from "@apollo/client";
+import { GET_ANSWERED_SURVEY, PAYBACK_SURVEY } from "./mutation.gql";
 import { Container } from "../../Components/Container/Container";
 import LoadingForm from "../../Components/LoadingForm";
 import { ExportCSV } from "../../Components/ExportExcel";
 import { SIForm } from "../SIForm";
 import Table from "react-bootstrap/Table";
+import { useHistory } from "react-router-dom";
 
 const AnsweredSurveyList: React.SFC = () => {
 	const [answeredSurvey, setAnsweredSurvey] = useState();
 	const [excelData, setExcelData] = useState([]);
+
+	const history = useHistory();
+
+	const paybackThisSurvey = async (id) => {
+		await paybackSurvey({ variables: { surveyId: id } }).then(() => alert("completed"));
+
+		window.location.reload();
+	};
+
+	const [paybackSurvey] = useMutation(PAYBACK_SURVEY);
 
 	const { loading, data } = useQuery(GET_ANSWERED_SURVEY, {
 		onCompleted: () => {
@@ -38,6 +49,7 @@ const AnsweredSurveyList: React.SFC = () => {
 						"탑승객 아이디": survey.user.id,
 						"탑승객 계좌번호": survey.user.bankAccount,
 						"탑승객 휴대폰번호": survey.user.phoneNumber,
+						"설문지 폼 번호": survey.surveyForm.id,
 						...answeredJson,
 					});
 
@@ -75,9 +87,9 @@ const AnsweredSurveyList: React.SFC = () => {
 							</thead>
 							<tbody>
 								{answeredSurvey.map((survey, index) => (
-									<tr key={index}>
+									<tr key={survey.id}>
 										<td>{survey.id}</td>
-										<td>{survey.paybacked ? "완료" : "미완료"}</td>
+										<td onClick={() => paybackThisSurvey(survey.id)}>{survey.paybacked ? "완료" : "미완료"}</td>
 										<td>{survey.ride.from.address}</td>
 										<td>{survey.ride.to.address}</td>
 										<td>{survey.ride.finalFee}</td>
