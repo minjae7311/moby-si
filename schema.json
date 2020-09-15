@@ -2196,7 +2196,7 @@
             "args": [],
             "type": {
               "kind": "SCALAR",
-              "name": "Boolean",
+              "name": "String",
               "ofType": null
             },
             "isDeprecated": false,
@@ -3896,7 +3896,7 @@
                 "description": "",
                 "type": {
                   "kind": "SCALAR",
-                  "name": "Boolean",
+                  "name": "String",
                   "ofType": null
                 },
                 "defaultValue": null
@@ -4876,7 +4876,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "SCALAR",
-                    "name": "Boolean",
+                    "name": "String",
                     "ofType": null
                   }
                 },

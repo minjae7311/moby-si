@@ -4,6 +4,48 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: addDriver
+// ====================================================
+
+export interface addDriver_AddDriver_driver {
+  __typename: "Driver";
+  id: number;
+}
+
+export interface addDriver_AddDriver {
+  __typename: "AddDriverResponse";
+  ok: boolean | null;
+  error: string | null;
+  driver: addDriver_AddDriver_driver | null;
+}
+
+export interface addDriver {
+  AddDriver: addDriver_AddDriver;
+}
+
+export interface addDriverVariables {
+  lat?: number | null;
+  lng?: number | null;
+  loginId?: string | null;
+  loginPw?: string | null;
+  privateTaxi?: boolean | null;
+  company?: string | null;
+  driveLicenseNumber?: string | null;
+  taxiLicenseNumber?: string | null;
+  fullName?: string | null;
+  profilePhotoUrl?: string | null;
+  phoneNumber?: string | null;
+  gender?: string | null;
+  accepted?: boolean | null;
+  birthDate?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: addUser
 // ====================================================
 
@@ -290,7 +332,7 @@ export interface getDriverDetail_GetDriverDetail_driver {
   profilePhotoUrl: string | null;
   phoneNumber: string | null;
   verifiedPhoneNumber: boolean | null;
-  gender: boolean | null;
+  gender: string | null;
   accepted: boolean | null;
   birthDate: string | null;
   vehicle: getDriverDetail_GetDriverDetail_driver_vehicle | null;

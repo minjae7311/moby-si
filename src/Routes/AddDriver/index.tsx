@@ -14,11 +14,10 @@ import { goDetail } from "../../Functions/functions";
 
 export const AddDriver: React.SFC = () => {
 	const [driverData, setDriverData] = useState({
-		lat: "",
-		lng: "",
+		// lat: 0,
+		// lng: 0,
 		loginId: "",
 		loginPw: "",
-		privateTaxi: "",
 		company: "",
 		driveLicenseNumber: "",
 		taxiLicenseNumber: "",
@@ -26,7 +25,6 @@ export const AddDriver: React.SFC = () => {
 		profilePhotoUrl: "",
 		phoneNumber: "",
 		gender: "",
-		accepted: "",
 		birthDate: "",
 	});
 
@@ -35,7 +33,7 @@ export const AddDriver: React.SFC = () => {
 	const history = useHistory();
 
 	const onChange = (event, header) => {
-		setDriverData({ ...driverData, [header]: event.target.value });
+		setDriverData({ ...driverData, [header]: event.target.value});
 	};
 
 	const addThisDriver = async () => {

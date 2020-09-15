@@ -13,7 +13,7 @@ export const ADD_DRIVER = gql`
 		$fullName: String
 		$profilePhotoUrl: String
 		$phoneNumber: String
-		$gender: Boolean
+		$gender: String
 		$accepted: Boolean
 		$birthDate: String
 	) {
