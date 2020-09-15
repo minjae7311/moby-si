@@ -6,13 +6,11 @@ import LoadingForm from "../../Components/LoadingForm";
 import { ExportCSV } from "../../Components/ExportExcel";
 import { SIForm } from "../SIForm";
 import Table from "react-bootstrap/Table";
-import { useHistory } from "react-router-dom";
+import Badge from "react-bootstrap/Badge";
 
 const AnsweredSurveyList: React.SFC = () => {
 	const [answeredSurvey, setAnsweredSurvey] = useState();
 	const [excelData, setExcelData] = useState([]);
-
-	const history = useHistory();
 
 	const paybackThisSurvey = async (id) => {
 		await paybackSurvey({ variables: { surveyId: id } }).then(() => alert("completed"));
@@ -89,7 +87,15 @@ const AnsweredSurveyList: React.SFC = () => {
 								{answeredSurvey.map((survey, index) => (
 									<tr key={survey.id}>
 										<td>{survey.id}</td>
-										<td onClick={() => paybackThisSurvey(survey.id)}>{survey.paybacked ? "완료" : "미완료"}</td>
+										<td onClick={() => paybackThisSurvey(survey.id)}>
+											{survey.paybacked ? (
+												<Badge variant="primary">완료</Badge>
+											) : (
+												<Badge style={{ cursor: "pointer" }} variant="danger">
+													페이백하기
+												</Badge>
+											)}
+										</td>
 										<td>{survey.ride.from.address}</td>
 										<td>{survey.ride.to.address}</td>
 										<td>{survey.ride.finalFee}</td>

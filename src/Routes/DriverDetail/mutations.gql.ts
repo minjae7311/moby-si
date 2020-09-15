@@ -70,6 +70,7 @@ export const GET_DRIVER_DETAIL = gql`
 				}
 
 				rides {
+					id
 					from {
 						address
 					}

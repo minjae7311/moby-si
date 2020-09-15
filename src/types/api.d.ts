@@ -4,6 +4,43 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: addUser
+// ====================================================
+
+export interface addUser_AddUser_user {
+  __typename: "User";
+  id: number;
+}
+
+export interface addUser_AddUser {
+  __typename: "AddUserResponse";
+  ok: boolean;
+  error: string | null;
+  user: addUser_AddUser_user | null;
+}
+
+export interface addUser {
+  AddUser: addUser_AddUser;
+}
+
+export interface addUserVariables {
+  bankAccount?: string | null;
+  fullName?: string | null;
+  profilePhotoUrl?: string | null;
+  phoneNumber?: string | null;
+  gender?: string | null;
+  pushToken?: string | null;
+  birthDate?: string | null;
+  job?: string | null;
+  deviceId?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: paybackSurvey
 // ====================================================
 
@@ -228,6 +265,7 @@ export interface getDriverDetail_GetDriverDetail_driver_rides_to {
 
 export interface getDriverDetail_GetDriverDetail_driver_rides {
   __typename: "Ride";
+  id: number;
   from: getDriverDetail_GetDriverDetail_driver_rides_from | null;
   to: getDriverDetail_GetDriverDetail_driver_rides_to | null;
   finalFee: number | null;
