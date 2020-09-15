@@ -4,6 +4,30 @@
 // This file was automatically generated and should not be edited.
 
 // ====================================================
+// GraphQL mutation operation: addCoupon
+// ====================================================
+
+export interface addCoupon_AddCoupon {
+  __typename: "AddCouponResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface addCoupon {
+  AddCoupon: addCoupon_AddCoupon;
+}
+
+export interface addCouponVariables {
+  code?: string | null;
+  expiry?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
 // GraphQL mutation operation: addDriver
 // ====================================================
 
@@ -38,6 +62,29 @@ export interface addDriverVariables {
   gender?: string | null;
   accepted?: boolean | null;
   birthDate?: string | null;
+}
+
+/* tslint:disable */
+/* eslint-disable */
+// @generated
+// This file was automatically generated and should not be edited.
+
+// ====================================================
+// GraphQL mutation operation: addInterest
+// ====================================================
+
+export interface addInterest_AddInterest {
+  __typename: "AddInterestResponse";
+  ok: boolean;
+  error: string | null;
+}
+
+export interface addInterest {
+  AddInterest: addInterest_AddInterest;
+}
+
+export interface addInterestVariables {
+  name: string;
 }
 
 /* tslint:disable */

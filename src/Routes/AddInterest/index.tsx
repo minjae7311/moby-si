@@ -10,7 +10,7 @@ import Col from "react-bootstrap/Col";
 import { useHistory } from "react-router-dom";
 import { useMutation } from "@apollo/client";
 import { ADD_INTEREST } from "./mutation.gql";
-import { goDetail, goBack } from "../../Functions/functions";
+import { goBack } from "../../Functions/functions";
 
 export const AddInterest: React.SFC = () => {
 	const [interestData, setInterestData] = useState({
@@ -28,7 +28,6 @@ export const AddInterest: React.SFC = () => {
 	const addThisInterest = async () => {
 		await addInterest().then((result) => {
 			console.log(result);
-			const { data } = result;
 			alert("completed");
 			goBack(history);
 		});
