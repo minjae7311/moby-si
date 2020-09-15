@@ -17,7 +17,7 @@ export const ExportCSV = ({ csvData, fileName }) => {
 
 	return (
 		<Button variant="warning" onClick={(e) => exportToCSV(csvData, fileName)}>
-			Save as Excel
+			Excel 파일 다운로드
 		</Button>
 	);
 };
