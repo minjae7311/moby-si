@@ -28,9 +28,9 @@ const DriverList: React.SFC = () => {
 
 			if (data.GetDriverList.drivers.length > 0) {
 				setDriverCols(
-					Object.keys(data.GetDriverList.drivers[0]).map((col) => {
-						if (col !== "__typename" && col !== "updatedAt") return col;
-						else return null;
+					Object.keys(data.GetDriverList.drivers[0]).filter((col) => {
+						if (col !== "__typename" && col !== "updatedAt" && col !== "createdAt") return true;
+						else return false;
 					})
 				);
 			}
@@ -67,7 +67,7 @@ const DriverList: React.SFC = () => {
 								{drivers.map((driver) => (
 									<tr id={driver.id} key={driver.id} onClick={() => goDetail(history, "driver", driver.id)}>
 										{driverCols.map((key, index) => {
-											return <td key={index}>{driver[key]}</td>;
+											return <td key={index}>{String(driver[key])}</td>;
 										})}
 									</tr>
 								))}
